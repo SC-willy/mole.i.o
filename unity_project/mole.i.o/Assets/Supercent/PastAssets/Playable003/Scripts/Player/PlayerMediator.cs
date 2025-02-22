@@ -31,6 +31,10 @@ namespace Supercent.MoleIO.InGame
             if (!IsCanUpdate)
                 return;
             _moveHandler.UpdateMove();
+
+            if (_animator == null)
+                return;
+
             _animFloat = Mathf.Clamp01(_animFloat + (Time.deltaTime * _animChangeValue * ANIM_TRANSITION_SPEED));
             _animator.SetFloat(_animFloatMove, _animFloat);
         }

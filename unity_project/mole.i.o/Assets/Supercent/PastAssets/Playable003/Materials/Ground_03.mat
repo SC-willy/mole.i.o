@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - TCP2_MOBILE
   - TCP2_REFLECTIONS_FRESNEL
   - TCP2_RIM_LIGHTING_LIGHTMASK
   - TCP2_SHADOW_LIGHT_COLOR
@@ -20,7 +21,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 1999
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -153,7 +154,7 @@ Material:
     - _UseFresnelReflections: 1
     - _UseMatCap: 0
     - _UseMatCapMask: 0
-    - _UseMobileMode: 0
+    - _UseMobileMode: 1
     - _UseNormalMap: 0
     - _UseOcclusion: 0
     - _UseOutline: 0
@@ -162,9 +163,9 @@ Material:
     - _UseRimLightMask: 1
     - _UseShadowTexture: 0
     - _UseSpecular: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.745283, g: 0.6031988, b: 0.40428087, a: 1}
+    - _BaseColor: {r: 0.4433962, g: 0.27955732, b: 0.10666606, a: 1}
     - _Color: {r: 0.42789382, g: 0.5283019, b: 0.34638664, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
