@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5957e03631483401f8a1a813448396c2, type: 3}
+  m_Name: UIGeneratorSettings
+  m_EditorClassIdentifier: 
+  _tokenDataList:
+  - Key: GO
+    ClassName: GameObject
+    Namespace: UnityEngine
+  - Key: TF
+    ClassName: Transform
+    Namespace: UnityEngine
+  - Key: RTF
+    ClassName: RectTransform
+    Namespace: UnityEngine
+  - Key: CVG
+    ClassName: CanvasGroup
+    Namespace: UnityEngine
+  - Key: TXT
+    ClassName: Text
+    Namespace: UnityEngine.UI
+  - Key: IMG
+    ClassName: Image
+    Namespace: UnityEngine.UI
+  - Key: RIMG
+    ClassName: RawImage
+    Namespace: UnityEngine.UI
+  - Key: BTN
+    ClassName: Button
+    Namespace: UnityEngine.UI
+  - Key: DRD
+    ClassName: Dropdown
+    Namespace: UnityEngine.UI
+  - Key: TMP
+    ClassName: TextMeshProUGUI
+    Namespace: TMPro
+  - Key: TDRD
+    ClassName: TMP_Dropdown
+    Namespace: TMPro
+  - Key: TIF
+    ClassName: TMP_InputField
+    Namespace: TMPro
+  - Key: GLG
+    ClassName: GridLayoutGroup
+    Namespace: UnityEngine.UI
+  - Key: AMT
+    ClassName: Animator
+    Namespace: UnityEngine
+  - Key: ANI
+    ClassName: Animation
+    Namespace: UnityEngine
+  - Key: PTC
+    ClassName: ParticleSystem
+    Namespace: UnityEngine
+  - Key: TDD
+    ClassName: TMP_Dropdown
+    Namespace: TMPro
+  - Key: SLD
+    ClassName: Slider
+    Namespace: UnityEngine.UI
+  - Key: HLG
+    ClassName: HorizontalLayoutGroup
+    Namespace: UnityEngine.UI
+  - Key: VLG
+    ClassName: VerticalLayoutGroup
+    Namespace: UnityEngine.UI
+  - Key: SR
+    ClassName: ScrollRect
+    Namespace: UnityEngine.UI
+  _ignoreTokenList:
+  - TMP SubMeshUI
