@@ -82,8 +82,68 @@ Temp/
 **/Temp/
 **/Bee/
 
-unity_project/luna_prison/UserSettings/EditorUserSettings.asset
-unity_project/luna_prison/ProjectSettings/TimelineSettings.asset
-unity_project/luna_prison/UserSettings/EditorUserSettings.asset
-unity_project/luna_prison/UserSettings/Layouts/default-2021.dwlt
-unity_project/luna_prison/UserSettings/Layouts/default-2022.dwlt
+unity_project/mole.i.o/UserSettings/EditorUserSettings.asset
+unity_project/mole.i.o/ProjectSettings/TimelineSettings.asset
+unity_project/mole.i.o/UserSettings/EditorUserSettings.asset
+unity_project/mole.i.o/UserSettings/Layouts/default-2021.dwlt
+unity_project/mole.i.o/UserSettings/Layouts/default-2022.dwlt
+
+
+# 추가적으로 제외할 Unity 디렉토리/파일
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+Logs/
+UserSettings/
+
+# 프로젝트 설정 제외 (필요 없거나 협업 시 충돌을 줄이기 위함)
+ProjectSettings/
+Packages/
+
+# 빌드 결과물 (특정 빌드 폴더가 있다면 추가)
+*.apk
+*.aab
+*.unitypackage
+*.exe
+*.app
+*.xcodeproj
+*.ipa
+
+# 자동 생성 파일 및 캐시
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.swp
+*.DS_Store
+
+# 플랫폼별 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Logs and crash files
+*.log
+*.stackdump
+*.dmp
+*.crash
+
+# IDE 관련 파일
+.vscode/
+.idea/
+*.iml
+
+# 기타 필요 없는 파일
+*.bak
+*.tmp
+*.cache
+*.tmp.meta
+*.old
+*.log.meta
