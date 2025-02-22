@@ -36,11 +36,11 @@ namespace Supercent.UIv2.EDT
             wnd._scProgMsg.fontSize = 15;
             wnd._scProgMsg.normal.textColor = Color.green;
 
-            wnd._target       = null;
-            wnd._namespace    = PlayerPrefs.GetString("UIv2_GW_NAMESPACE", string.Empty);
+            wnd._target = null;
+            wnd._namespace = PlayerPrefs.GetString("UIv2_GW_NAMESPACE", string.Empty);
             wnd._outputFolder = GetValidatePath(PlayerPrefs.GetString("UIv2_GW_OUTPUTFOLDER"));
-            wnd._useStop      = PlayerPrefs.GetInt("UIv2_GW_USESTOP", 1) == 1;
-            wnd._state        = EState.Idle;
+            wnd._useStop = PlayerPrefs.GetInt("UIv2_GW_USESTOP", 1) == 1;
+            wnd._state = EState.Idle;
         }
 
         private static bool IsInvalidPath(string path)
@@ -67,7 +67,7 @@ namespace Supercent.UIv2.EDT
 
             Idle,
 
-            GenerateBegan,            
+            GenerateBegan,
             GenerateUpdate,
 
             CompileBegan,
@@ -85,16 +85,16 @@ namespace Supercent.UIv2.EDT
         //------------------------------------------------------------------------------
         // variables
         //------------------------------------------------------------------------------
-        private EState     _state        = EState.None;
-        private string     _namespace    = string.Empty;
-        private string     _outputFolder = string.Empty;
-        private bool       _useStop      = true;
-        private int        _updateCount  = 0;
-        private GameObject _target       = null;
+        private EState _state = EState.None;
+        private string _namespace = string.Empty;
+        private string _outputFolder = string.Empty;
+        private bool _useStop = true;
+        private int _updateCount = 0;
+        private GameObject _target = null;
 
-        private GUIStyle   _scFileStyle  = null;
-        private GUIStyle   _scErrorStyle = null;
-        private GUIStyle   _scProgMsg    = null;
+        private GUIStyle _scFileStyle = null;
+        private GUIStyle _scErrorStyle = null;
+        private GUIStyle _scProgMsg = null;
 
         //------------------------------------------------------------------------------
         // functions
@@ -103,17 +103,17 @@ namespace Supercent.UIv2.EDT
         {
             switch (_state)
             {
-            case EState.None: return;
-            case EState.Idle:               _OnGUI_Idle();               break;
-            case EState.GenerateBegan:      _OnGUI_GenerateBegan();      break;
-            case EState.GenerateUpdate:     _OnGUI_GenerateUpdate();     break;
-            case EState.CompileBegan:       _OnGUI_CompileBegan();       break;
-            case EState.CompileUpdate:      _OnGUI_CompileUpdate();      break;
-            case EState.AddComponentBegan:  _OnGUI_AddComponentBegan();  break;
-            case EState.AddComponentUpdate: _OnGUI_AddComponentUpdate(); break;
-            case EState.AssignBegan:        _OnGUI_AssignBegan();        break;
-            case EState.AssignUpdate:       _OnGUI_AssignUpdate();       break;
-            case EState.Finish:             _OnGUI_Finish();             break;
+                case EState.None: return;
+                case EState.Idle: _OnGUI_Idle(); break;
+                case EState.GenerateBegan: _OnGUI_GenerateBegan(); break;
+                case EState.GenerateUpdate: _OnGUI_GenerateUpdate(); break;
+                case EState.CompileBegan: _OnGUI_CompileBegan(); break;
+                case EState.CompileUpdate: _OnGUI_CompileUpdate(); break;
+                case EState.AddComponentBegan: _OnGUI_AddComponentBegan(); break;
+                case EState.AddComponentUpdate: _OnGUI_AddComponentUpdate(); break;
+                case EState.AssignBegan: _OnGUI_AssignBegan(); break;
+                case EState.AssignUpdate: _OnGUI_AssignUpdate(); break;
+                case EState.Finish: _OnGUI_Finish(); break;
             }
 
             Repaint();
@@ -173,7 +173,7 @@ namespace Supercent.UIv2.EDT
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
-                
+
                 EditorGUILayout.BeginHorizontal();
                 {
                     EditorGUILayout.LabelField(" ", GUILayout.Width(10f));
@@ -181,8 +181,8 @@ namespace Supercent.UIv2.EDT
                     {
                         // TryCreateScript(target.gameObject);
                         _updateCount = 0;
-                        _state       = EState.GenerateBegan;
-                        _target      = target.gameObject;
+                        _state = EState.GenerateBegan;
+                        _target = target.gameObject;
                     }
                 }
                 EditorGUILayout.EndHorizontal();
@@ -196,7 +196,7 @@ namespace Supercent.UIv2.EDT
         private void _OnGUI_Idle_Error(Transform targetTf, string error)
         {
             if (null != targetTf)
-                EditorGUILayout.LabelField(" " + GetHierarchyPath(targetTf));   
+                EditorGUILayout.LabelField(" " + GetHierarchyPath(targetTf));
 
             if (!string.IsNullOrEmpty(error))
                 EditorGUILayout.LabelField(" " + error, _scErrorStyle);
@@ -244,7 +244,7 @@ namespace Supercent.UIv2.EDT
             _state = EState.CompileBegan;
             _updateCount = 0;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -283,7 +283,7 @@ namespace Supercent.UIv2.EDT
         {
             _OnGUI_CompileMessage();
             AssetDatabase.Refresh();
-            
+
             _updateCount = 0;
             _state = EState.AddComponentBegan;
         }
@@ -369,7 +369,7 @@ namespace Supercent.UIv2.EDT
         private void _OnGUI_AssignUpdate()
         {
             _OnGUI_AssignMessage();
-            
+
             _target.SendMessage("EDITOR_AssignObjects");
 
             _updateCount = 0;
@@ -444,12 +444,12 @@ namespace Supercent.UIv2.EDT
 
         private string GetHierarchyPath(Transform self)
         {
-            var path   = self.name;
+            var path = self.name;
             var parent = self.parent;
 
             while (null != parent)
             {
-                path   = parent.name + " / " + path;
+                path = parent.name + " / " + path;
                 parent = parent.parent;
             }
 

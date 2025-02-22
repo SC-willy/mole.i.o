@@ -10,12 +10,9 @@ namespace Supercent.Base
         public static float ScreenAspect => Screen.width / (float)Screen.height;
         public static bool IsLandscape => 1f <= ScreenAspect;
 
-        [LunaPlaygroundField("Info", 0, "App")]
         [SerializeField] bool visibleInfo = false;
-        [LunaPlaygroundField("Log", 1, "App")]
-        [SerializeField] bool visibleLogPanel = false;
 
-        [LunaPlaygroundField("Time Scale", 10, "App")]
+        [SerializeField] bool visibleLogPanel = false;
         [Range(0.01f, 10f)]
         [SerializeField] float timeScale = 1f;
 
@@ -65,7 +62,7 @@ namespace Supercent.Base
                 else
                 {
                     if (stampTimeFPS + 1 < sec)
-                            FPS = 0;
+                        FPS = 0;
 
                     if (textFPS != null)
                     {
