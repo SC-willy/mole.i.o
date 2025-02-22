@@ -20,7 +20,6 @@ namespace Supercent.MoleIO.Playable03
         private void Awake()
         {
             _audioSource.pitch = _min;
-            AudioMuteManager.OnMute += Mute;
         }
 
         private void Mute(bool isSoundOn) => _isMute = !isSoundOn;
