@@ -12,6 +12,7 @@ namespace Supercent.MoleIO.InGame
         public Renderer renderer;
         public float waveStartTime;    // 파동이 시작된 시간
         public bool isActive;          // 활성화 여부
+        public int xp = 1;
 
         public void SetTileData(Vector2Int coords, Color color)
         {

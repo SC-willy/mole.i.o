@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,18 @@ namespace Supercent.MoleIO.InGame
 {
     public class WaveController : MonoBehaviour
     {
+        [SerializeField] PlayerMediator _player;
+        public event Action OnGetXp;
         public HexShaderController shaderController;
         public HexGrid hexGrid;
         public float waveDelay = 0.05f;
 
-        public void SpreadWave(Vector2Int startTile, Color playerColor, int maxRange)
+        public void SpreadWave(Vector2Int startTile, Color playerColor, int maxRange, bool isPlayer = false)
         {
-            StartCoroutine(WavePropagation(startTile, playerColor, maxRange));
+            StartCoroutine(WavePropagation(startTile, playerColor, maxRange, isPlayer));
         }
 
-        IEnumerator WavePropagation(Vector2Int startTile, Color playerColor, int maxRange)
+        IEnumerator WavePropagation(Vector2Int startTile, Color playerColor, int maxRange, bool isPlayer = false)
         {
             Queue<Vector2Int> queue = new Queue<Vector2Int>();
             Dictionary<Vector2Int, int> distanceMap = new Dictionary<Vector2Int, int>(); // 거리 추적
@@ -41,6 +44,19 @@ namespace Supercent.MoleIO.InGame
                             queue.Enqueue(neighbor);
                             distanceMap[neighbor] = currentDistance + 1;
                         }
+                    }
+
+
+
+
+                    if (isPlayer)
+                    {
+                        _player.GetXp(hexGrid.GetTileData(current).xp);
+                        hexGrid.GetTileData(current).xp = 0;
+                    }
+                    else
+                    {
+                        hexGrid.GetTileData(current).xp = 2;
                     }
                 }
 

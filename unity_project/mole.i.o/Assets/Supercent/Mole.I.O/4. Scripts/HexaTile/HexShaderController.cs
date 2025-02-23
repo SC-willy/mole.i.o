@@ -13,7 +13,7 @@ namespace Supercent.MoleIO.InGame
         {
             foreach (var tile in tileProperties)
             {
-                TileData tileObj = hexGrid.GetTileObject(tile.Key);
+                TileData tileObj = hexGrid.GetTileData(tile.Key);
                 if (tileObj == null) continue;
 
                 MaterialPropertyBlock props = tile.Value;
@@ -29,7 +29,7 @@ namespace Supercent.MoleIO.InGame
                 tileProperties[tilePos] = new MaterialPropertyBlock();
             }
 
-            TileData tileObj = hexGrid.GetTileObject(tilePos);
+            TileData tileObj = hexGrid.GetTileData(tilePos);
             if (tileObj == null) return;
 
             MaterialPropertyBlock props = tileProperties[tilePos];

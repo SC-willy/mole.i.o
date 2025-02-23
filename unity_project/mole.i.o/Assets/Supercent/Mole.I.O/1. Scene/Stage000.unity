@@ -1046,6 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e086e70df80b9de48a0dd289a4763d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 473470775}
   shaderController: {fileID: 2135758635}
   hexGrid: {fileID: 2135758632}
   waveDelay: 0.1
@@ -1067,6 +1068,7 @@ MonoBehaviour:
   waveController: {fileID: 2135758633}
   playerColor: {r: 1, g: 0, b: 0, a: 1}
   maxWaveRange: 1
+  _isPlayer: 1
 --- !u!114 &2135758635
 MonoBehaviour:
   m_ObjectHideFlags: 0

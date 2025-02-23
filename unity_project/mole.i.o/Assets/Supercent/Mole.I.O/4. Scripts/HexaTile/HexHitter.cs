@@ -9,6 +9,7 @@ namespace Supercent.MoleIO.InGame
         public WaveController waveController;
         public Color playerColor = Color.red;
         public int maxWaveRange = 3; // 최대 웨이브 퍼지는 거리 설정
+        [SerializeField] bool _isPlayer;
 
         void Update()
         {
@@ -22,7 +23,7 @@ namespace Supercent.MoleIO.InGame
                     HexTile tile = hit.collider.GetComponent<HexTile>();
                     if (tile != null)
                     {
-                        waveController.SpreadWave(tile.hexCoords, playerColor, maxWaveRange);
+                        waveController.SpreadWave(tile.hexCoords, playerColor, maxWaveRange, _isPlayer);
                     }
                 }
             }

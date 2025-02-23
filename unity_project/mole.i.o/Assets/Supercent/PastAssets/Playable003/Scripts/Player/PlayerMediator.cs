@@ -13,6 +13,7 @@ namespace Supercent.MoleIO.InGame
         float _animChangeValue = -1;
         public bool IsCanUpdate = true;
         protected bool _wasMoved = false;
+        [SerializeField] int _xp;
 
         protected override void _Init()
         {
@@ -56,6 +57,11 @@ namespace Supercent.MoleIO.InGame
                 return;
             _wasMoved = false;
             _animChangeValue = -1;
+        }
+
+        public void GetXp(int xp)
+        {
+            _xp += xp;
         }
     }
 }

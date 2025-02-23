@@ -38,7 +38,7 @@ namespace Supercent.MoleIO.InGame
             }
         }
 
-        public TileData GetTileObject(Vector2Int coords)
+        public TileData GetTileData(Vector2Int coords)
         {
             return tileDict.ContainsKey(coords) ? tileDict[coords] : null;
         }
