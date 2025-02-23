@@ -4,9 +4,11 @@ namespace Supercent.MoleIO.InGame
 {
     public class HexGrid : MonoBehaviour
     {
-        public GameObject hexTilePrefab; // 핵사타일 프리팹
+        public GameObject hexTilePrefab; // 3D 핵사타일 프리팹
         public int gridWidth = 10;
         public int gridHeight = 10;
+        public float _tileWidth = 1.7f;
+        public float _tileHeight = 1.7f;
 
         public Dictionary<Vector2Int, TileData> tileDict = new Dictionary<Vector2Int, TileData>();
 
@@ -22,33 +24,32 @@ namespace Supercent.MoleIO.InGame
                 for (int y = 0; y < gridHeight; y++)
                 {
                     Vector2Int hexCoords = new Vector2Int(x, y);
-
-                    // 타일 생성
                     GameObject hexTile = Instantiate(hexTilePrefab, HexToWorldPosition(hexCoords), Quaternion.identity, transform);
                     hexTile.name = $"Tile {x}, {y}";
 
-                    // TileData 추가 (초기 색은 흰색)
-                    TileData newTileData = new TileData(hexCoords, Color.white);
-                    tileDict.Add(hexCoords, newTileData);
-
-                    // 타일에 좌표 정보 저장
-                    TileData tileScript = hexTile.GetComponent<TileData>();
+                    // HexTile 컴포넌트 설정
+                    HexTile tileScript = hexTile.GetComponent<HexTile>();
                     if (tileScript != null)
                     {
-                        tileScript.hexCoords = hexCoords;
+                        tileScript.InitTile(hexCoords, Color.white);
+                        tileDict.Add(hexCoords, tileScript.TileData);
                     }
                 }
             }
         }
 
-        Vector3 HexToWorldPosition(Vector2Int hexCoords)
+        public TileData GetTileObject(Vector2Int coords)
         {
-            float xOffset = hexCoords.y % 2 == 0 ? 0f : 0.5f; // 홀수 줄 오프셋
-            float x = hexCoords.x + xOffset;
-            float y = hexCoords.y * 0.85f; // 높이 조절
-            return new Vector3(x, 0, y);
+            return tileDict.ContainsKey(coords) ? tileDict[coords] : null;
         }
 
+        Vector3 HexToWorldPosition(Vector2Int hexCoords)
+        {
+            float xOffset = hexCoords.y % 2 == 0 ? 0f : _tileWidth * 0.5f;
+            float x = hexCoords.x * _tileWidth + xOffset;
+            float y = hexCoords.y * _tileHeight * 0.85f;
+            return new Vector3(x, 0, y);
+        }
         public List<Vector2Int> GetHexNeighbors(Vector2Int hexCoords)
         {
             List<Vector2Int> neighbors = new List<Vector2Int>();
@@ -57,13 +58,13 @@ namespace Supercent.MoleIO.InGame
             Vector2Int[] evenOffsets = {
             new Vector2Int(1, 0), new Vector2Int(-1, 0),
             new Vector2Int(0, 1), new Vector2Int(0, -1),
-            new Vector2Int(1, -1), new Vector2Int(-1, -1)
+            new Vector2Int(-1, 1), new Vector2Int(-1, -1)
         };
 
             Vector2Int[] oddOffsets = {
             new Vector2Int(1, 0), new Vector2Int(-1, 0),
             new Vector2Int(0, 1), new Vector2Int(0, -1),
-            new Vector2Int(1, 1), new Vector2Int(-1, 1)
+            new Vector2Int(1, 1), new Vector2Int(1, -1)
         };
 
             Vector2Int[] offsets = (hexCoords.y % 2 == 0) ? evenOffsets : oddOffsets;
