@@ -11,6 +11,10 @@ namespace Supercent.MoleIO.InGame
         public int maxWaveRange = 3; // 최대 웨이브 퍼지는 거리 설정
         [SerializeField] bool _isPlayer;
 
+        public void AddRange(int range = 1)
+        {
+            maxWaveRange += range;
+        }
         void Update()
         {
             if (Input.GetMouseButtonDown(0))

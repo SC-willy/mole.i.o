@@ -14,6 +14,10 @@ namespace Supercent.MoleIO.InGame
         public bool IsCanUpdate = true;
         protected bool _wasMoved = false;
         [SerializeField] int _xp;
+        [SerializeField] int[] _hammerLevels;
+        [SerializeField] GameObject[] _hammers;
+        [SerializeField] HexHitter _hitter;
+        int _levelIndex = 0;
 
         protected override void _Init()
         {
@@ -62,6 +66,17 @@ namespace Supercent.MoleIO.InGame
         public void GetXp(int xp)
         {
             _xp += xp;
+
+            if (_levelIndex >= _hammerLevels.Length)
+                return;
+
+            if (_hammerLevels[_levelIndex] > _xp)
+                return;
+
+            _hammers[_levelIndex].SetActive(false);
+            _levelIndex++;
+            _hammers[_levelIndex].SetActive(true);
+            _hitter.AddRange();
         }
     }
 }

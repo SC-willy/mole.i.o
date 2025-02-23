@@ -982,107 +982,6 @@ MonoBehaviour:
   _targetTr: {fileID: 1761954139}
   _originTransform: {fileID: 231884376}
   _traceSpeed: 6
---- !u!1 &2135758630
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2135758631}
-  - component: {fileID: 2135758634}
-  - component: {fileID: 2135758633}
-  - component: {fileID: 2135758632}
-  - component: {fileID: 2135758635}
-  m_Layer: 0
-  m_Name: HexaField
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2135758631
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135758630}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6131134303490926596}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2135758632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135758630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35329202fb03ef545a9b615c3e602116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hexTilePrefab: {fileID: 7474153535207440907, guid: 2d8baea37c94e7b4bb83c2116b73660f, type: 3}
-  gridWidth: 20
-  gridHeight: 20
-  _tileWidth: 1.7
-  _tileHeight: 1.7
---- !u!114 &2135758633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135758630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e086e70df80b9de48a0dd289a4763d66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 473470775}
-  shaderController: {fileID: 2135758635}
-  hexGrid: {fileID: 2135758632}
-  waveDelay: 0.1
---- !u!114 &2135758634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135758630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddbcb2052332b874e8f403cc73b9c1a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  waveController: {fileID: 2135758633}
-  playerColor: {r: 1, g: 0, b: 0, a: 1}
-  maxWaveRange: 1
-  _isPlayer: 1
---- !u!114 &2135758635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135758630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be9a4ca09ec3d514499339553aa005b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hexMaterial: {fileID: 2100000, guid: 0adb378a214bf2342b38d040163b9ba2, type: 2}
-  hexGrid: {fileID: 2135758632}
 --- !u!1001 &421947234119608763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1294,10 +1193,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaticMap
       objectReference: {fileID: 0}
-    - target: {fileID: 9098413939595338305, guid: 97181c354c47c3946ae556f6f3062b68, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.51
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1327,6 +1222,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1023648122}
     m_Modifications:
+    - target: {fileID: 3434376528625025088, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: _hammerLevels.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3434376528625025088, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: _hammerLevels.Array.data[2]
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5414519198230721666, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_Name
       value: GamePlayObjects
@@ -1373,10 +1276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8264878687575486768, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2135758631}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
 --- !u!1660057539 &9223372036854775807
