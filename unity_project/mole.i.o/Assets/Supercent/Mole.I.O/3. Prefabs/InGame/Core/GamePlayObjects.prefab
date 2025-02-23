@@ -171,6 +171,14 @@ PrefabInstance:
       propertyPath: _hitter
       value: 
       objectReference: {fileID: 8973017322067059408}
+    - target: {fileID: 3286889711481461702, guid: 70e4dbd5569c3d24b90232eca503277f, type: 3}
+      propertyPath: _hammerLevels.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286889711481461702, guid: 70e4dbd5569c3d24b90232eca503277f, type: 3}
+      propertyPath: _hammerLevels.Array.data[2]
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8488160158125211577, guid: 70e4dbd5569c3d24b90232eca503277f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
