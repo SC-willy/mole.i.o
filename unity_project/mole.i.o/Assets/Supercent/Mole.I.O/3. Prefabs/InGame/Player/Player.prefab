@@ -61,6 +61,13 @@ MonoBehaviour:
     _moveSpeed: 6
   _animator: {fileID: 0}
   IsCanUpdate: 1
+  _xp: 0
+  _hammerLevels: 0a000000140000001e000000
+  _hammers:
+  - {fileID: 1108832985152195890}
+  - {fileID: 1049944175770060282}
+  - {fileID: 4972661407062012130}
+  - {fileID: 2344423120346926615}
 --- !u!1001 &67437278403007773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118,6 +125,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+--- !u!1 &1049944175770060282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1044187994335432935, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+  m_PrefabInstance: {fileID: 67437278403007773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1108832985152195890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1120490727536531503, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+  m_PrefabInstance: {fileID: 67437278403007773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2344423120346926615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2334700451903658762, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+  m_PrefabInstance: {fileID: 67437278403007773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4972661407062012130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5038935264587490815, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+  m_PrefabInstance: {fileID: 67437278403007773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8176186141795993908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8185345249240701993, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
