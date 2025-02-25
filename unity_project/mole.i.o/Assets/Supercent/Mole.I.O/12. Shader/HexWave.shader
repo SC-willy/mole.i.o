@@ -26,12 +26,18 @@ Shader "Custom/HexWaveShader"
 
         void vert(inout appdata_full v)
         {
-            float elapsedTime = _GlobalTime - _WaveStartTime;
+           float elapsedTime = _GlobalTime - _WaveStartTime;
 
     if (elapsedTime > 0 && elapsedTime < _WaveDuration)
     {
         float wave = sin(elapsedTime * _WaveSpeed) * _WaveHeight * (1.0 - elapsedTime / _WaveDuration);
-        v.vertex.z -= wave; // 🔥 모델의 Up 방향을 확인해서 수정
+
+        // 🔥 로컬 좌표 → 월드 좌표 변환
+        float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+        worldPos.y += wave;
+
+        // 🔥 월드 좌표 → 로컬 좌표 변환
+        v.vertex = mul(unity_WorldToObject, float4(worldPos, 1.0));
     }
         }
 
