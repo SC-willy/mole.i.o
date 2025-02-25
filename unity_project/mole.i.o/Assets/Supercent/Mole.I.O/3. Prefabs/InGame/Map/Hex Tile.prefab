@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647901206971361048}
-  m_Mesh: {fileID: 8792586484180348971, guid: f60ad2ff18e95f740bef6fde2f03c035, type: 3}
+  m_Mesh: {fileID: 8314571269056883277, guid: f60ad2ff18e95f740bef6fde2f03c035, type: 3}
 --- !u!23 &1503089166878916613
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
     renderer: {fileID: 1503089166878916613}
     waveStartTime: 0
     isActive: 0
+    xp: 1
 --- !u!135 &6958039697192052064
 SphereCollider:
   m_ObjectHideFlags: 0
