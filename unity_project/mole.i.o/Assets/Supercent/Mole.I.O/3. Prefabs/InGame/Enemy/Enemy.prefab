@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &974934735020269413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4760960676496094374}
+  m_Layer: 0
+  m_Name: HitPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4760960676496094374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974934735020269413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8176186141795993908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2855535073352118133
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,8 +40,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8488160158125211577}
-  - component: {fileID: 3286889711481461702}
-  m_Layer: 0
+  - component: {fileID: 6311483327721149708}
+  - component: {fileID: 4574881671476882499}
+  - component: {fileID: 8966477398002697975}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +66,7 @@ Transform:
   - {fileID: 8176186141795993908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3286889711481461702
+--- !u!114 &6311483327721149708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,24 +75,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 2855535073352118133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3a2fc205bc04e65b7fe66729a9f77b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c85779b9056349adb3ee7abf729a759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _callPriority: 0
-  _isBindByManager: 1
-  _moveHandler:
-    _mover:
-      _playerTr: {fileID: 8488160158125211577}
-      _rotateModelTr: {fileID: 8176186141795993908}
-      _moveSpeed: 6
-      IsCanMove: 0
-      _rayRadius: 0.5
-      _layerMask:
-        serializedVersion: 2
-        m_Bits: 64
-    _moveSpeed: 6
-  _animator: {fileID: 0}
-  IsCanUpdate: 1
+  _followTarget: {fileID: 0}
+  _col: {fileID: 8966477398002697975}
+  _hitter: {fileID: 4574881671476882499}
+  _speed: 10
+  _rotateSpeed: 3
+  _rotateDuration: 5
+--- !u!114 &4574881671476882499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855535073352118133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e85a3f2dd3544a74b13fa4ff8ba7a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hexGrid: {fileID: 0}
+  _waveController: {fileID: 0}
+  _hitTr: {fileID: 4760960676496094374}
+  playerColor: {r: 0.96142673, g: 1, b: 0, a: 1}
+  _hitDuration: 1
+  _maxWaveRange: 3
+  _isPlayer: 0
+--- !u!135 &8966477398002697975
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855535073352118133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3189192252488602902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,7 +178,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6716534517768264738, guid: ef4e28e5a3c00b3438eeae6cce821915, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4760960676496094374}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4e28e5a3c00b3438eeae6cce821915, type: 3}
 --- !u!4 &8176186141795993908 stripped

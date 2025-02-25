@@ -48,7 +48,7 @@ namespace Supercent.MoleIO.InGame
 
                     if (isPlayer)
                     {
-                        _player.GetXp(hexGrid.GetTileData(current).xp);
+                        //_player.GetXp(hexGrid.GetTileData(current).xp);
                         hexGrid.GetTileData(current).xp = 0;
                     }
                     else

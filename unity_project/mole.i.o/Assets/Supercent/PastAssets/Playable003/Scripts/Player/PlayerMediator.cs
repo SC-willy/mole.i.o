@@ -16,7 +16,10 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _xp;
         [SerializeField] int[] _hammerLevels;
         [SerializeField] GameObject[] _hammers;
-        [SerializeField] HexHitter _hitter;
+        [SerializeField] HexHitterHammer _hitter;
+        [SerializeField] Transform _attackTr;
+        [SerializeField] LayerMask _mask;
+        [SerializeField] float _killRange = 3f;
         int _levelIndex = 0;
 
         protected override void _Init()
@@ -24,6 +27,8 @@ namespace Supercent.MoleIO.InGame
             _moveHandler.OnMove += ExecuteOnMove;
             _moveHandler.OnStop += ExecuteOnStop;
             _moveHandler.Init();
+
+            _hitter.OnHit += CheckEnemy;
         }
 
         protected override void _Release()
@@ -77,6 +82,21 @@ namespace Supercent.MoleIO.InGame
             _levelIndex++;
             _hammers[_levelIndex].SetActive(true);
             _hitter.AddRange();
+        }
+
+        private void CheckEnemy()
+        {
+            Collider[] others = Physics.OverlapSphere(_attackTr.position, _killRange, _mask);
+
+            for (int i = 0; i < others.Length; i++)
+            {
+                var enemy = EnemyDict.GetData(others[i]);
+
+                if (enemy == null)
+                    continue;
+
+                enemy.GetDamage();
+            }
         }
     }
 }

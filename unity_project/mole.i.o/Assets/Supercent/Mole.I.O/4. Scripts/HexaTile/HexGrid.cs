@@ -27,7 +27,6 @@ namespace Supercent.MoleIO.InGame
                     GameObject hexTile = Instantiate(hexTilePrefab, HexToWorldPosition(hexCoords), Quaternion.identity, transform);
                     hexTile.name = $"Tile {x}, {y}";
 
-                    // HexTile 컴포넌트 설정
                     HexTile tileScript = hexTile.GetComponent<HexTile>();
                     if (tileScript != null)
                     {
@@ -41,6 +40,33 @@ namespace Supercent.MoleIO.InGame
         public TileData GetTileData(Vector2Int coords)
         {
             return tileDict.ContainsKey(coords) ? tileDict[coords] : null;
+        }
+
+        public TileData GetTileDataByPos(Vector3 position)
+        {
+            Vector2Int hexCoords = WorldToHexCoords(position);
+
+            if (tileDict.TryGetValue(hexCoords, out TileData tileData))
+            {
+                return tileData;
+            }
+            return null;
+        }
+
+        public Vector2Int WorldToHexCoords(Vector3 worldPosition)
+        {
+            float x = worldPosition.x / _tileWidth;
+            float y = worldPosition.z / (_tileHeight * 0.85f);
+
+            // 반올림하여 가장 가까운 타일 좌표로 변환
+            int hexX = Mathf.RoundToInt(x);
+            int hexY = Mathf.RoundToInt(y);
+
+            // 짝수/홀수 행 보정 (오프셋 좌표계 적용)
+            float xOffset = (hexY % 2 == 0) ? 0f : 0.5f;
+            hexX = Mathf.RoundToInt(x - xOffset);
+
+            return new Vector2Int(hexX, hexY);
         }
 
         Vector3 HexToWorldPosition(Vector2Int hexCoords)
