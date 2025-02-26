@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6932623734212584124}
   - component: {fileID: 7202350839125232616}
-  - component: {fileID: 6958039697192052064}
   m_Layer: 7
   m_Name: Hex Tile
   m_TagString: Untagged
@@ -137,24 +136,3 @@ MonoBehaviour:
     waveStartTime: 0
     isActive: 0
     xp: 1
---- !u!135 &6958039697192052064
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7474153535207440907}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.73
-  m_Center: {x: 0, y: 0, z: 0}

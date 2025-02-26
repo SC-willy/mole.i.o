@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Tile_Toony
-  m_Shader: {fileID: -6465566751694194690, guid: edd7abf643fa4bc4e8561d4c280c97cf, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d5f6479c8af294e4cb62ae26cf6aaf06, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -129,8 +129,8 @@ Material:
     - _RampBandsSmoothing: 0.1
     - _RampOffset: 0
     - _RampScale: 1
-    - _RampSmoothing: 0.6
-    - _RampThreshold: 0.75
+    - _RampSmoothing: 0.76
+    - _RampThreshold: 0.89
     - _RampType: 0
     - _ReceiveShadowsOff: 1
     - _ReflectionMapType: 0
@@ -163,6 +163,9 @@ Material:
     - _UseRimLightMask: 1
     - _UseShadowTexture: 0
     - _UseSpecular: 1
+    - _WaveDuration: 1
+    - _WaveHeight: 1
+    - _WaveSpeed: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 0.3160377, b: 0.3160377, a: 1}

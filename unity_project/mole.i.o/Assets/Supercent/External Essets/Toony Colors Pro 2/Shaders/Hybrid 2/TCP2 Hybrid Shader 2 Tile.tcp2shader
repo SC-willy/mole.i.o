@@ -684,12 +684,7 @@ Shader "Toony Colors Pro 2/Hybrid Shader 2 Tile"
 			#include "Lighting.cginc"
 			#include "AutoLight.cginc"
 			
-        float _WaveSpeed;
-        float _WaveHeight;
-        float _WaveDuration;  // 추가: 웨이브 지속 시간
-        float _GlobalTime;  
-        float _WaveStartTime; 
-        fixed4 _Color;  
+
 		ENDCG
 
 		Pass
@@ -704,7 +699,7 @@ Shader "Toony Colors Pro 2/Hybrid Shader 2 Tile"
 			#pragma exclude_renderers d3d11_9x
 			#pragma target 3.0
 
-			#pragma vertex Vertex
+			#pragma vertex vert
 			#pragma fragment Fragment
 
 			#pragma multi_compile_fog    /*** OPTION: "Fog" ***/
@@ -746,6 +741,7 @@ Shader "Toony Colors Pro 2/Hybrid Shader 2 Tile"
 			#define UNITY_INSTANCED_SH
 			#include "UnityShaderVariables.cginc"
 			#include "UnityShaderUtilities.cginc"
+			 #include "UnityCG.cginc"
 
 			#undef UNITY_SHOULD_SAMPLE_SH
 			#define UNITY_SHOULD_SAMPLE_SH 1
@@ -754,25 +750,6 @@ Shader "Toony Colors Pro 2/Hybrid Shader 2 Tile"
 			#if !defined(UNITY_PASS_FORWARDBASE)
 				#define UNITY_PASS_FORWARDBASE
 			#endif
-void CustomVertexAnimation(inout appdata_full v)
-{
-    float elapsedTime = _GlobalTime - _WaveStartTime;
-
-    if (elapsedTime > 0 && elapsedTime < _WaveDuration)
-    {
-        float t = elapsedTime / _WaveDuration; // 0~1 정규화
-        float easeInOut = sin(t * 2.0 * UNITY_PI) * (1.0 - t); // 이즈인-이즈아웃 보간
-
-        float wave = easeInOut * _WaveHeight;
-        float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-        worldPos.y += wave;
-
-        v.vertex = mul(unity_WorldToObject, float4(worldPos, 1.0));
-    }
-}
-			#ifdef CUSTOM_VERTEX_TRANSFORMATION
-CustomVertexAnimation(v);
-#endif
 
 			#include "TCP2 Hybrid 2 Include.cginc"
 

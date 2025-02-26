@@ -34,7 +34,7 @@ namespace Supercent.MoleIO.InGame
 
             MaterialPropertyBlock props = tileProperties[tilePos];
             props.SetFloat("_WaveStartTime", waveStartTime);
-            props.SetColor("_Color", newColor);  // 🔥 타일 색상 적용!
+            props.SetColor("_MainColor", newColor);  // 🔥 타일 색상 적용!
             tileObj.renderer.SetPropertyBlock(props);
         }
     }

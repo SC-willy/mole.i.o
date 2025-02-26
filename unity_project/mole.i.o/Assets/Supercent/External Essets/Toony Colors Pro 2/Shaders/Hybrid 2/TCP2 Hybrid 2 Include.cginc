@@ -1,4 +1,8 @@
-﻿// Toony Colors Pro+Mobile 2
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Toony Colors Pro+Mobile 2
 // (c) 2014-2022 Jean Moreno
 
 /// #define fixed half
@@ -113,6 +117,12 @@ CBUFFER_START(UnityPerMaterial)
 	half _OutlineTextureLOD;
 	half _DirectIntensityOutline;
 	half _IndirectIntensityOutline;
+
+	float _GlobalTime;
+float _WaveStartTime;
+float _WaveSpeed;
+float _WaveHeight;
+float _WaveDuration;
 CBUFFER_END
 
 // Samplers
@@ -316,12 +326,8 @@ struct Attributes
 	float3 normal         : NORMAL;
 	float4 tangent        : TANGENT;
 	float4 texcoord0      : TEXCOORD0;
-	#if defined(NEEDS_TEXCOORD1)
 		float2 texcoord1  : TEXCOORD1;
-	#endif
-	#if defined(DYNAMICLIGHTMAP_ON) || defined(UNITY_PASS_META)
 		float2 texcoord2 : TEXCOORD2;
-	#endif
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
@@ -489,6 +495,53 @@ VERTEX_OUTPUT Vertex(Attributes input)
 	#endif
 }
 
+float CalculateWave(float3 worldPos, float globalTime, float waveStartTime, float waveDuration, float waveHeight)
+        {
+            float elapsedTime = globalTime - waveStartTime;
+            if (elapsedTime > 0 && elapsedTime < waveDuration)
+            {
+                float t = elapsedTime / waveDuration;
+                float easeInOut = sin(t * 6.28318530718) * (1.0 - t); // 2 * PI 사용
+                return easeInOut * waveHeight;
+            }
+            return 0.0;
+        }
+void vert(inout appdata_full v)
+{   // ✅ appdata_full을 TCP2에서 사용하는 Attributes로 변환
+    Attributes inputa;
+    inputa.vertex = v.vertex;
+    inputa.normal = v.normal;
+    inputa.tangent = v.tangent;
+    inputa.texcoord0 = v.texcoord;
+    inputa.texcoord1 = v.texcoord1;
+    inputa.texcoord2 = v.texcoord2;
+
+   // ✅ 기존 TCP2의 Vertex() 실행하여 기본 변환 적용
+   VERTEX_OUTPUT output = Vertex(inputa);
+
+   // ✅ 올바른 월드 좌표 가져오기
+   float3 worldPos = mul(unity_ObjectToWorld, inputa.vertex).xyz;
+
+   // 🌊 웨이브 애니메이션 적용 (버텍스 위치 변형)
+   worldPos.y += CalculateWave(worldPos, _GlobalTime, _WaveStartTime, _WaveDuration, _WaveHeight);
+
+   // ✅ 변형된 좌표를 다시 로컬 좌표로 변환
+   float4 localPos = mul(unity_WorldToObject, float4(worldPos, 1.0));
+
+   // ✅ 최종적으로 클립 공간으로 변환하여 적용
+   v.vertex = UnityObjectToClipPos(localPos);
+
+   // ✅ **노멀 벡터 재계산**
+   float3 newNormal = UnityObjectToWorldNormal(v.normal);
+   newNormal.y += CalculateWave(worldPos, _GlobalTime, _WaveStartTime, _WaveDuration, _WaveHeight) * 0.5;
+   v.normal = UnityWorldToObjectDir(newNormal);
+
+   // ✅ **탱젠트 & 비탱젠트 벡터도 수정 (노멀맵, 라이팅 정상화)**
+   float3 newTangent = UnityObjectToWorldDir(v.tangent.xyz);
+   float3 bitangent = cross(newNormal, newTangent) * v.tangent.w;
+
+   v.tangent.xyz = UnityWorldToObjectDir(newTangent);
+}
 // Note: calculations from the main pass are defined with UNITY_PASS_FORWARDBASE
 // However it is left out sometimes because some keywords aren't defined for the
 // Forward Add pass (e.g. TCP2_MATCAP, TCP2_REFLECTIONS, ...)
