@@ -2004,7 +2004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: _tileWidth
-      value: 1.2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: gridHeight
@@ -2012,11 +2012,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: _tileHeight
-      value: 1.2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7433891292437055887, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7834461767543499176, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: waveDelay
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8264878687575486768, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_LocalPosition.x

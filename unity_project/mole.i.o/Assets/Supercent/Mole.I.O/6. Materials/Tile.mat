@@ -164,7 +164,7 @@ Material:
     - _UseShadowTexture: 0
     - _UseSpecular: 1
     - _WaveDuration: 0.5
-    - _WaveHeight: 20
+    - _WaveHeight: 40
     - _WaveSpeed: 0.5
     - _ZWrite: 1
     m_Colors:
