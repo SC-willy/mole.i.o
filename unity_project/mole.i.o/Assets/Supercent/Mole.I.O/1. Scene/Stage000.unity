@@ -395,11 +395,23 @@ PrefabInstance:
       objectReference: {fileID: 2134315100}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _hitDuration
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _maxWaveRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.g
+      value: 0.16084695
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -485,7 +497,7 @@ MonoBehaviour:
   _hitTr: {fileID: 7102766194194202361}
   playerColor: {r: 1, g: 0, b: 0, a: 1}
   _hitDuration: 1
-  _maxWaveRange: 1
+  _maxWaveRange: 10
   _isPlayer: 1
 --- !u!54 &601179249
 Rigidbody:
@@ -532,10 +544,22 @@ PrefabInstance:
       objectReference: {fileID: 2134315100}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _hitDuration
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _maxWaveRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.b
+      value: 0.9104991
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
@@ -618,11 +642,11 @@ PrefabInstance:
       objectReference: {fileID: 2134315100}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _hitDuration
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _maxWaveRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -726,11 +750,11 @@ PrefabInstance:
       objectReference: {fileID: 2134315100}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _hitDuration
-      value: 4.9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _maxWaveRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -1450,11 +1474,19 @@ PrefabInstance:
       objectReference: {fileID: 2134315100}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _hitDuration
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _maxWaveRange
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.b
+      value: 0.037703037
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -1597,11 +1629,19 @@ PrefabInstance:
       objectReference: {fileID: 2134315100}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _hitDuration
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _maxWaveRange
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.b
+      value: 0.669194
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -1957,6 +1997,22 @@ PrefabInstance:
     - target: {fileID: 5414519198230721666, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_Name
       value: GamePlayObjects
+      objectReference: {fileID: 0}
+    - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: gridWidth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: _tileWidth
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: gridHeight
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5547570217935420309, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: _tileHeight
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7433891292437055887, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_LocalPosition.z
