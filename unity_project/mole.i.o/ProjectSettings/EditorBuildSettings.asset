@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Supercent/Prison/Origin/Scenes/Playable001.unity
+    guid: 61e592e29595e4edbb7797943321282f
+  - enabled: 1
+    path: Assets/Supercent/Prison/Origin/Scenes/Playable001-3.unity
+    guid: 74e256299c7d04515bd08fccd52098fe
+  - enabled: 1
+    path: Assets/Supercent/Prison/Origin/Scenes/Playable001-2.unity
+    guid: 98e661fb3cb974d359e27f72e538c0df
+  - enabled: 1
+    path: Assets/Supercent/Prison/Origin/Scenes/Playable001-1.unity
+    guid: df0c87c48624b49deb4af7da6c930982
+  - enabled: 1
+    path: Assets/Supercent/Prison/Origin/Scenes/LoadScene.unity
+    guid: 43711d1ce3cd846f89ddf054363fbd91
+  - enabled: 1
+    path: Assets/Supercent/Prison/PastResources/Playable002.unity
+    guid: 0078a9ce3239d48038a22dfa68eb2467
+  - enabled: 1
+    path: Assets/Supercent/PastAssets/Playable003/Scenes/Playable003.unity
+    guid: 8a4a9e09a0a3e48d8997d592cfefddfa
+  m_configObjects: {}

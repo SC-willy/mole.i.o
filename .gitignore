@@ -98,9 +98,6 @@ unity_project/mole.i.o/UserSettings/Layouts/default-2022.dwlt
 Logs/
 UserSettings/
 
-# 프로젝트 설정 제외 (필요 없거나 협업 시 충돌을 줄이기 위함)
-ProjectSettings/
-Packages/
 
 # 빌드 결과물 (특정 빌드 폴더가 있다면 추가)
 *.apk
