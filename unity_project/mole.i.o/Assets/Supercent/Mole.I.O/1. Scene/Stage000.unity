@@ -1949,6 +1949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaticMap
       objectReference: {fileID: 0}
+    - target: {fileID: 9098413939595338305, guid: 97181c354c47c3946ae556f6f3062b68, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

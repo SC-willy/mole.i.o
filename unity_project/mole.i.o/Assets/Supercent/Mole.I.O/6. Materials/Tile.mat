@@ -163,8 +163,8 @@ Material:
     - _UseRimLightMask: 1
     - _UseShadowTexture: 0
     - _UseSpecular: 1
-    - _WaveDuration: 0.5
-    - _WaveHeight: 40
+    - _WaveDuration: 1
+    - _WaveHeight: 3
     - _WaveSpeed: 0.5
     - _ZWrite: 1
     m_Colors:

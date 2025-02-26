@@ -30,13 +30,13 @@ Shader "Custom/HexWaveShader"
 
     if (elapsedTime > 0 && elapsedTime < _WaveDuration)
     {
-        float wave = sin(elapsedTime * _WaveSpeed) * _WaveHeight * (1.0 - elapsedTime / _WaveDuration);
+         float t = elapsedTime / _WaveDuration; // 0~1 정규화
+        float easeInOut = sin(t * 2.0 * UNITY_PI) * (1.0 - t); // 이즈인-이즈아웃 보간 (0 -> 1 -> -0.3 -> 0)
 
-        // 🔥 로컬 좌표 → 월드 좌표 변환
+        float wave = easeInOut * _WaveHeight;
         float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
         worldPos.y += wave;
 
-        // 🔥 월드 좌표 → 로컬 좌표 변환
         v.vertex = mul(unity_WorldToObject, float4(worldPos, 1.0));
     }
         }
