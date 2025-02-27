@@ -442,8 +442,8 @@ MonoBehaviour:
     _coroutineOwner: {fileID: 1023648125}
     _hexTilePrefab: {fileID: 7474153535207440907, guid: 2d8baea37c94e7b4bb83c2116b73660f, type: 3}
     _mapParents: {fileID: 1226664419}
-    _emptyTileColor: {r: 1, g: 0.7296881, b: 0.4481132, a: 1}
-    _hitColor: {r: 1, g: 0.3160377, b: 0.3160377, a: 1}
+    _emptyTileColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
+    _hitColor: {r: 0.97233677, g: 1, b: 0.19215685, a: 1}
     _gridWidth: 100
     _gridHeight: 100
     _tileWidth: 0.6
