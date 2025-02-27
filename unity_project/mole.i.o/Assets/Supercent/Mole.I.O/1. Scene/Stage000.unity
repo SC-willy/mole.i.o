@@ -441,7 +441,7 @@ MonoBehaviour:
     _gridHeight: 100
     _tileWidth: 0.6
     _tileHeight: 0.6
-    _waveDelay: 0.02
+    _waveDelay: 0.075
   _hammers:
   - {fileID: 601179249}
   - {fileID: 1753213607}
