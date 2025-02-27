@@ -54,7 +54,8 @@ namespace Supercent.MoleIO.InGame
         public void GetXp(int xp)
         {
             _user.GetXp(xp);
-            _hitter.AddRange();
         }
+
+        public void AddRange(int range = 0) => _hitter.AddRange();
     }
 }

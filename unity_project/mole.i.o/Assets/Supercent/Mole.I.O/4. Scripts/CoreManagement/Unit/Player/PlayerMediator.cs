@@ -67,6 +67,7 @@ namespace Supercent.MoleIO.InGame
             _hammers[_levelIndex].SetActive(false);
             _levelIndex++;
             _hammers[_levelIndex].SetActive(true);
+            _attacker.AddRange();
         }
 
         public void GetDamage()

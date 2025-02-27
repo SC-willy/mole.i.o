@@ -1361,6 +1361,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1023648122}
     m_Modifications:
+    - target: {fileID: 4552621203276268826, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
+      propertyPath: _maxWaveRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5414519198230721666, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_Name
       value: GamePlayObjects
