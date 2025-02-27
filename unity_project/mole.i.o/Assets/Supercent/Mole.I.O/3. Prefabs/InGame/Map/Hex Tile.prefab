@@ -128,11 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ab22b4cdc6e7a49843ea37015b295e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexCoords: {x: 0, y: 0}
   _tileData:
-    hexCoords: {x: 0, y: 0}
-    ownerColor: {r: 0, g: 0, b: 0, a: 0}
-    renderer: {fileID: 1503089166878916613}
-    waveStartTime: 0
-    isActive: 0
-    xp: 1
+    HexCoords: {x: 0, y: 0}
+    OwnerColor: {r: 0, g: 0, b: 0, a: 0}
+    Renderer: {fileID: 1503089166878916613}

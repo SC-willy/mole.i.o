@@ -7,7 +7,7 @@ namespace Supercent.MoleIO.InGame
         public Action<EnemyController> OnHit;
         [SerializeField] Transform _followTarget;
         [SerializeField] Collider _col;
-        [SerializeField] HexHitterHammer _hitter;
+        [SerializeField] HexHammer _hitter;
         [SerializeField] float _speed;
         [SerializeField] float _rotateSpeed;
         [SerializeField] float _rotateDuration;

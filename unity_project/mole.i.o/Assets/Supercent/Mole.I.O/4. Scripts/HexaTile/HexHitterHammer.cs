@@ -2,11 +2,10 @@ using System;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
-    public class HexHitterHammer : MonoBehaviour
+    public class HexHammer : MonoBehaviour
     {
         public event Action OnHit;
-        [SerializeField] HexGrid _hexGrid;
-        [SerializeField] WaveController _waveController;
+        HexGrid _mapInfo;
         [SerializeField] Transform _hitTr;
         [SerializeField] Color playerColor = Color.red;
         [SerializeField] float _hitDuration = 1f;
@@ -15,7 +14,7 @@ namespace Supercent.MoleIO.InGame
 
         float _lastHitTime = 1;
 
-
+        public void SetMapInfo(HexGrid map) => _mapInfo = map;
         public void AddRange(int range = 1)
         {
             _maxWaveRange += range;
@@ -30,11 +29,11 @@ namespace Supercent.MoleIO.InGame
 
         private void TryHit()
         {
-            TileData tile = _hexGrid.GetTileDataByPos(_hitTr.position);
+            TileData tile = _mapInfo.GetTileDataByPos(_hitTr.position);
 
             if (tile == null)
                 return;
-            if (tile.xp == 0)
+            if (tile.Xp == 0)
                 return;
 
             OnHit?.Invoke();
@@ -43,8 +42,8 @@ namespace Supercent.MoleIO.InGame
 
         public void HitTile()
         {
-            TileData tile = _hexGrid.GetTileDataByPos(_hitTr.position);
-            _waveController.SpreadWave(tile.hexCoords, playerColor, _maxWaveRange, _isPlayer);
+            TileData tile = _mapInfo.GetTileDataByPos(_hitTr.position);
+            _mapInfo.SpreadWave(tile.HexCoords, playerColor, _maxWaveRange, _isPlayer);
         }
     }
 }

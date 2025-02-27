@@ -1,52 +1,70 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
-    public class HexGrid : MonoBehaviour
+    [Serializable]
+    public class HexGrid : IStartable, IUpdateable, IBindable
     {
-        public GameObject hexTilePrefab; // 3D 핵사타일 프리팹
-        public int gridWidth = 10;
-        public int gridHeight = 10;
-        public float _tileWidth = 1.7f;
-        public float _tileHeight = 1.7f;
+        [Header("Tile Map")]
+        [SerializeField] MonoBehaviour _coroutineOwner;
+        [SerializeField] GameObject _hexTilePrefab; // 3D 핵사타일 프리팹
+        [SerializeField] Transform _mapParents;
+        [SerializeField] int _gridWidth = 10;
+        [SerializeField] int _gridHeight = 10;
+        [SerializeField] float _tileWidth = 1.7f;
+        [SerializeField] float _tileHeight = 1.7f;
+        [SerializeField] float _waveDelay = 0.05f;
 
-        public Dictionary<Vector2Int, TileData> tileDict = new Dictionary<Vector2Int, TileData>();
+        Dictionary<Vector2Int, TileData> _tileDict = new Dictionary<Vector2Int, TileData>();
+        Dictionary<Vector2Int, MaterialPropertyBlock> tileProperties = new Dictionary<Vector2Int, MaterialPropertyBlock>();
 
-        void Start()
+        public void StartSetup()
         {
             GenerateHexGrid();
         }
 
-        void GenerateHexGrid()
+        public void UpdateManualy(float dt)
         {
-            for (int x = 0; x < gridWidth; x++)
+            foreach (var tile in tileProperties)
             {
-                for (int y = 0; y < gridHeight; y++)
+                TileData tileObj = GetTileData(tile.Key);
+                if (tileObj == null) continue;
+
+                MaterialPropertyBlock props = tile.Value;
+                props.SetFloat("_GlobalTime", Time.time);
+                tileObj.Renderer.SetPropertyBlock(props);
+            }
+        }
+
+        private void GenerateHexGrid()
+        {
+            for (int x = 0; x < _gridWidth; x++)
+            {
+                for (int y = 0; y < _gridHeight; y++)
                 {
                     Vector2Int hexCoords = new Vector2Int(x, y);
-                    GameObject hexTile = Instantiate(hexTilePrefab, HexToWorldPosition(hexCoords), Quaternion.identity, transform);
+                    GameObject hexTile = GameObject.Instantiate(_hexTilePrefab, HexToWorldPosition(hexCoords), Quaternion.identity, _mapParents);
                     hexTile.name = $"Tile {x}, {y}";
 
                     HexTile tileScript = hexTile.GetComponent<HexTile>();
                     if (tileScript != null)
                     {
                         tileScript.InitTile(hexCoords, Color.white);
-                        tileDict.Add(hexCoords, tileScript.TileData);
+                        _tileDict.Add(hexCoords, tileScript.TileData);
                     }
                 }
             }
         }
 
-        public TileData GetTileData(Vector2Int coords)
-        {
-            return tileDict.ContainsKey(coords) ? tileDict[coords] : null;
-        }
+        public TileData GetTileData(Vector2Int coords) => _tileDict.ContainsKey(coords) ? _tileDict[coords] : null;
 
         public TileData GetTileDataByPos(Vector3 position)
         {
             Vector2Int hexCoords = WorldToHexCoords(position);
 
-            if (tileDict.TryGetValue(hexCoords, out TileData tileData))
+            if (_tileDict.TryGetValue(hexCoords, out TileData tileData))
             {
                 return tileData;
             }
@@ -98,11 +116,80 @@ namespace Supercent.MoleIO.InGame
             foreach (Vector2Int offset in offsets)
             {
                 Vector2Int neighbor = hexCoords + offset;
-                if (tileDict.ContainsKey(neighbor))
+                if (_tileDict.ContainsKey(neighbor))
                     neighbors.Add(neighbor);
             }
 
             return neighbors;
+        }
+
+        public void SpreadWave(Vector2Int startTile, Color playerColor, int maxRange, bool isPlayer = false)
+        {
+            _coroutineOwner.StartCoroutine(WavePropagation(startTile, playerColor, maxRange, isPlayer));
+        }
+
+        IEnumerator WavePropagation(Vector2Int startTile, Color playerColor, int maxRange, bool isPlayer = false)
+        {
+            Queue<Vector2Int> queue = new Queue<Vector2Int>();
+            Dictionary<Vector2Int, int> distanceMap = new Dictionary<Vector2Int, int>(); // 거리 추적
+            queue.Enqueue(startTile);
+            distanceMap[startTile] = 0;
+
+            while (queue.Count > 0)
+            {
+                int waveSize = queue.Count;
+
+                for (int i = 0; i < waveSize; i++)
+                {
+                    Vector2Int current = queue.Dequeue();
+                    int currentDistance = distanceMap[current];
+
+                    if (currentDistance > maxRange) continue; // 최대 거리 초과 시 무시
+
+                    StartWave(current, Time.time, playerColor);
+
+                    foreach (Vector2Int neighbor in GetHexNeighbors(current))
+                    {
+                        if (!distanceMap.ContainsKey(neighbor))
+                        {
+                            queue.Enqueue(neighbor);
+                            distanceMap[neighbor] = currentDistance + 1;
+                        }
+                    }
+
+                    if (isPlayer)
+                    {
+                        GetTileData(current).Xp = 0;
+                    }
+                    else
+                    {
+                        GetTileData(current).Xp = 2;
+                    }
+                }
+
+                yield return new WaitForSeconds(_waveDelay);
+            }
+        }
+
+        public void StartWave(Vector2Int tilePos, float waveStartTime, Color newColor)
+        {
+            if (!tileProperties.ContainsKey(tilePos))
+            {
+                tileProperties[tilePos] = new MaterialPropertyBlock();
+            }
+
+            TileData tileObj = GetTileData(tilePos);
+            if (tileObj == null) return;
+
+            MaterialPropertyBlock props = tileProperties[tilePos];
+            props.SetFloat("_WaveStartTime", waveStartTime);
+            props.SetColor("_BaseColor", newColor);
+            tileObj.Renderer.SetPropertyBlock(props);
+        }
+
+        public void Bind(MonoBehaviour mono)
+        {
+            _coroutineOwner = mono;
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Supercent.MoleIO.InGame
 {
     public class PlayerMediator : InitManagedBehaviorBase
     {
-        private const float ANIM_TRANSITION_SPEED = 5f;
         readonly private static int _animBoolHit = Animator.StringToHash("Hit");
 
         [SerializeField] protected PlayerMoveHandler _moveHandler = new PlayerMoveHandler();
@@ -15,7 +14,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _xp;
         [SerializeField] int[] _hammerLevels;
         [SerializeField] GameObject[] _hammers;
-        [SerializeField] HexHitterHammer _hitter;
+        [SerializeField] HexHammer _hitter;
         [SerializeField] Transform _attackTr;
         [SerializeField] LayerMask _mask;
         [SerializeField] float _killRange = 3f;
