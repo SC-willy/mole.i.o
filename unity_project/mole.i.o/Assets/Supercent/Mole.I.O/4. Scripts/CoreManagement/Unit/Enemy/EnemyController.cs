@@ -2,12 +2,14 @@ using System;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, ITileXpGetter, IDamageable
     {
         public Action<EnemyController> OnHit;
+
+        [CustomColor(0, 0, 0.2f)]
+        [SerializeField] UnitHammer _attacker;
         [SerializeField] Transform _followTarget;
         [SerializeField] Collider _col;
-        [SerializeField] HexHammer _hitter;
         [SerializeField] float _speed;
         [SerializeField] float _rotateSpeed;
         [SerializeField] float _rotateDuration;
@@ -16,12 +18,17 @@ namespace Supercent.MoleIO.InGame
         float _lastRotateTime = 0;
         bool _isRotate;
 
+        int _xp;
+
         void Start()
         {
-            EnemyDict.RegistData(_col, this);
+            ColDict.RegistData(_col, this);
             Vector2 rand = UnityEngine.Random.insideUnitCircle;
             _offset.x = rand.x;
             _offset.z = rand.y;
+
+            _attacker.RegistUser(this);
+            _attacker.Init();
         }
 
         private void Update()
@@ -52,6 +59,11 @@ namespace Supercent.MoleIO.InGame
         public void GetDamage()
         {
             OnHit?.Invoke(this);
+        }
+
+        public void GetXp(int xp)
+        {
+            _xp += xp;
         }
     }
 }

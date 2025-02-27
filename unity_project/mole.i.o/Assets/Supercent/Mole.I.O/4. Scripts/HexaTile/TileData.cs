@@ -7,6 +7,9 @@ namespace Supercent.MoleIO.InGame
     [Serializable]
     public class TileData
     {
+        public const int EMPTY_CODE = 0;
+        public const int PLAYER_CODE = -1;
+        public int Owner;
         public Vector2Int HexCoords;
         public Color OwnerColor;
         public Renderer Renderer;

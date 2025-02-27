@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
     [Serializable]
-    public class PlayerMoveHandler
+    public class PlayerMoveHandler : IInitable
     {
         // Events
         public event Action OnMove;
@@ -16,7 +16,6 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] float _moveSpeed = 6;
         Vector3 _forwardDir = Vector3.zero;
         float _mainCamY = 0;
-
         public void Init()
         {
             ScreenInputController.OnDragEvent += MovePlayer;
@@ -27,6 +26,7 @@ namespace Supercent.MoleIO.InGame
             _mover.SetMoveSpeed(_moveSpeed);
             ResetCamY();
         }
+
         public void Release()
         {
             ScreenInputController.OnDragEvent -= MovePlayer;
@@ -69,5 +69,7 @@ namespace Supercent.MoleIO.InGame
             _moveSpeed += speed;
             _mover.SetMoveSpeed(_moveSpeed);
         }
+
+
     }
 }

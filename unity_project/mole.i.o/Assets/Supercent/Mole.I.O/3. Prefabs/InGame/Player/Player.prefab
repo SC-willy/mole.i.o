@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3286889711481461702}
   - component: {fileID: 4402852869471919772}
   - component: {fileID: 1532817436570717807}
-  m_Layer: 0
+  - component: {fileID: 7860896568373249823}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _callPriority: 0
   _isBindByManager: 1
+  IsCanUpdate: 1
   _moveHandler:
     _mover:
       _playerTr: {fileID: 8488160158125211577}
@@ -61,22 +63,26 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 64
     _moveSpeed: 6
-  _animator: {fileID: 3664012417166261792}
   _animEvent: {fileID: 1925687718496948091}
-  IsCanUpdate: 1
+  _animator: {fileID: 3664012417166261792}
+  _attacker:
+    _hitter: {fileID: 4402852869471919772}
+    _animEvent: {fileID: 1925687718496948091}
+    _animator: {fileID: 3664012417166261792}
+    _attackTr: {fileID: 1798826741231357609}
+    _mask:
+      serializedVersion: 2
+      m_Bits: 128
+    _killRange: 3
+  _col: {fileID: 0}
   _xp: 0
-  _hammerLevels: 0a0000001e00000032000000
+  _combo: 0
   _hammers:
   - {fileID: 1108832985152195890}
   - {fileID: 1049944175770060282}
   - {fileID: 4972661407062012130}
   - {fileID: 2344423120346926615}
-  _hitter: {fileID: 4402852869471919772}
-  _attackTr: {fileID: 1798826741231357609}
-  _mask:
-    serializedVersion: 2
-    m_Bits: 128
-  _killRange: 1
+  _hammerLevels: 640000002c010000f4010000
 --- !u!114 &4402852869471919772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,13 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e85a3f2dd3544a74b13fa4ff8ba7a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hexGrid: {fileID: 0}
-  _waveController: {fileID: 0}
   _hitTr: {fileID: 1798826741231357609}
   playerColor: {r: 0.08025527, g: 1, b: 0, a: 1}
   _hitDuration: 1
   _maxWaveRange: 10
-  _isPlayer: 1
+  _playerCode: -1
 --- !u!54 &1532817436570717807
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,6 +127,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!135 &7860896568373249823
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855535073352118133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &67437278403007773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,10 +156,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8488160158125211577}
     m_Modifications:
-    - target: {fileID: 1736457318222338996, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.7
-      objectReference: {fileID: 0}
     - target: {fileID: 7782961899951991122, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
       propertyPath: m_Name
       value: PlayerModel
@@ -179,10 +200,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8967149143010743561, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

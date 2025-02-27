@@ -11,6 +11,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] MonoBehaviour _coroutineOwner;
         [SerializeField] GameObject _hexTilePrefab; // 3D 핵사타일 프리팹
         [SerializeField] Transform _mapParents;
+        [SerializeField] Color _emptyTileColor;
         [SerializeField] int _gridWidth = 10;
         [SerializeField] int _gridHeight = 10;
         [SerializeField] float _tileWidth = 1.7f;
@@ -38,6 +39,7 @@ namespace Supercent.MoleIO.InGame
             }
         }
 
+        #region TileMap
         private void GenerateHexGrid()
         {
             for (int x = 0; x < _gridWidth; x++)
@@ -122,13 +124,16 @@ namespace Supercent.MoleIO.InGame
 
             return neighbors;
         }
+        #endregion
 
-        public void SpreadWave(Vector2Int startTile, Color playerColor, int maxRange, bool isPlayer = false)
+
+        #region WaveControl
+        public void SpreadWave(ITileXpGetter hitter, Vector2Int startTile, Color playerColor, int maxRange, int userCode = TileData.PLAYER_CODE)
         {
-            _coroutineOwner.StartCoroutine(WavePropagation(startTile, playerColor, maxRange, isPlayer));
+            _coroutineOwner.StartCoroutine(WavePropagation(hitter, startTile, playerColor, maxRange, userCode));
         }
 
-        IEnumerator WavePropagation(Vector2Int startTile, Color playerColor, int maxRange, bool isPlayer = false)
+        IEnumerator WavePropagation(ITileXpGetter hitter, Vector2Int startTile, Color playerColor, int maxRange, int userCode = TileData.PLAYER_CODE)
         {
             Queue<Vector2Int> queue = new Queue<Vector2Int>();
             Dictionary<Vector2Int, int> distanceMap = new Dictionary<Vector2Int, int>(); // 거리 추적
@@ -142,11 +147,29 @@ namespace Supercent.MoleIO.InGame
                 for (int i = 0; i < waveSize; i++)
                 {
                     Vector2Int current = queue.Dequeue();
+                    TileData curTile = GetTileData(current);
                     int currentDistance = distanceMap[current];
 
                     if (currentDistance > maxRange) continue; // 최대 거리 초과 시 무시
 
-                    StartWave(current, Time.time, playerColor);
+                    if (curTile.Owner == TileData.EMPTY_CODE)
+                    {
+                        hitter.GetXp(curTile.Xp);
+                        curTile.Xp = 0;
+                    }
+
+                    if (curTile.Owner != userCode && curTile.Owner != TileData.EMPTY_CODE)
+                    {
+                        curTile.Owner = TileData.EMPTY_CODE;
+                        curTile.Xp = 1;
+                        StartWave(current, Time.time, _emptyTileColor);
+                    }
+                    else
+                    {
+                        curTile.Owner = userCode;
+                        StartWave(current, Time.time, playerColor);
+                    }
+
 
                     foreach (Vector2Int neighbor in GetHexNeighbors(current))
                     {
@@ -156,21 +179,15 @@ namespace Supercent.MoleIO.InGame
                             distanceMap[neighbor] = currentDistance + 1;
                         }
                     }
-
-                    if (isPlayer)
-                    {
-                        GetTileData(current).Xp = 0;
-                    }
-                    else
-                    {
-                        GetTileData(current).Xp = 2;
-                    }
                 }
-
                 yield return new WaitForSeconds(_waveDelay);
+
             }
         }
+        #endregion
 
+
+        #region ShaderControl
         public void StartWave(Vector2Int tilePos, float waveStartTime, Color newColor)
         {
             if (!tileProperties.ContainsKey(tilePos))
@@ -191,5 +208,7 @@ namespace Supercent.MoleIO.InGame
         {
             _coroutineOwner = mono;
         }
+
+        #endregion
     }
 }
