@@ -39,12 +39,8 @@ namespace Supercent.MoleIO.InGame
 
         public void UpdateMove()
         {
-            if (ScreenInputController.Direction == Vector2.zero)
-            {
-                StopPlayer();
-                return;
-            }
-            _forwardDir = Quaternion.Euler(0, Mathf.Atan2(ScreenInputController.X, ScreenInputController.Y) * Mathf.Rad2Deg + _mainCamY, 0f) * Vector3.forward;
+            if (ScreenInputController.Direction != Vector2.zero)
+                _forwardDir = Quaternion.Euler(0, Mathf.Atan2(ScreenInputController.X, ScreenInputController.Y) * Mathf.Rad2Deg + _mainCamY, 0f) * Vector3.forward;
             _mover.UpdateMove(_forwardDir);
         }
 

@@ -38,6 +38,12 @@ namespace Supercent.MoleIO.InGame
                 return;
 
             OnHit?.Invoke();
+
+        }
+
+        public void HitTile()
+        {
+            TileData tile = _hexGrid.GetTileDataByPos(_hitTr.position);
             _waveController.SpreadWave(tile.hexCoords, playerColor, _maxWaveRange, _isPlayer);
             _lastHitTime = Time.time;
         }

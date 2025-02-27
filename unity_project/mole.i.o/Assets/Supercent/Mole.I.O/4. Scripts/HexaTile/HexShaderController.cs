@@ -5,7 +5,6 @@ namespace Supercent.MoleIO.InGame
 {
     public class HexShaderController : MonoBehaviour
     {
-        public Material hexMaterial;
         private Dictionary<Vector2Int, MaterialPropertyBlock> tileProperties = new Dictionary<Vector2Int, MaterialPropertyBlock>();
         public HexGrid hexGrid;
 
@@ -34,7 +33,7 @@ namespace Supercent.MoleIO.InGame
 
             MaterialPropertyBlock props = tileProperties[tilePos];
             props.SetFloat("_WaveStartTime", waveStartTime);
-            props.SetColor("_MainColor", newColor);  // 🔥 타일 색상 적용!
+            props.SetColor("_BaseColor", newColor);
             tileObj.renderer.SetPropertyBlock(props);
         }
     }

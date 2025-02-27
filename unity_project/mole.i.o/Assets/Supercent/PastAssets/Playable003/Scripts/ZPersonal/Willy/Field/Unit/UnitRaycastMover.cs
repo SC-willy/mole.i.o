@@ -11,11 +11,6 @@ namespace Supercent.MoleIO.InGame
 
         public override void UpdateMove(Vector3 dir)
         {
-            if (!IsCanMove)
-                return;
-            if (dir == Vector3.zero)
-                return;
-
             TryMoveTowards(dir);
             Rotate(dir);
         }

@@ -5,12 +5,11 @@ namespace Supercent.MoleIO.InGame
     public class PlayerMediator : InitManagedBehaviorBase
     {
         private const float ANIM_TRANSITION_SPEED = 5f;
-        readonly private static int _animFloatMove = Animator.StringToHash("IsMove");
+        readonly private static int _animBoolHit = Animator.StringToHash("Hit");
 
         [SerializeField] protected PlayerMoveHandler _moveHandler = new PlayerMoveHandler();
         [SerializeField] protected Animator _animator = null;
-        float _animFloat = 0;
-        float _animChangeValue = -1;
+        [SerializeField] AnimEventContainer _animEvent;
         public bool IsCanUpdate = true;
         protected bool _wasMoved = false;
         [SerializeField] int _xp;
@@ -28,7 +27,8 @@ namespace Supercent.MoleIO.InGame
             _moveHandler.OnStop += ExecuteOnStop;
             _moveHandler.Init();
 
-            _hitter.OnHit += CheckEnemy;
+            _hitter.OnHit += PlayAttackAnim;
+            _animEvent.OnAnimEvent += CheckEnemy;
         }
 
         protected override void _Release()
@@ -44,9 +44,6 @@ namespace Supercent.MoleIO.InGame
 
             if (_animator == null)
                 return;
-
-            _animFloat = Mathf.Clamp01(_animFloat + (Time.deltaTime * _animChangeValue * ANIM_TRANSITION_SPEED));
-            _animator.SetFloat(_animFloatMove, _animFloat);
         }
 
         public void ExecuteOnMove()
@@ -56,7 +53,6 @@ namespace Supercent.MoleIO.InGame
             if (_animator == null)
                 return;
             _wasMoved = true;
-            _animChangeValue = 1;
         }
         public void ExecuteOnStop()
         {
@@ -65,7 +61,6 @@ namespace Supercent.MoleIO.InGame
             if (_animator == null)
                 return;
             _wasMoved = false;
-            _animChangeValue = -1;
         }
 
         public void GetXp(int xp)
@@ -84,6 +79,8 @@ namespace Supercent.MoleIO.InGame
             _hitter.AddRange();
         }
 
+        private void PlayAttackAnim() => _animator.SetTrigger(_animBoolHit);
+
         private void CheckEnemy()
         {
             Collider[] others = Physics.OverlapSphere(_attackTr.position, _killRange, _mask);
@@ -97,6 +94,8 @@ namespace Supercent.MoleIO.InGame
 
                 enemy.GetDamage();
             }
+
+            _hitter.HitTile();
         }
     }
 }
