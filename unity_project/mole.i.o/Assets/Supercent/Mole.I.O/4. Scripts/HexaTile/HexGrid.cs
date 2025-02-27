@@ -12,6 +12,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] GameObject _hexTilePrefab; // 3D 핵사타일 프리팹
         [SerializeField] Transform _mapParents;
         [SerializeField] Color _emptyTileColor;
+        [SerializeField] Color _hitColor;
         [SerializeField] int _gridWidth = 10;
         [SerializeField] int _gridHeight = 10;
         [SerializeField] float _tileWidth = 1.7f;
@@ -200,7 +201,8 @@ namespace Supercent.MoleIO.InGame
 
             MaterialPropertyBlock props = tileProperties[tilePos];
             props.SetFloat("_WaveStartTime", waveStartTime);
-            props.SetColor("_BaseColor", newColor);
+            props.SetColor("_TargetColor", newColor);
+            props.SetColor("_BaseColor", _hitColor);
             tileObj.Renderer.SetPropertyBlock(props);
         }
 

@@ -123,6 +123,8 @@ float _WaveStartTime;
 float _WaveSpeed;
 float _WaveHeight;
 float _WaveDuration;
+ float4 _TargetColor;
+
 CBUFFER_END
 
 // Samplers
@@ -627,7 +629,10 @@ half4 Fragment (Varyings input, half vFace : VFACE) : SV_Target
 	// Base
 
 	half4 albedo = tex2D(_BaseMap, mainTexcoord).rgba;
-	albedo.rgb *= _BaseColor.rgb;
+float t = saturate((_GlobalTime - _WaveStartTime) / _WaveDuration);
+half3 waveColor = lerp(_BaseColor.rgb, _TargetColor.rgb, t);
+
+	albedo.rgb *= waveColor;
 	half alpha = albedo.a * _BaseColor.a;
 	half3 emission = half3(0,0,0);
 

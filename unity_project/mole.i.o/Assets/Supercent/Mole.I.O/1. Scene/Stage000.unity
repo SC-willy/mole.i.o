@@ -435,7 +435,8 @@ MonoBehaviour:
     _coroutineOwner: {fileID: 1023648125}
     _hexTilePrefab: {fileID: 7474153535207440907, guid: 2d8baea37c94e7b4bb83c2116b73660f, type: 3}
     _mapParents: {fileID: 1226664419}
-    _emptyTileColor: {r: 0, g: 0, b: 0, a: 0}
+    _emptyTileColor: {r: 1, g: 0.9069199, b: 0.8066038, a: 1}
+    _hitColor: {r: 1, g: 1, b: 1, a: 1}
     _gridWidth: 100
     _gridHeight: 100
     _tileWidth: 0.6
@@ -1363,7 +1364,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4552621203276268826, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: _maxWaveRange
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5414519198230721666, guid: aeabe4afc5439ba4daf41580e2b3fdd7, type: 3}
       propertyPath: m_Name
