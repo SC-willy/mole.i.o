@@ -629,7 +629,7 @@ half4 Fragment (Varyings input, half vFace : VFACE) : SV_Target
 	// Base
 
 	half4 albedo = tex2D(_BaseMap, mainTexcoord).rgba;
-float t = saturate((_GlobalTime - _WaveStartTime) / _WaveDuration);
+float t = saturate((_GlobalTime - _WaveStartTime)*3 / _WaveDuration);
 half3 waveColor = lerp(_BaseColor.rgb, _TargetColor.rgb, t);
 
 	albedo.rgb *= waveColor;

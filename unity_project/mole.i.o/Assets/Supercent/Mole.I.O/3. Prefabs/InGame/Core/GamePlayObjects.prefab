@@ -201,15 +201,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.b
-      value: 0
+      value: 0.3037113
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.g
-      value: 0.9508463
+      value: 0.9629926
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.r
-      value: 1
+      value: 0.990566
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -314,15 +314,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.b
-      value: 1
+      value: 0.15566039
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.g
-      value: 0.16084695
+      value: 0.53494024
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -427,11 +427,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.b
-      value: 0.037703037
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
+      propertyPath: playerColor.g
+      value: 0.4009434
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.r
-      value: 0
+      value: 0.4009434
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -540,11 +544,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.g
-      value: 1
+      value: 0.5235849
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.r
-      value: 1
+      value: 0.776558
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController
@@ -649,11 +653,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.b
-      value: 0.9104991
+      value: 0.95362556
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.g
-      value: 0
+      value: 0.48584908
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.r
@@ -758,15 +762,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.b
-      value: 0.8781085
+      value: 0.8443195
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.g
-      value: 1
+      value: 0.8962264
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: playerColor.r
-      value: 0
+      value: 0.46925062
       objectReference: {fileID: 0}
     - target: {fileID: 4574881671476882499, guid: 398daf3f711901048a5f3a3af670bc96, type: 3}
       propertyPath: _waveController

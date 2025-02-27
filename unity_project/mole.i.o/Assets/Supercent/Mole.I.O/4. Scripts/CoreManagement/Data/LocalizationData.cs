@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Supercent.MoleIO.Management
 {
-    [CreateAssetMenu(fileName = "LocalizationData", menuName = "Localization/Data")]
+    [CreateAssetMenu(fileName = "LocalizationData", menuName = "Data/Localization")]
     public class LocalizationData : ScriptableObject
     {
         public List<LocalizedText> Texts;

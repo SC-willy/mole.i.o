@@ -8,12 +8,14 @@ namespace Supercent.MoleIO.InGame
     [Serializable]
     public class InGameManager : MonoBehaviour
     {
+        public static LevelData CurLevelData;
+
         [Header("Managers")]
         [CustomColor(0f, 0f, 0.2f)]
         [SerializeField] InitManager _initManager = new InitManager();
         [CustomColor(0.23f, 0.34f, 0f)]
         [SerializeField] TransitionManager _transitionManager = new TransitionManager();
-
+        [SerializeField] LevelData _levelData;
 
         [Header("Mediators")]
         [CustomColor(0.2f, 0.1f, 0.3f)]
@@ -21,6 +23,9 @@ namespace Supercent.MoleIO.InGame
 
         private void Start()
         {
+            if (CurLevelData == null)
+                CurLevelData = _levelData;
+
             InvokeStartMethod(_initManager);
             InvokeStartMethod(_mainMed);
             InvokeStartMethod(_transitionManager);

@@ -15,9 +15,12 @@ namespace Supercent.MoleIO.InGame
         float _lastHitTime = 1;
 
         public void SetMapInfo(HexGrid map) => _mapInfo = map;
-        public void AddRange(int range = 1)
+        public void SetRange(int range)
         {
-            _maxWaveRange += range;
+            if (range >= 1)
+                _maxWaveRange = range;
+            else
+                _maxWaveRange = 1;
         }
         void Update()
         {
@@ -33,7 +36,7 @@ namespace Supercent.MoleIO.InGame
 
             if (tile == null)
                 return;
-            if (tile.Xp == 0)
+            if (tile.Owner == _playerCode)
                 return;
 
             OnHit?.Invoke();

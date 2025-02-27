@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
-    public class EnemyController : MonoBehaviour, ITileXpGetter, IDamageable
+    public class EnemyController : InitManagedBehaviorBase, ITileXpGetter, IDamageable
     {
         public Action<EnemyController> OnHit;
 
         [CustomColor(0, 0, 0.2f)]
-        [SerializeField] UnitHammer _attacker;
+        [SerializeField] UnitBattleController _attacker;
         [SerializeField] Transform _followTarget;
         [SerializeField] Collider _col;
         [SerializeField] float _speed;
@@ -16,23 +16,33 @@ namespace Supercent.MoleIO.InGame
         Vector3 _offset;
         float _rotateLerpValue = 0;
         float _lastRotateTime = 0;
-        bool _isRotate;
+        int _xp = 0;
 
-        int _xp;
+        bool _isDie = false;
+        bool _isRotate = false;
 
-        void Start()
+
+
+        protected override void _Init()
         {
             ColDict.RegistData(_col, this);
             Vector2 rand = UnityEngine.Random.insideUnitCircle;
             _offset.x = rand.x;
             _offset.z = rand.y;
 
-            _attacker.RegistUser(this);
+            _attacker.OnSetSize += SetSize;
             _attacker.Init();
+        }
+
+        protected override void _Release()
+        {
         }
 
         private void Update()
         {
+            if (_isDie)
+                return;
+
             transform.position += transform.forward * Time.deltaTime * _speed;
 
             if (_lastRotateTime + _rotateDuration > Time.deltaTime)
@@ -56,14 +66,32 @@ namespace Supercent.MoleIO.InGame
             _isRotate = true;
         }
 
-        public void GetDamage()
+        public void GetDamage(int attackerLevel)
         {
-            OnHit?.Invoke(this);
+            if (_attacker.Level > attackerLevel)
+                GetWeakAttack();
+            else
+                GetDeadlyAttack();
+        }
+        public void GetWeakAttack()
+        {
+            _attacker.GradeDown();
+        }
+
+        public void GetDeadlyAttack()
+        {
+            _attacker.Die();
+            _isDie = true;
         }
 
         public void GetXp(int xp)
         {
             _xp += xp;
+        }
+
+        private void SetSize(float size)
+        {
+            transform.localScale = Vector3.one * size;
         }
     }
 }

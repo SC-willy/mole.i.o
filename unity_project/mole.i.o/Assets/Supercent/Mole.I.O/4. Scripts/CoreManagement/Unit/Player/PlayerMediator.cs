@@ -1,11 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Supercent.MoleIO.InGame
 {
-    public class PlayerMediator : InitManagedBehaviorBase, ITileXpGetter, IDamageable
+    public class PlayerMediator : InitManagedBehaviorBase, IDamageable
     {
-
-
         public bool IsCanUpdate = true;
 
         [Header("Functions")]
@@ -20,23 +19,18 @@ namespace Supercent.MoleIO.InGame
         [Space]
         [Header("Attack")]
         [CustomColor(0, 0.2f, 0)]
-        [SerializeField] UnitHammer _attacker;
+        [SerializeField] UnitBattleController _attacker;
         [SerializeField] Collider _col;
-        [SerializeField] int _xp = 0;
-        [SerializeField] int _combo;
-
-        [Space]
-        [Header("LevelUp")]
-        [SerializeField] GameObject[] _hammers;
-        [SerializeField] int[] _hammerLevels;
-        int _levelIndex = 0;
+        [SerializeField] Image _gauge;
+        [SerializeField] int _combo = 0;
 
         protected override void _Init()
         {
             ColDict.RegistData(_col, this);
             _moveHandler.Init();
-            _attacker.RegistUser(this);
             _attacker.Init();
+            _attacker.OnCombo += UpdateComboUI;
+            _attacker.OnSetSize += SetSize;
         }
 
         protected override void _Release()
@@ -53,26 +47,35 @@ namespace Supercent.MoleIO.InGame
             if (_animator == null)
                 return;
         }
-
-        public void GetXp(int xp)
+        public void GetDamage(int attackerLevel)
         {
-            _xp += xp;
-
-            if (_levelIndex >= _hammerLevels.Length)
-                return;
-
-            if (_hammerLevels[_levelIndex] > _xp)
-                return;
-
-            _hammers[_levelIndex].SetActive(false);
-            _levelIndex++;
-            _hammers[_levelIndex].SetActive(true);
-            _attacker.AddRange();
+            if (_attacker.Level > attackerLevel)
+                GetWeakAttack();
+            else
+                GetDeadlyAttack();
         }
 
-        public void GetDamage()
+        public void GetWeakAttack()
         {
-            Debug.Log("Ouch");
+            _attacker.GradeDown();
         }
+
+        public void GetDeadlyAttack()
+        {
+            _attacker.Die();
+            IsCanUpdate = false;
+        }
+
+        public void UpdateComboUI(float comboValue)
+        {
+            if (_gauge != null)
+                _gauge.fillAmount = comboValue;
+        }
+
+        private void SetSize(float size)
+        {
+            transform.localScale = Vector3.one * size;
+        }
+
     }
 }

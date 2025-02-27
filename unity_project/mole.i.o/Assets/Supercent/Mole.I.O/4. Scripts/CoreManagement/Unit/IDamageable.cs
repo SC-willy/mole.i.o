@@ -5,6 +5,8 @@ namespace Supercent.MoleIO.InGame
 {
     public interface IDamageable
     {
-        public void GetDamage();
+        public void GetDamage(int attackerLevel);
+        public void GetWeakAttack();
+        public void GetDeadlyAttack();
     }
 }

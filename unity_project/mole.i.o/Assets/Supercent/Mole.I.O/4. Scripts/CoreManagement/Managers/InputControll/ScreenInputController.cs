@@ -13,7 +13,7 @@ namespace Supercent.MoleIO.InGame
         private static event Action<bool> _onActiveJoystick;
         private static event Action _onCutJoystickMove;
 
-        private static Vector2 _dir;
+        private static Vector2 _dir = Vector2.up;
         public static Vector2 Direction => _dir;
         public static float X => _dir.x;
         public static float Y => _dir.y;
