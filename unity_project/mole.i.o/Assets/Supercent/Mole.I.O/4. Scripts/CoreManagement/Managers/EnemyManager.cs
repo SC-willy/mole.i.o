@@ -13,6 +13,8 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] float _respawnTime;
         [SerializeField] float _respawnDistance;
         [SerializeField] float _respawnXpGap = 1.35f;
+        float _width;
+        float _height;
 
         float _lastRespawnTime = 0;
 
@@ -25,6 +27,9 @@ namespace Supercent.MoleIO.InGame
                 _enemies[i].OnHit += StartHitAction;
                 _enemies[i].OnDie += SetRespawnMod;
             }
+
+            _width = _spawnMaxTr.position.x - _spawnMinTr.position.x;
+            _height = _spawnMaxTr.position.z - _spawnMinTr.position.z;
         }
 
         private void StartHitAction(EnemyController target)
@@ -43,23 +48,51 @@ namespace Supercent.MoleIO.InGame
             _lastRespawnTime = Time.time;
         }
 
-        void Update()
+        private void Update()
         {
             if (!_isResawning)
                 return;
 
             if (_lastRespawnTime + _respawnTime > Time.time)
                 return;
+
+            RespawnMole();
+
+        }
+
+        private void RespawnMole()
+        {
+            _lastRespawnTime = Time.time;
+
             int xp;
             if (OnGetPlayerXp != null)
                 xp = (int)(OnGetPlayerXp.Invoke() * _respawnXpGap) + UnityEngine.Random.Range(1, 100);
             else
                 xp = 1;
 
-            _lastRespawnTime = Time.time;
+            Vector3 pos = _target.position + MathUtil.RandomOnCircle(_respawnDistance);
+
+            if (pos.x < _spawnMinTr.position.x)
+            {
+                pos.x += _width;
+            }
+            else if (pos.x > _spawnMaxTr.position.x)
+            {
+                pos.x -= _width;
+            }
+
+            if (pos.z < _spawnMinTr.position.z)
+            {
+                pos.z += _height;
+            }
+            else if (pos.z > _spawnMaxTr.position.z)
+            {
+                pos.z -= _height;
+            }
+
             _respawnLine.Dequeue()
             .Respawn(xp)
-            .transform.position = _target.position + MathUtil.RandomOnCircle(_respawnDistance);
+            .transform.position = pos;
 
             if (_respawnLine.Count <= 0)
             {
