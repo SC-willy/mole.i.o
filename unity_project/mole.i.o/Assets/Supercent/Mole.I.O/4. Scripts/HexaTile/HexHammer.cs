@@ -5,6 +5,8 @@ namespace Supercent.MoleIO.InGame
     public class HexHammer : MonoBehaviour
     {
         public event Action OnHit;
+
+        public int PlayerCode => _playerCode;
         HexGrid _mapInfo;
         [SerializeField] Transform _hitTr;
         [SerializeField] Color playerColor = Color.red;

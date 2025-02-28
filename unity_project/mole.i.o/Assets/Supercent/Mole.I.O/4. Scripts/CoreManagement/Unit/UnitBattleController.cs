@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using TMPro;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
@@ -13,9 +15,11 @@ namespace Supercent.MoleIO.InGame
 
         public event Action<float> OnCombo;
         public event Action<float> OnSetSize;
+        public event Action OnChangeXp;
 
         public int Level => _level;
         public int Xp => _xp;
+        public int PlayerCode => _hitter.PlayerCode;
 
         [SerializeField] HexHammer _hitter;
         [SerializeField] GameObject[] _hammers;
@@ -30,6 +34,11 @@ namespace Supercent.MoleIO.InGame
         LevelData.HammerLevel _nextLevelInfo;
         int _combo = 0;
         int _curHammerType = 0;
+
+        [Space]
+        [Header("UI")]
+        [SerializeField] TMP_Text _levelText;
+        StringBuilder _stringBuilder = new StringBuilder();
 
         public void Init()
         {
@@ -99,6 +108,7 @@ namespace Supercent.MoleIO.InGame
         public void GetXp(int xp)
         {
             _xp += xp;
+            UpdateXpUI();
 
             if (_level >= InGameManager.CurLevelData.MaxHammerLevel)
                 return;
@@ -158,11 +168,23 @@ namespace Supercent.MoleIO.InGame
             _hitter.enabled = true;
             _xp = xp;
             SetLevel(InGameManager.CurLevelData.EvaluateXpToLevel(_xp));
+            UpdateXpUI();
         }
 
         public void SetRandomXp()
         {
             _xp = InGameManager.CurLevelData.EvaluateLevelToRandomXp(_level);
+            UpdateXpUI();
+        }
+
+        private void UpdateXpUI()
+        {
+            if (_levelText == null)
+                return;
+
+            _stringBuilder.Clear();
+            _stringBuilder.Append(_xp);
+            _levelText.text = _stringBuilder.ToString();
         }
     }
 }

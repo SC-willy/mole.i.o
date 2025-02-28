@@ -7,6 +7,8 @@ public static class GameManager
 {
     const string FIRST_CHECK = "IsFirst";
     static bool _isLoaded = false;
+    static string _playerName = "Player";
+    public static string PlayerName => _playerName;
 
     public static bool IsLoaded()
     {
