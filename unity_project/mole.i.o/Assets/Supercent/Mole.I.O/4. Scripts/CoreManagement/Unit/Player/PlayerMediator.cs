@@ -24,6 +24,8 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] Image _gauge;
         [SerializeField] int _combo = 0;
 
+        public int GetPlayerXp() => _attacker.Xp;
+
         protected override void _Init()
         {
             ColDict.RegistData(_col, this);

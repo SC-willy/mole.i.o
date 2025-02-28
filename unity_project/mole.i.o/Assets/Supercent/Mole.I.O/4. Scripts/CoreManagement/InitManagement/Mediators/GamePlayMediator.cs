@@ -8,6 +8,8 @@ namespace Supercent.MoleIO.InGame
         [CustomColor(0.2f, 0f, 0f)]
         [SerializeField] HexGrid _map;
         [SerializeField] HexHammer[] _hammers;
+        [SerializeField] PlayerMediator _player;
+        [SerializeField] EnemyManager _enemyManager;
         protected override void _Init()
         {
             _map.StartSetup();
@@ -15,6 +17,8 @@ namespace Supercent.MoleIO.InGame
             {
                 _hammers[i].SetMapInfo(_map);
             }
+
+            _enemyManager.OnGetPlayerXp += _player.GetPlayerXp;
         }
 
         void Update()
@@ -30,6 +34,9 @@ namespace Supercent.MoleIO.InGame
         protected override void OnBindSerializedField()
         {
             _hammers = GetComponentsInChildren<HexHammer>();
+            _player = GetComponentInChildren<PlayerMediator>();
+            _enemyManager = GetComponentInChildren<EnemyManager>();
+
             _map.Bind(this);
         }
 

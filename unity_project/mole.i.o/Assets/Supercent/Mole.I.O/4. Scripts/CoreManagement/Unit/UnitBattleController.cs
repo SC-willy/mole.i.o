@@ -9,11 +9,13 @@ namespace Supercent.MoleIO.InGame
         readonly private static int _animTrigHit = Animator.StringToHash("Hit");
         readonly private static int _animTrigDie = Animator.StringToHash("Die");
         readonly private static int _animTrigHitted = Animator.StringToHash("Ouch");
+        readonly private static int _animIdle = Animator.StringToHash("Idle");
 
         public event Action<float> OnCombo;
         public event Action<float> OnSetSize;
 
-        public int Level => _atkLevel;
+        public int Level => _level;
+        public int Xp => _xp;
 
         [SerializeField] HexHammer _hitter;
         [SerializeField] GameObject[] _hammers;
@@ -23,17 +25,17 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] LayerMask _mask;
         [SerializeField] GameObject[] _chargeObjs;
         [SerializeField] float _killRange = 3f;
-        [SerializeField] int _atkLevel = 0;
+        [SerializeField] int _level = 0;
         [SerializeField] int _xp = 0;
         LevelData.HammerLevel _nextLevelInfo;
         int _combo = 0;
+        int _curHammerType = 0;
 
         public void Init()
         {
             _hitter.OnHit += PlayAttackAnim;
             _animEvent.OnAnimEvent += CheckEnemy;
-            _nextLevelInfo = InGameManager.CurLevelData.GetNextHammerLvData(_atkLevel);
-            SetNextLevel();
+            SetLevel(_level);
         }
 
         public void Release()
@@ -67,7 +69,7 @@ namespace Supercent.MoleIO.InGame
                 if (enemy == null)
                     continue;
 
-                enemy.GetDamage(_atkLevel);
+                enemy.GetDamage(_level);
                 ReleaseCharge();
             }
         }
@@ -98,7 +100,7 @@ namespace Supercent.MoleIO.InGame
         {
             _xp += xp;
 
-            if (_atkLevel >= InGameManager.CurLevelData.MaxHammerLevel)
+            if (_level >= InGameManager.CurLevelData.MaxHammerLevel)
                 return;
 
             if (_nextLevelInfo.RequireXp > _xp)
@@ -111,13 +113,28 @@ namespace Supercent.MoleIO.InGame
         private void SetSize(float size) => OnSetSize?.Invoke(size);
         private void SetNextLevel()
         {
-            _hammers[_nextLevelInfo.HammerModelType].SetActive(false);
+            _hammers[_curHammerType].SetActive(false);
+
+            _hammers[_nextLevelInfo.HammerModelType].SetActive(true);
             SetRange(_nextLevelInfo.AttackRange);
             SetSize(_nextLevelInfo.PlayerSize);
-            _nextLevelInfo = InGameManager.CurLevelData.GetNextHammerLvData(_atkLevel);
 
-            _atkLevel++;
-            _hammers[_nextLevelInfo.HammerModelType].SetActive(true);
+            _level++;
+            _nextLevelInfo = InGameManager.CurLevelData.GetNextHammerLvData(_level);
+        }
+
+        private void SetLevel(int level)
+        {
+            for (int i = 0; i < _hammers.Length; i++)
+            {
+                _hammers[i].SetActive(false);
+            }
+
+            _level = level;
+            _nextLevelInfo = InGameManager.CurLevelData.GetNextHammerLvData(_level);
+            _curHammerType = _nextLevelInfo.HammerModelType;
+
+            SetNextLevel();
         }
 
         public void SetRange(int range) => _hitter.SetRange(range);
@@ -125,12 +142,27 @@ namespace Supercent.MoleIO.InGame
         public void GradeDown()
         {
             _animator.SetTrigger(_animTrigHitted);
+            SetLevel(Mathf.Min(_level - 1, 0));
+            SetRandomXp();
         }
 
         public void Die()
         {
             _animator.SetTrigger(_animTrigDie);
             _hitter.enabled = false;
+        }
+
+        public void ResetData(int xp = 0)
+        {
+            _animator.Play(_animIdle);
+            _hitter.enabled = true;
+            _xp = xp;
+            SetLevel(InGameManager.CurLevelData.EvaluateXpToLevel(_xp));
+        }
+
+        public void SetRandomXp()
+        {
+            _xp = InGameManager.CurLevelData.EvaluateLevelToRandomXp(_level);
         }
     }
 }

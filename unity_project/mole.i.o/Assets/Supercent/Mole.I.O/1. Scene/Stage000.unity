@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -175,16 +175,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initManager:
     _initializableComponents:
-    - {fileID: 1926609008}
-    - {fileID: 1826019594}
-    - {fileID: 1456068231}
-    - {fileID: 1533902202}
-    - {fileID: 1793490608}
-    - {fileID: 1821692658}
     - {fileID: 376675772}
     - {fileID: 473470775}
     - {fileID: 1023648125}
+    - {fileID: 1456068231}
+    - {fileID: 1533902202}
     - {fileID: 1761954141}
+    - {fileID: 1793490608}
+    - {fileID: 1821692658}
+    - {fileID: 1826019594}
+    - {fileID: 1926609008}
     - {fileID: 7076362485622711172}
   _transitionManager:
     _allTransitionData:
@@ -457,6 +457,8 @@ MonoBehaviour:
   - {fileID: 986208182}
   - {fileID: 1826019591}
   - {fileID: 1006525992}
+  _player: {fileID: 473470775}
+  _enemyManager: {fileID: 376675772}
 --- !u!1 &1171696742
 GameObject:
   m_ObjectHideFlags: 0

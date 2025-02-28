@@ -2,9 +2,11 @@ using System;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
-    public class EnemyController : InitManagedBehaviorBase, ITileXpGetter, IDamageable
+    public class EnemyController : InitManagedBehaviorBase, IDamageable
     {
         public Action<EnemyController> OnHit;
+        public Action<EnemyController> OnDie;
+
 
         [CustomColor(0, 0, 0.2f)]
         [SerializeField] UnitBattleController _attacker;
@@ -16,7 +18,6 @@ namespace Supercent.MoleIO.InGame
         Vector3 _offset;
         float _rotateLerpValue = 0;
         float _lastRotateTime = 0;
-        int _xp = 0;
 
         bool _isDie = false;
         bool _isRotate = false;
@@ -32,6 +33,7 @@ namespace Supercent.MoleIO.InGame
 
             _attacker.OnSetSize += SetSize;
             _attacker.Init();
+            _attacker.SetRandomXp();
         }
 
         protected override void _Release()
@@ -76,22 +78,27 @@ namespace Supercent.MoleIO.InGame
         public void GetWeakAttack()
         {
             _attacker.GradeDown();
+            OnHit.Invoke(this);
         }
 
         public void GetDeadlyAttack()
         {
             _attacker.Die();
             _isDie = true;
-        }
-
-        public void GetXp(int xp)
-        {
-            _xp += xp;
+            OnDie?.Invoke(this);
         }
 
         private void SetSize(float size)
         {
             transform.localScale = Vector3.one * size;
+        }
+
+        public EnemyController Respawn(int xp)
+        {
+            _attacker.ResetData(xp);
+            gameObject.SetActive(true);
+            _isDie = false;
+            return this;
         }
     }
 }
