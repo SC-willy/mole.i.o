@@ -22,6 +22,7 @@ namespace Supercent.MoleIO.InGame
         bool _isDie = false;
         bool _isRotate = false;
 
+        public UnitBattleController BattleController => _attacker;
 
 
         protected override void _Init()

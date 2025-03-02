@@ -12,14 +12,9 @@ namespace Supercent.MoleIO.InGame
         public TMP_Text[] _scores;
 
         private List<UnitBattleController> players = new List<UnitBattleController>();
-        [SerializeField] string[] _botNames = { "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel" };
+        [SerializeField] string[] _botNames = { "Muncher", "Digby", "Snuffles", "Pebble", "Nibbles", "Foxtrot", "Golfer", "HotelMaster", "Clumpy", "Sooty", "Vev", "Paper", "Wully", "Melmer", "WaterLemon", "Lemini", "Bike", "Dot", "Rong", "MoonWalker", "Glue", "Flour", "Malson" };
         public int NameCount => _botNames.Length;
-        StringBuilder _stringBuilder;
-
-        private void Start()
-        {
-            UpdateLeaderboard();
-        }
+        StringBuilder _stringBuilder = new StringBuilder();
 
         public void RegistUnit(UnitBattleController unit)
         {
@@ -42,12 +37,14 @@ namespace Supercent.MoleIO.InGame
             UpdateLeaderboard();
         }
 
-        void UpdateLeaderboard()
+        private void UpdateLeaderboard()
         {
             for (int i = 0; i < _names.Length; i++)
             {
                 _stringBuilder.Clear();
+                _stringBuilder.Append(players[i].Xp);
                 _names[i].text = players[i].PlayerCode == USER_CODE ? GameManager.PlayerName : _botNames[players[i].PlayerCode];
+                _scores[i].text = _stringBuilder.ToString();
             }
         }
 

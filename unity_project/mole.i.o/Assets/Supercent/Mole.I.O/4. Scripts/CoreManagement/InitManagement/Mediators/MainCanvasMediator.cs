@@ -8,6 +8,8 @@ namespace Supercent.MoleIO.InGame
     {
         [SerializeField] Canvas _canvas;
         [SerializeField] ScreenInputController _screenInputHandler;
+        [SerializeField] LeaderBoard _leaderBoard;
+        public void RegistLeaderBoardPlayer(UnitBattleController unit) => _leaderBoard.RegistUnit(unit);
         protected override void _Init()
         {
             _screenInputHandler.SetCanvas(_canvas);

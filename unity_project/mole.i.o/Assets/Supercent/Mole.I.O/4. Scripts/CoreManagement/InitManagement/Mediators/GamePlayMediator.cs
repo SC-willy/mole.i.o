@@ -21,6 +21,18 @@ namespace Supercent.MoleIO.InGame
             _enemyManager.OnGetPlayerXp += _player.GetPlayerXp;
         }
 
+        public void RegistLeaderboard(LeaderBoard leaderBoard)
+        {
+            leaderBoard.RegistUnit(_player.Attacker);
+            var BattleControllers = _enemyManager.BattleControllers;
+            for (int i = 0; i < BattleControllers.Length; i++)
+            {
+                leaderBoard.RegistUnit(BattleControllers[i]);
+            }
+
+            leaderBoard.UpdateScores();
+        }
+
         void Update()
         {
             _map.UpdateManualy(Time.deltaTime);

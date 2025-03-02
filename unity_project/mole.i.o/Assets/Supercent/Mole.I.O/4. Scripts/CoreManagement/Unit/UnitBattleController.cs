@@ -179,6 +179,8 @@ namespace Supercent.MoleIO.InGame
 
         private void UpdateXpUI()
         {
+            OnChangeXp?.Invoke();
+
             if (_levelText == null)
                 return;
 

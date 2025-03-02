@@ -6,6 +6,7 @@ namespace Supercent.MoleIO.InGame
     public class EnemyManager : InitManagedBehaviorBase
     {
         public event Func<int> OnGetPlayerXp;
+
         [SerializeField] EnemyController[] _enemies;
         [SerializeField] Transform _target;
         [SerializeField] Transform _spawnMinTr;
@@ -13,13 +14,25 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] float _respawnTime;
         [SerializeField] float _respawnDistance;
         [SerializeField] float _respawnXpGap = 1.35f;
+        Queue<EnemyController> _respawnLine = new Queue<EnemyController>();
         float _width;
         float _height;
-
         float _lastRespawnTime = 0;
 
-        Queue<EnemyController> _respawnLine = new Queue<EnemyController>();
         bool _isResawning;
+
+        public UnitBattleController[] BattleControllers
+        {
+            get
+            {
+                UnitBattleController[] controllers = new UnitBattleController[_enemies.Length];
+                for (int i = 0; i < controllers.Length; i++)
+                {
+                    controllers[i] = _enemies[i].BattleController;
+                }
+                return controllers;
+            }
+        }
         protected override void _Init()
         {
             for (int i = 0; i < _enemies.Length; i++)
