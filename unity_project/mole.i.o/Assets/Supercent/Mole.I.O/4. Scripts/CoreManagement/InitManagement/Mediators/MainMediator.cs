@@ -17,6 +17,7 @@ namespace Supercent.MoleIO.InGame
         [Header("Others")]
         [SerializeField] MainCanvasMediator _mainCanvas;
         [SerializeField] GamePlayMediator _playMediator;
+        [SerializeField] PlayerMediator _player;
         [SerializeField] LeaderBoard _leaderBoard;
         [SerializeField] IsoCamSizeFitter _isoCam;
 
@@ -26,11 +27,17 @@ namespace Supercent.MoleIO.InGame
             _cameraManager.StartSetup();
 
             _playMediator.RegistLeaderboard(_leaderBoard);
+            _player.Attacker.OnSetSize += LevelUpZoom;
         }
 
         public void ShowCamPos(int index)
         {
             _cameraManager.StartShowTr(index);
+        }
+
+        private void LevelUpZoom(float playerSize)
+        {
+            _isoCam.ChangeStackedZoom(_player.Attacker.Level);
         }
 
 #if UNITY_EDITOR
@@ -42,6 +49,7 @@ namespace Supercent.MoleIO.InGame
             _mainCanvas = mono.GetComponentInChildren<MainCanvasMediator>(true);
             _playMediator = mono.GetComponentInChildren<GamePlayMediator>(true);
             _leaderBoard = mono.GetComponentInChildren<LeaderBoard>(true);
+            _player = mono.GetComponentInChildren<PlayerMediator>(true);
         }
 #endif // UNITY_EDITOR
     }

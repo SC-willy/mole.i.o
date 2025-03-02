@@ -224,6 +224,7 @@ MonoBehaviour:
       _isSmoothCamera: 1
     _mainCanvas: {fileID: 7076362485622711172}
     _playMediator: {fileID: 1023648125}
+    _player: {fileID: 473470775}
     _leaderBoard: {fileID: 387738216}
     _isoCam: {fileID: 1761954141}
 --- !u!4 &119670048
@@ -1003,6 +1004,10 @@ PrefabInstance:
     - target: {fileID: 1870783459275198393, guid: d641401ceb5ae4b75990c83cb847483f, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113366823869604120, guid: d641401ceb5ae4b75990c83cb847483f, type: 3}
+      propertyPath: orthographic size
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

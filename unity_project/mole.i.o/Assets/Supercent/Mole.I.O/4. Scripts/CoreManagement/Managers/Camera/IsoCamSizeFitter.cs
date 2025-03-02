@@ -17,13 +17,17 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] float _calmpedZoomOutValue = 2;
         [SerializeField] float _cameraOutTime = 0.75f;
         [SerializeField] float _cameraBackTime = 0.75f;
+        [Range(0, 1.9f)]
+        [SerializeField] float _zoomValue = 1f;
+        [SerializeField] float _stackZoomValue = 1f;
+        Coroutine _coroutine;
         float _originOrthoSize;
         float _zoomOrthoSize;
         float _currentResolution;
         float _currentOrthosize;
-        Coroutine _coroutine;
-        [Range(0, 1.9f)]
-        [SerializeField] float _zoomValue = 1f;
+        int _zoomStack = 1;
+
+
 
         protected override void _Init()
         {
@@ -78,7 +82,9 @@ namespace Supercent.MoleIO.InGame
         {
             //화면 비율이 변경되면 조정하는 코드
             _currentResolution = Screen.width - Screen.height;
-            _zoomOrthoSize = _originOrthoSize - Mathf.Max(Screen.width, Screen.height) / Mathf.Min(Screen.width, Screen.height) * _onWideScreenCameraScale * _zoomValue;
+            _zoomOrthoSize = _originOrthoSize - Mathf.Max(Screen.width, Screen.height) / Mathf.Min(Screen.width, Screen.height) * _onWideScreenCameraScale * _zoomValue * _zoomStack;
+
+
             if (Screen.width >= Screen.height)
             {
                 for (int i = 0; i < _cameras.Length; i++)
@@ -95,7 +101,6 @@ namespace Supercent.MoleIO.InGame
             }
             _currentOrthosize = _cameras[0].orthographicSize;
         }
-
         private void FixedUpdate()
         {
             //런타임 중 기존 비율을 크게 벗어날 시 카메라 줌 변경
@@ -173,6 +178,38 @@ namespace Supercent.MoleIO.InGame
                 StopCoroutine(_coroutine);
 
             _coroutine = StartCoroutine(StartZoomIn(duration, () => ZoomBack(backDuration)));
+        }
+
+        public void ChangeStackedZoom(int changedStackValue)
+        {
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
+
+            _zoomStack = changedStackValue;
+            _coroutine = StartCoroutine(CoChangeStackedZoom());
+        }
+
+        IEnumerator CoChangeStackedZoom()
+        {
+            float _timer = 0;
+            float lerpValue = 0f;
+
+            float orthoSize;
+            float startZoom = _cameras[0].orthographicSize;
+            float stackedZoom = _currentOrthosize + _zoomStack * _stackZoomValue;
+            while (lerpValue < 1f)
+            {
+                _timer += Time.deltaTime;
+                lerpValue = Mathf.Min(_timer / _cameraOutTime, 1f);
+                orthoSize = Mathf.Lerp(startZoom, stackedZoom, _curve.Evaluate(lerpValue));
+                for (int i = 0; i < _cameras.Length; i++)
+                {
+                    _cameras[i].orthographicSize = orthoSize;
+                }
+
+                yield return null;
+            }
+            _coroutine = null;
         }
 
         IEnumerator StartZoomIn(float duration, Action onEnd = null)

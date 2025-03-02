@@ -119,15 +119,13 @@ namespace Supercent.MoleIO.InGame
             SetNextLevel();
         }
 
-
-        private void SetSize(float size) => OnSetSize?.Invoke(size);
         private void SetNextLevel()
         {
             _hammers[_curHammerType].SetActive(false);
 
             _hammers[_nextLevelInfo.HammerModelType].SetActive(true);
             SetRange(_nextLevelInfo.AttackRange);
-            SetSize(_nextLevelInfo.PlayerSize);
+            OnSetSize?.Invoke(_nextLevelInfo.PlayerSize);
 
             _level++;
             _nextLevelInfo = InGameManager.CurLevelData.GetNextHammerLvData(_level);
