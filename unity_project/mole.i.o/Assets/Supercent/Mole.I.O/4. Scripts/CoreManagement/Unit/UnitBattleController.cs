@@ -20,7 +20,9 @@ namespace Supercent.MoleIO.InGame
         public int Level => _level;
         public int Xp => _xp;
         public int PlayerCode => _hitter.PlayerCode;
+        public void SetCode(int Code) => _hitter.SetPlayerCode(Code);
 
+        [SerializeField] TMP_Text _name;
         [SerializeField] HexHammer _hitter;
         [SerializeField] GameObject[] _hammers;
         [SerializeField] AnimEventContainer _animEvent;
@@ -45,6 +47,11 @@ namespace Supercent.MoleIO.InGame
             _hitter.OnHit += PlayAttackAnim;
             _animEvent.OnAnimEvent += CheckEnemy;
             SetLevel(_level);
+        }
+
+        public void SetName(string name)
+        {
+            _name.text = name;
         }
 
         public void Release()

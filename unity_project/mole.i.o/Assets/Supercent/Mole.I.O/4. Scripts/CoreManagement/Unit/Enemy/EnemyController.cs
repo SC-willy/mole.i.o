@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
@@ -11,6 +12,7 @@ namespace Supercent.MoleIO.InGame
         [CustomColor(0, 0, 0.2f)]
         [SerializeField] UnitBattleController _attacker;
         [SerializeField] Transform _followTarget;
+        [SerializeField] Transform _model;
         [SerializeField] Collider _col;
         [SerializeField] float _speed;
         [SerializeField] float _rotateSpeed;
@@ -55,7 +57,7 @@ namespace Supercent.MoleIO.InGame
                 return;
 
             _rotateLerpValue = Mathf.Min(_rotateLerpValue + Time.deltaTime * _rotateSpeed, 1f);
-            transform.forward = Vector3.Lerp(transform.forward, (_followTarget.position + _offset - transform.position).normalized, _rotateLerpValue);
+            _model.forward = Vector3.Lerp(transform.forward, (_followTarget.position + _offset - transform.position).normalized, _rotateLerpValue);
 
             if (_rotateLerpValue == 1f)
             {

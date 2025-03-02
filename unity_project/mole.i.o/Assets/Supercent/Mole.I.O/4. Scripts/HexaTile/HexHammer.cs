@@ -16,6 +16,7 @@ namespace Supercent.MoleIO.InGame
 
         float _lastHitTime = 1;
 
+        public void SetPlayerCode(int code) => _playerCode = code;
         public void SetMapInfo(HexGrid map) => _mapInfo = map;
         public void SetRange(int range)
         {

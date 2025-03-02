@@ -52,6 +52,7 @@ MonoBehaviour:
   _callPriority: 0
   _isBindByManager: 0
   _attacker:
+    _name: {fileID: 4256868104534566196}
     _hitter: {fileID: 4574881671476882499}
     _hammers:
     - {fileID: 4473979709380967881}
@@ -71,6 +72,7 @@ MonoBehaviour:
     _xp: 0
     _levelText: {fileID: 6805397110825362775}
   _followTarget: {fileID: 0}
+  _model: {fileID: 8176186141795993908}
   _col: {fileID: 8966477398002697975}
   _speed: 10
   _rotateSpeed: 3
@@ -313,6 +315,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50054e0eb1d7e8d41b248848a5800592, type: 3}
+--- !u!114 &4256868104534566196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9127743721681347004, guid: 50054e0eb1d7e8d41b248848a5800592, type: 3}
+  m_PrefabInstance: {fileID: 5025784574788453512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6805397110825362775 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2003693832886051295, guid: 50054e0eb1d7e8d41b248848a5800592, type: 3}

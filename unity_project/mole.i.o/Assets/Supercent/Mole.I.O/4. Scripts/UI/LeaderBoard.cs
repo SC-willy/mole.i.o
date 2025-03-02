@@ -69,5 +69,12 @@ namespace Supercent.MoleIO.InGame
             }
             return code;
         }
+
+        public string GetName(int index)
+        {
+            if (index >= NameCount)
+                index = NameCount - 1;
+            return _botNames[index];
+        }
     }
 }

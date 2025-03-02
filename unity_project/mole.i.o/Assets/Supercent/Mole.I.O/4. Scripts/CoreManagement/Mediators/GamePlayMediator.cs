@@ -24,10 +24,15 @@ namespace Supercent.MoleIO.InGame
         public void RegistLeaderboard(LeaderBoard leaderBoard)
         {
             leaderBoard.RegistUnit(_player.Attacker);
+            _player.Attacker.SetName(GameManager.PlayerName);
+
             var BattleControllers = _enemyManager.BattleControllers;
             for (int i = 0; i < BattleControllers.Length; i++)
             {
                 leaderBoard.RegistUnit(BattleControllers[i]);
+                int code = leaderBoard.GetRandomNameCode();
+                BattleControllers[i].SetCode(code);
+                BattleControllers[i].SetName(leaderBoard.GetName(code));
             }
 
             leaderBoard.UpdateScores();
