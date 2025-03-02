@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7458152155176721912}
-  - component: {fileID: 4598682819903846791}
-  m_Layer: 0
+  - component: {fileID: 1872781193203394133}
+  - component: {fileID: 5794833839227030001}
+  - component: {fileID: 6012367210153992900}
+  m_Layer: 3
   m_Name: LobbyPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +35,7 @@ Transform:
   - {fileID: 7150318272788474741}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4598682819903846791
+--- !u!114 &1872781193203394133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3885563500732353844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3a2fc205bc04e65b7fe66729a9f77b, type: 3}
+  m_Script: {fileID: 11500000, guid: de07d69923fffa247857c3d2d3bb7ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _callPriority: 0
@@ -58,8 +60,55 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 64
     _moveSpeed: 6
-  _animator: {fileID: 0}
-  IsCanUpdate: 1
+  _animator: {fileID: 2347926330334698593}
+--- !u!54 &5794833839227030001
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3885563500732353844}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!135 &6012367210153992900
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3885563500732353844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.58
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1342979473060329308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,6 +166,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+--- !u!95 &2347926330334698593 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3618284107265747773, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+  m_PrefabInstance: {fileID: 1342979473060329308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7150318272788474741 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8185345249240701993, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}

@@ -31,6 +31,11 @@ namespace Supercent.MoleIO.InGame
             CameraManager.OnCamTrChanged += ResetAngle;
         }
 
+        void OnDestroy()
+        {
+            CameraManager.OnCamTrChanged -= ResetAngle;
+        }
+
         public void ResetAngle() => _cameraDefaultAngle = transform.localRotation.eulerAngles;
         private void StartTilt() => _isControlled = true;
         private void EndTilt() => _isControlled = false;

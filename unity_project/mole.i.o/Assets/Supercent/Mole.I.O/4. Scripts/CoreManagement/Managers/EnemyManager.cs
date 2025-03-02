@@ -10,13 +10,13 @@ namespace Supercent.MoleIO.InGame
         private int _killCount = 0;
 
         [SerializeField] EnemyController[] _enemies;
-        [SerializeField] Transform _target;
         [SerializeField] Transform _spawnMinTr;
         [SerializeField] Transform _spawnMaxTr;
         [SerializeField] float _respawnTime;
         [SerializeField] float _respawnDistance;
         [SerializeField] float _respawnXpGap = 1.35f;
         Queue<EnemyController> _respawnLine = new Queue<EnemyController>();
+        Transform _target;
         float _width;
         float _height;
         float _lastRespawnTime = 0;
@@ -46,6 +46,15 @@ namespace Supercent.MoleIO.InGame
             _width = _spawnMaxTr.position.x - _spawnMinTr.position.x;
             _height = _spawnMaxTr.position.z - _spawnMinTr.position.z;
             _killCount = 0;
+        }
+
+        public void SetTarget(Transform tr)
+        {
+            _target = tr;
+            for (int i = 0; i < _enemies.Length; i++)
+            {
+                _enemies[i].SetTarget(tr);
+            }
         }
 
         private void StartHitAction(EnemyController target)

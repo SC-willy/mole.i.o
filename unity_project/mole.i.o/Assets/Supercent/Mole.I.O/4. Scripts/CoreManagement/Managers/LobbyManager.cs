@@ -13,11 +13,14 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] InitManager _initManager = new InitManager();
         [CustomColor(0.23f, 0.34f, 0f)]
         [SerializeField] TransitionManager _transitionManager = new TransitionManager();
+        [CustomColor(0.2f, 0f, 0.1f)]
+        [SerializeField] CameraManager _cameraManager = new CameraManager();
 
         private void Start()
         {
             InvokeStartMethod(_initManager);
             InvokeStartMethod(_transitionManager);
+            InvokeStartMethod(_cameraManager);
         }
 
         private void Update()
@@ -43,6 +46,7 @@ namespace Supercent.MoleIO.InGame
         {
             Bind(_initManager);
             Bind(_transitionManager);
+            Bind(_cameraManager);
         }
         protected void Bind(IBindable bindable) => bindable.Bind(this);
         public virtual void OnInspectorGUI() { }

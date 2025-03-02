@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3581133515241594930}
-  - component: {fileID: 3258358832364424567}
+  - component: {fileID: 2798090346746535974}
   - component: {fileID: 1562682745884166170}
   - component: {fileID: 6952156391415189802}
   - component: {fileID: 1052299169528533845}
@@ -41,7 +41,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &3258358832364424567
+--- !u!114 &2798090346746535974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 472543513960242726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d91aecf7a0140a3ba54ebeefb8c01c, type: 3}
+  m_Script: {fileID: 11500000, guid: 706659df81e35fd4aa9e1073fb2491b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _callPriority: 0
@@ -148,6 +148,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3581133515241594930}
     m_Modifications:
+    - target: {fileID: 582694788424159195, guid: 0a70de1eacaf16746bbc4918f9041fac, type: 3}
+      propertyPath: _isAutoMove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5127968090781709280, guid: 0a70de1eacaf16746bbc4918f9041fac, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -17,6 +17,7 @@ namespace Supercent.MoleIO.InGame
         public event Action OnFail;
         [SerializeField] MonoBehaviour _coroutieOwner;
         [SerializeField] GameObject _bossFlowObjs;
+        [SerializeField] GameObject _bossFlowUi;
         [SerializeField] ImageTouchChecker _btn;
         [SerializeField] Image _gauge;
         [SerializeField] Animator _playerAnim;
@@ -63,6 +64,7 @@ namespace Supercent.MoleIO.InGame
         {
             OnWin?.Invoke();
             _coroutieOwner.StartCoroutine(CoOpenWinUI());
+            _bossFlowUi.gameObject.SetActive(false);
         }
 
         private void PlayFailFlow()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Supercent.MoleIO.Management;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class GameManager
 {
@@ -28,5 +29,15 @@ public static class GameManager
             return true;
         }
         return false;
+    }
+
+    public static void LoadGameScene()
+    {
+        SceneManager.LoadScene("Stage000");
+    }
+
+    public static void LoadLobbyScene()
+    {
+        SceneManager.LoadScene("Lobby");
     }
 }

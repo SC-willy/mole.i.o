@@ -11,12 +11,12 @@ namespace Supercent.MoleIO.InGame
 
         [CustomColor(0, 0, 0.2f)]
         [SerializeField] UnitBattleController _attacker;
-        [SerializeField] Transform _followTarget;
         [SerializeField] Transform _model;
         [SerializeField] Collider _col;
         [SerializeField] float _speed;
         [SerializeField] float _rotateSpeed;
         [SerializeField] float _rotateDuration;
+        Transform _followTarget;
         Vector3 _offset;
         float _rotateLerpValue = 0;
         float _lastRotateTime = 0;
@@ -41,6 +41,12 @@ namespace Supercent.MoleIO.InGame
 
         protected override void _Release()
         {
+            _attacker.OnSetSize -= SetSize;
+        }
+
+        public void SetTarget(Transform tr)
+        {
+            _followTarget = tr;
         }
 
         private void Update()

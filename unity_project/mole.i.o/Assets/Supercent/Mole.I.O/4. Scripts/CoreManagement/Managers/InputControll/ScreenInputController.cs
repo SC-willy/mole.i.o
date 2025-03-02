@@ -29,6 +29,7 @@ namespace Supercent.MoleIO.InGame
 
 
         [SerializeField] Joystick _joystick;
+        [SerializeField] bool _isAutoMove = true;
         bool _isCutted = false;
         bool _isJoystickOff = false;
 
@@ -42,6 +43,9 @@ namespace Supercent.MoleIO.InGame
         {
             _onActiveJoystick += _ActiveJoystick;
             _onCutJoystickMove += _CutJoystickMove;
+            if (_isAutoMove)
+                return;
+            _dir = Vector3.zero;
         }
 
         private void OnDestroy()

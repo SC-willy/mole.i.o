@@ -7,14 +7,11 @@ namespace Supercent.MoleIO.InGame
     {
         [SerializeField] Camera _mainCamera;
         [SerializeField] Camera[] _cameras;
-        [SerializeField] BoxCollider _camColider;
         [Header("Must Bigger then OriginFOV")]
         [SerializeField] float _wideFovDecreasedStrength = 40;
 
-
         [Range(0f, 300f)]
         [SerializeField] float _originalFieldOfView = 90;
-        [SerializeField] float _colSizeFactor = 0.001f;
         float _wideFieldOfView;
         float _defaultFieldOfView;
         public float DefaultFieldOfView { get { return _defaultFieldOfView; } }
@@ -35,14 +32,6 @@ namespace Supercent.MoleIO.InGame
                 _cameras[i].fieldOfView = _defaultFieldOfView;
             }
             _mainCamera.fieldOfView = _defaultFieldOfView;
-
-            float height = 2f * _colSizeFactor * Mathf.Tan(_mainCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
-            _camColider.size = new Vector3
-                (
-                     height * _mainCamera.aspect,
-                     height,
-                    _camColider.size.z
-                );
         }
 
         private void Update()
