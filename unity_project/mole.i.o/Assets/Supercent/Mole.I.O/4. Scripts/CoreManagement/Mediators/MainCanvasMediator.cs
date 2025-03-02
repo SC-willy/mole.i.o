@@ -1,5 +1,7 @@
 
+using System.Collections;
 using Supercent.MoleIO.Playable001;
+using Supercent.Util;
 using UnityEngine;
 
 namespace Supercent.MoleIO.InGame
@@ -9,6 +11,10 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] Canvas _canvas;
         [SerializeField] ScreenInputController _screenInputHandler;
         [SerializeField] GameObject _timerEndCard;
+        [SerializeField] GameObject _winUI;
+        [SerializeField] GameObject _failUI;
+        [SerializeField] float _winUiDelay = 5f;
+        [SerializeField] float _failUiDelay = 1f;
         protected override void _Init()
         {
             _screenInputHandler.SetCanvas(_canvas);
@@ -17,10 +23,32 @@ namespace Supercent.MoleIO.InGame
         {
         }
 
-        public void ShowTimerEndUI()
+        public void SetActiveTimerEndUI(bool isOn = true)
         {
-            _timerEndCard.SetActive(true);
+            _timerEndCard.SetActive(isOn);
         }
+
+        public void OpenWinUI()
+        {
+            StartCoroutine(CoOpenWinUi());
+        }
+
+        private IEnumerator CoOpenWinUi()
+        {
+            yield return CoroutineUtil.WaitForSeconds(_winUiDelay);
+            _winUI.SetActive(true);
+        }
+
+        public void OpenFailUI()
+        {
+            StartCoroutine(CoOpenFailUi());
+        }
+        private IEnumerator CoOpenFailUi()
+        {
+            yield return CoroutineUtil.WaitForSeconds(_failUiDelay);
+            _failUI.SetActive(true);
+        }
+
 
 #if UNITY_EDITOR
         protected override void OnBindSerializedField()

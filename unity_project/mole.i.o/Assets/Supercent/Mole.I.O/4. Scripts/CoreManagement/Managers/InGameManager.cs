@@ -43,6 +43,7 @@ namespace Supercent.MoleIO.InGame
         private void Update()
         {
             _transitionManager.UpdateManualy(Time.deltaTime);
+            _mainMed.UpdateManualy(Time.deltaTime);
         }
 
         private void InvokeStartMethod(IStartable managed) => managed.StartSetup();

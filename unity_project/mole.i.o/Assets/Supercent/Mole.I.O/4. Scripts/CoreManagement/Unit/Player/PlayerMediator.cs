@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ namespace Supercent.MoleIO.InGame
 {
     public class PlayerMediator : InitManagedBehaviorBase, IDamageable
     {
+        public event Action OnDie;
         private bool _isCanUpdate = false;
 
         [Header("Functions")]
@@ -68,6 +70,7 @@ namespace Supercent.MoleIO.InGame
 
         public void GetDeadlyAttack()
         {
+            OnDie?.Invoke();
             _attacker.Die();
             _isCanUpdate = false;
         }

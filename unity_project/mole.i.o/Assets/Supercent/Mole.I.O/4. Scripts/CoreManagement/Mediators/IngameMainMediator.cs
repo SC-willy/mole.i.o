@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
+using Supercent.Util;
 using UnityEngine;
 
 namespace Supercent.MoleIO.InGame
 {
     [Serializable]
-    public class IngameMainMediator : IBindable, IStartable
+    public class IngameMainMediator : IBindable, IStartable, IUpdateable
     {
         [Header("Managers")]
 
@@ -12,6 +14,9 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] FlowEventManager _flowManager = new FlowEventManager();
         [CustomColor(0.2f, 0f, 0.1f)]
         [SerializeField] CameraManager _cameraManager = new CameraManager();
+        [CustomColor(0f, 0.1f, 0.2f)]
+        [SerializeField] BossFlowManager _bossFlowManager = new BossFlowManager();
+        [SerializeField] float _bossFlowDelay = 1f;
 
         [Space]
         [Header("Mediators")]
@@ -32,8 +37,18 @@ namespace Supercent.MoleIO.InGame
 
             _playMediator.RegistLeaderboard(_leaderBoard);
             _player.Attacker.OnSetSize += LevelUpZoom;
+            _player.OnDie += OpenFailUI;
+
+            _bossFlowManager.Init();
+            _bossFlowManager.OnWin += OpenWinUI;
+            _bossFlowManager.OnFail += OpenFailUI;
 
             _timer.OnEnd += ShowTimerEnd;
+        }
+
+        public void UpdateManualy(float dt)
+        {
+            _bossFlowManager.UpdateManualy(dt);
         }
 
         public void ShowCamPos(int index)
@@ -57,7 +72,25 @@ namespace Supercent.MoleIO.InGame
         private void ShowTimerEnd()
         {
             _player.Release();
-            _mainCanvas.ShowTimerEndUI();
+            _mainCanvas.SetActiveTimerEndUI();
+            _timer.StartCoroutine(CoStartBossFlow());
+        }
+
+        private IEnumerator CoStartBossFlow()
+        {
+            yield return CoroutineUtil.WaitForSeconds(_bossFlowDelay);
+            _bossFlowManager.StartFlow(_player.GetPlayerXp());
+            _mainCanvas.SetActiveTimerEndUI(false);
+        }
+
+        private void OpenWinUI()
+        {
+            _mainCanvas.OpenWinUI();
+        }
+
+        private void OpenFailUI()
+        {
+            _mainCanvas.OpenFailUI();
         }
 
 #if UNITY_EDITOR
@@ -72,6 +105,8 @@ namespace Supercent.MoleIO.InGame
             _player = mono.GetComponentInChildren<PlayerMediator>(true);
             _timer = mono.GetComponentInChildren<TimerUI>(true);
         }
+
+
 #endif // UNITY_EDITOR
     }
 }
