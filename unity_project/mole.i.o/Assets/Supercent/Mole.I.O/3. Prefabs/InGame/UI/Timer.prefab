@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minuiteText: {fileID: 5319130607236175296}
   _secText: {fileID: 4331353294487244177}
-  _totalSeconds: 10
+  _totalSeconds: 80
 --- !u!1 &2945971918781355926
 GameObject:
   m_ObjectHideFlags: 0

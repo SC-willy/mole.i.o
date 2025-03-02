@@ -544,6 +544,7 @@ void vert(inout appdata_full v)
 
    v.tangent.xyz = UnityWorldToObjectDir(newTangent);
 }
+
 // Note: calculations from the main pass are defined with UNITY_PASS_FORWARDBASE
 // However it is left out sometimes because some keywords aren't defined for the
 // Forward Add pass (e.g. TCP2_MATCAP, TCP2_REFLECTIONS, ...)
@@ -1306,6 +1307,114 @@ Varyings_Outline vertex_outline (Attributes_Outline input)
 	#endif
 
 	// Lighting & Texture
+	#if defined(TCP2_OUTLINE_LIGHTING)
+		output.normal = normalize(UnityObjectToWorldNormal(input.normal));
+	#endif
+
+	#if defined(TCP2_OUTLINE_TEXTURED_VERTEX)
+		half4 outlineTexture = tex2Dlod(_BaseMap, float4(input.texcoord0.xy * _BaseMap_ST.xy + _BaseMap_ST.zw, 0, _OutlineTextureLOD));
+		output.vcolor *= outlineTexture;
+	#endif
+
+	#if defined(TCP2_OUTLINE_TEXTURED_FRAGMENT)
+		output.texcoord0.xy = input.texcoord0.xy * _BaseMap_ST.xy + _BaseMap_ST.zw;
+		output.texcoord0.zw = input.texcoord0.zw;
+	#endif
+
+	return output;
+}
+
+Varyings_Outline vert_outline (Attributes_Outline input)
+{
+	Varyings_Outline output = (Varyings_Outline)0;
+
+	UNITY_SETUP_INSTANCE_ID(input);
+	UNITY_TRANSFER_INSTANCE_ID(input, output);
+	UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
+
+	#if defined(TCP2_HYBRID_URP)
+		VertexPositionInputs vertexInput = GetVertexPositionInputs(input.vertex.xyz);
+		#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
+			output.shadowCoord = GetShadowCoord(vertexInput);
+		#endif
+		float3 positionWS = vertexInput.positionWS;
+	#else
+		float3 positionWS = mul(unity_ObjectToWorld, input.vertex).xyz;
+		UNITY_TRANSFER_LIGHTING(output, input.texcoord1.xy);
+	#endif
+
+	//-------------------------------------------
+	// 🌊 웨이브 애니메이션 적용 (worldPos 기준)
+	positionWS.y += CalculateWave(positionWS, _GlobalTime, _WaveStartTime, _WaveDuration, _WaveHeight);
+	//-------------------------------------------
+
+	#ifdef TCP2_COLORS_AS_NORMALS
+		float3 normal = (input.vertexColor.xyz*2) - 1;
+	#elif TCP2_TANGENT_AS_NORMALS
+		float3 normal = input.tangent.xyz;
+	#elif TCP2_UV1_AS_NORMALS || TCP2_UV2_AS_NORMALS || TCP2_UV3_AS_NORMALS || TCP2_UV4_AS_NORMALS
+		// (중략, 그대로 유지)
+	#else
+		float3 normal = input.normal;
+	#endif
+
+	#if !defined(SHADOWCASTER_PASS)
+		// ✅ 변형된 월드 좌표를 다시 오브젝트 공간으로 변환
+		float4 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0));
+		output.pos = UnityObjectToClipPos(localPos.xyz);
+
+		// 노멀도 변형이 필요하다면 아래에 추가
+		normal = UnityObjectToWorldNormal(normal);
+		normal.y += CalculateWave(positionWS, _GlobalTime, _WaveStartTime, _WaveDuration, _WaveHeight) * 0.5;
+		normal = normalize(normal);
+
+		float2 clipNormals = normalize(mul(UNITY_MATRIX_VP, float4(normal,0)).xy);
+
+		#if defined(TCP2_OUTLINE_CONST_SIZE)
+			float2 outlineWidth = (_OutlineWidth * output.pos.w) / (_ScreenParams.xy / 2.0);
+			output.pos.xy += clipNormals.xy * outlineWidth;
+		#elif defined(TCP2_OUTLINE_MIN_SIZE)
+			float screenRatio = _ScreenParams.x / _ScreenParams.y;
+			float2 outlineWidth = max(
+				(_OutlineMinWidth * output.pos.w) / (_ScreenParams.xy / 2.0),
+				(_OutlineWidth / 100) * float2(1.0, screenRatio)
+			);
+			output.pos.xy += clipNormals.xy * outlineWidth;
+		#elif defined(TCP2_OUTLINE_MIN_MAX_SIZE)
+			float screenRatio = _ScreenParams.x / _ScreenParams.y;
+			float2 outlineWidth = max(
+				(_OutlineMinWidth * output.pos.w) / (_ScreenParams.xy / 2.0),
+		        (_OutlineWidth / 100) * float2(1.0, screenRatio)
+		    );
+			outlineWidth = min(
+				(_OutlineMaxWidth * output.pos.w) / (_ScreenParams.xy / 2.0),
+		        outlineWidth
+		    );
+			output.pos.xy += clipNormals.xy * outlineWidth;
+		#else
+			float screenRatio = _ScreenParams.x / _ScreenParams.y;
+			output.pos.xy += clipNormals.xy * (_OutlineWidth / 100) * float2(1.0, screenRatio);
+		#endif
+	#else
+		input.vertex = input.vertex + float4(normal,0) * _OutlineWidth * 0.01;
+	#endif
+
+	output.vcolor.rgba = _OutlineColor.rgba;
+	float4 clipPos = output.pos;
+
+	#if defined(TCP2_OUTLINE_LIGHTING_ALL) && defined(_ADDITIONAL_LIGHTS_VERTEX)
+		VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(input.normal, input.tangent);
+		output.vertexLights = VertexLighting(positionWS, vertexNormalInput.normalWS);
+	#endif
+
+	output.worldPos.xyz = positionWS;
+
+	#if defined(TCP2_HYBRID_URP)
+		output.worldPos.w = ComputeFogFactor(output.pos.z);
+	#else
+		UNITY_TRANSFER_FOG_COMBINED_WITH_WORLD_POS(output, output.pos);
+	#endif
+
 	#if defined(TCP2_OUTLINE_LIGHTING)
 		output.normal = normalize(UnityObjectToWorldNormal(input.normal));
 	#endif
