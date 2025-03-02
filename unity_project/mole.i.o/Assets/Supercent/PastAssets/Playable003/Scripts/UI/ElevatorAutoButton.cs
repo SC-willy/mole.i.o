@@ -8,8 +8,8 @@ namespace Supercent.MoleIO.InGame
         private static readonly int _animPress = Animator.StringToHash("Press");
         private static readonly int _animGuide = Animator.StringToHash("Guide");
         [SerializeField] Elevator _elevator;
-        [SerializeField] ElevatorTouchChecker _up;
-        [SerializeField] ElevatorTouchChecker _down;
+        [SerializeField] ImageTouchChecker _up;
+        [SerializeField] ImageTouchChecker _down;
         [SerializeField] Animator _pressAnimationUp;
         [SerializeField] Animator _pressAnimationDown;
         [SerializeField] AudioSource _sound;

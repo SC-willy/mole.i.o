@@ -48,6 +48,8 @@ namespace Supercent.MoleIO.InGame
 
         public void StartGame()
         {
+            _leaderBoard.gameObject.SetActive(true);
+            _timer.gameObject.SetActive(true);
             _timer.StartTimer();
             _player.StartUpdate();
         }
