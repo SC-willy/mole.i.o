@@ -6,6 +6,8 @@ namespace Supercent.MoleIO.InGame
     public class EnemyManager : InitManagedBehaviorBase
     {
         public event Func<int> OnGetPlayerXp;
+        public event Action<int> OnKill;
+        private int _killCount = 0;
 
         [SerializeField] EnemyController[] _enemies;
         [SerializeField] Transform _target;
@@ -43,6 +45,7 @@ namespace Supercent.MoleIO.InGame
 
             _width = _spawnMaxTr.position.x - _spawnMinTr.position.x;
             _height = _spawnMaxTr.position.z - _spawnMinTr.position.z;
+            _killCount = 0;
         }
 
         private void StartHitAction(EnemyController target)
@@ -52,6 +55,8 @@ namespace Supercent.MoleIO.InGame
 
         private void SetRespawnMod(EnemyController target)
         {
+            _killCount++;
+            OnKill?.Invoke(_killCount);
             _respawnLine.Enqueue(target);
 
             if (_isResawning)

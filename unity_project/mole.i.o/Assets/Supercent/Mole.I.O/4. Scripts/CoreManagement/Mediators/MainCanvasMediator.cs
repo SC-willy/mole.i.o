@@ -1,7 +1,9 @@
 
 using System.Collections;
+using System.Text;
 using Supercent.MoleIO.Playable001;
 using Supercent.Util;
+using TMPro;
 using UnityEngine;
 
 namespace Supercent.MoleIO.InGame
@@ -13,14 +15,21 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] GameObject _timerEndCard;
         [SerializeField] GameObject _winUI;
         [SerializeField] GameObject _failUI;
+        [SerializeField] TMP_Text _killCount;
         [SerializeField] float _winUiDelay = 5f;
         [SerializeField] float _failUiDelay = 1f;
+        StringBuilder _stringBuilder = new StringBuilder();
         protected override void _Init()
         {
             _screenInputHandler.SetCanvas(_canvas);
         }
         protected override void _Release()
         {
+        }
+
+        public void GetKillCount()
+        {
+
         }
 
         public void SetActiveTimerEndUI(bool isOn = true)
@@ -47,6 +56,13 @@ namespace Supercent.MoleIO.InGame
         {
             yield return CoroutineUtil.WaitForSeconds(_failUiDelay);
             _failUI.SetActive(true);
+        }
+
+        public void CountKill(int count)
+        {
+            _stringBuilder.Clear();
+            _stringBuilder.Append(count);
+            _killCount.text = _stringBuilder.ToString();
         }
 
 
