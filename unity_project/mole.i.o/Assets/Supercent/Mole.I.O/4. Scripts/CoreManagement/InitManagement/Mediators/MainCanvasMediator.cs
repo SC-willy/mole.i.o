@@ -8,14 +8,18 @@ namespace Supercent.MoleIO.InGame
     {
         [SerializeField] Canvas _canvas;
         [SerializeField] ScreenInputController _screenInputHandler;
-        [SerializeField] LeaderBoard _leaderBoard;
-        public void RegistLeaderBoardPlayer(UnitBattleController unit) => _leaderBoard.RegistUnit(unit);
+        [SerializeField] GameObject _timerEndCard;
         protected override void _Init()
         {
             _screenInputHandler.SetCanvas(_canvas);
         }
         protected override void _Release()
         {
+        }
+
+        public void ShowTimerEndUI()
+        {
+            _timerEndCard.SetActive(true);
         }
 
 #if UNITY_EDITOR

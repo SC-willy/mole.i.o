@@ -14,12 +14,16 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] CameraManager _cameraManager = new CameraManager();
 
         [Space]
-        [Header("Others")]
+        [Header("Mediators")]
         [SerializeField] MainCanvasMediator _mainCanvas;
         [SerializeField] GamePlayMediator _playMediator;
         [SerializeField] PlayerMediator _player;
-        [SerializeField] LeaderBoard _leaderBoard;
+
+        [Space]
+        [Header("Others")]
         [SerializeField] IsoCamSizeFitter _isoCam;
+        [SerializeField] LeaderBoard _leaderBoard;
+        [SerializeField] TimerUI _timer;
 
         public void StartSetup()
         {
@@ -28,6 +32,8 @@ namespace Supercent.MoleIO.InGame
 
             _playMediator.RegistLeaderboard(_leaderBoard);
             _player.Attacker.OnSetSize += LevelUpZoom;
+
+            _timer.OnEnd += ShowTimerEnd;
         }
 
         public void ShowCamPos(int index)
@@ -40,6 +46,18 @@ namespace Supercent.MoleIO.InGame
             _isoCam.ChangeStackedZoom(_player.Attacker.Level);
         }
 
+        public void StartGame()
+        {
+            _timer.StartTimer();
+            _player.StartUpdate();
+        }
+
+        private void ShowTimerEnd()
+        {
+            _player.Release();
+            _mainCanvas.ShowTimerEndUI();
+        }
+
 #if UNITY_EDITOR
         public void Bind(MonoBehaviour mono)
         {
@@ -50,6 +68,7 @@ namespace Supercent.MoleIO.InGame
             _playMediator = mono.GetComponentInChildren<GamePlayMediator>(true);
             _leaderBoard = mono.GetComponentInChildren<LeaderBoard>(true);
             _player = mono.GetComponentInChildren<PlayerMediator>(true);
+            _timer = mono.GetComponentInChildren<TimerUI>(true);
         }
 #endif // UNITY_EDITOR
     }

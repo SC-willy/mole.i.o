@@ -96,8 +96,8 @@ namespace Supercent.MoleIO.InGame
 
         public EnemyController Respawn(int xp)
         {
-            _attacker.ResetData(xp);
             gameObject.SetActive(true);
+            _attacker.ResetData(xp);
             _isDie = false;
             return this;
         }

@@ -5,7 +5,7 @@ namespace Supercent.MoleIO.InGame
 {
     public class PlayerMediator : InitManagedBehaviorBase, IDamageable
     {
-        public bool IsCanUpdate = true;
+        private bool _isCanUpdate = false;
 
         [Header("Functions")]
         [CustomColor(0.2f, 0, 0)]
@@ -25,6 +25,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _combo = 0;
 
         public int GetPlayerXp() => _attacker.Xp;
+        public void StartUpdate() => _isCanUpdate = true;
         public UnitBattleController Attacker => _attacker;
 
         protected override void _Init()
@@ -38,12 +39,14 @@ namespace Supercent.MoleIO.InGame
 
         protected override void _Release()
         {
+            _isCanUpdate = false;
             _moveHandler.Release();
+            _col.enabled = false;
         }
 
         protected virtual void Update()
         {
-            if (!IsCanUpdate)
+            if (!_isCanUpdate)
                 return;
             _moveHandler.UpdateMove();
 
@@ -66,7 +69,7 @@ namespace Supercent.MoleIO.InGame
         public void GetDeadlyAttack()
         {
             _attacker.Die();
-            IsCanUpdate = false;
+            _isCanUpdate = false;
         }
 
         public void UpdateComboUI(float comboValue)

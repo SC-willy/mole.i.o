@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Reflection;
+using Supercent.Util;
 using UnityEngine;
 
 namespace Supercent.MoleIO.InGame
@@ -29,6 +30,14 @@ namespace Supercent.MoleIO.InGame
             InvokeStartMethod(_initManager);
             InvokeStartMethod(_mainMed);
             InvokeStartMethod(_transitionManager);
+
+            StartCoroutine(CoWaitForMove());
+        }
+
+        private IEnumerator CoWaitForMove()
+        {
+            yield return CoroutineUtil.WaitForSeconds(0.5f);
+            _mainMed.StartGame();
         }
 
         private void Update()
