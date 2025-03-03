@@ -601,16 +601,92 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 461
       objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 724983975}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OpenWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Supercent.MoleIO.InGame.OptionUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800318156149522485, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5512001846765667743, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 724983975}
   m_SourcePrefab: {fileID: 100100000, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
 --- !u!224 &724983971 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3269346550291409644, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
   m_PrefabInstance: {fileID: 724983970}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &724983972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6402032715601092236, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+  m_PrefabInstance: {fileID: 724983970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &724983973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5314352046551145720, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+  m_PrefabInstance: {fileID: 724983970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &724983974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5512001846765667743, guid: 85a8ae735c7e4f149b9b9f0d9c4726e1, type: 3}
+  m_PrefabInstance: {fileID: 724983970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &724983975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724983974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f157e3f2f199644a5078ab94eb88f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: 724983973}
+  _haptic: {fileID: 724983972}
 --- !u!1 &1023648121
 GameObject:
   m_ObjectHideFlags: 0
