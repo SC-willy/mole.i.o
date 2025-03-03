@@ -44,5 +44,6 @@ public static class GameManager
     public static void LoadLobbyScene()
     {
         SceneManager.LoadScene(LOBBY_SCENE);
+        
     }
 }
