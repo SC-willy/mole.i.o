@@ -1,77 +1,78 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Networking;
+
 namespace Supercent.MoleIO.Management
 {
     [Serializable]
     public class CSVLoader
     {
+        private readonly string _url = "https://script.google.com/macros/s/AKfycbwCZDqK107c4pF0jNj1JtRWI4d34k12OhU_3uiG5mg6eT7qELG6yJcpBpeEcWBimZc/exec";
         [SerializeField] LocalizationData localizationData;
         // [SerializeField] bool _forceUpdate;
-        public void StartLoadText(MonoBehaviour mono)
+        public async void StartLoadText()
         {
-            // mono.StartCoroutine(LoadCSV());
-            LoadCSV();
+            string csvData = await LoadDataGoogleSheet(_url);
+            if (csvData != null)
+            {
+                ParseCSV(csvData);
+            }
         }
 
-        // private IEnumerator LoadCSV()
-        // {
-        //     string filePath = Path.Combine(Application.streamingAssetsPath, "Localization.csv");
-        //     string csvData = "";
-
-        //     if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        //     {
-        //         UnityWebRequest request = UnityWebRequest.Get(filePath);
-        //         yield return request.SendWebRequest();
-        //         if (request.result == UnityWebRequest.Result.Success)
-        //             csvData = request.downloadHandler.text;
-        //         else
-        //             Debug.LogError("CSV 파일을 찾을 수 없음: " + request.error);
-        //     }
-        //     else
-        //     {
-        //         if (File.Exists(filePath))
-        //             csvData = File.ReadAllText(filePath);
-        //         else
-        //             Debug.LogError("CSV 파일을 찾을 수 없음! 경로: " + filePath);
-        //     }
-
-        //     if (!string.IsNullOrEmpty(csvData))
-        //         ParseCSV(csvData);
-        // }
-
-        private void LoadCSV()
+        async Task<string> LoadDataGoogleSheet(string url)
         {
-            TextAsset csvFile = Resources.Load<TextAsset>("Localization");
-
-            if (csvFile != null)
-                ParseCSV(csvFile.text);
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    byte[] dataBytes = await client.GetByteArrayAsync(url);
+                    return Encoding.UTF8.GetString(dataBytes);
+                }
+                catch (HttpRequestException e)
+                {
+                    Debug.LogError($"Request error: {e.Message}");
+                    return null;
+                }
+            }
         }
-
 
         private void ParseCSV(string csvData)
         {
-            string[] lines = csvData.Split('\n');
             localizationData.Texts = new List<LocalizedText>();
+            csvData = csvData.Trim('[', ']'); // 양 끝의 대괄호 제거
+            var items = csvData.Split(new[] { "},{" }, StringSplitOptions.None);
 
-            for (int i = 1; i < lines.Length; i++)
+            // 처음과 끝의 아이템 처리: 첫번째 아이템과 마지막 아이템에 대한 처리가 제대로 이루어지도록 수정
+            for (int i = 0; i < items.Length; i++)
             {
-                string[] columns = lines[i].Split(',');
-                if (columns.Length < 3) continue;
+                var cleanItem = items[i].Trim('{', '}');
+                var keyValuePairs = cleanItem.Split(',');
 
-                LocalizedText entry = new LocalizedText
+                LocalizedText entry = new LocalizedText();
+                foreach (var keyValue in keyValuePairs)
                 {
-                    key = columns[1].Trim(),
-                    value = columns[2].Trim()
-                };
+                    var keyValuePair = keyValue.Split(':');
+                    var key = keyValuePair[0].Trim('"');
+                    var value = keyValuePair[1].Trim('"');
+
+                    if (key == "Key")
+                    {
+                        entry.Key = int.Parse(value);
+                    }
+                    else if (key == "Value")
+                    {
+                        entry.Value = value;
+                    }
+                }
 
                 localizationData.Texts.Add(entry);
             }
 
             Debug.Log("CSV 파싱 완료! 총 " + localizationData.Texts.Count + "개의 번역 데이터 로드됨.");
+
         }
     }
 }

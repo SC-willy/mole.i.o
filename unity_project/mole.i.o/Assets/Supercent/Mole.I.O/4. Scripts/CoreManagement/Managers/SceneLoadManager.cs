@@ -11,7 +11,7 @@ namespace Supercent.MoleIO.Management
         {
             if (!GameManager.IsLoaded())
             {
-                _csvLoader.StartLoadText(this);
+                _csvLoader.StartLoadText();
             }
 
             if (GameManager.IsFirst())

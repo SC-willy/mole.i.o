@@ -158,6 +158,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.DefaultCompany.luna_prison
     Standalone: com.DefaultCompany.luna-prison
   buildNumber:
     Standalone: 0
@@ -940,7 +941,7 @@ PlayerSettings:
   embeddedLinuxEnableGamepadInput: 1
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
-  apiCompatibilityLevel: 6
+  apiCompatibilityLevel: 3
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
   cloudProjectId: b7af9b7f-87c6-4eca-9c2f-2bc9dfe6048b

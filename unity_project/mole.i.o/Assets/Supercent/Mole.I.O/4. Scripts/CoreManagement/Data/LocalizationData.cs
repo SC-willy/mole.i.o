@@ -7,13 +7,13 @@ namespace Supercent.MoleIO.Management
     {
         public List<LocalizedText> Texts;
 
-        public Dictionary<string, string> GetTextDic()
+        public Dictionary<int, string> GetTextDic()
         {
-            Dictionary<string, string> _stringDic = new Dictionary<string, string>();
+            Dictionary<int, string> _stringDic = new Dictionary<int, string>();
             foreach (var text in Texts)
             {
-                if (!_stringDic.ContainsKey(text.key))
-                    _stringDic.Add(text.key, text.value);
+                if (!_stringDic.ContainsKey(text.Key))
+                    _stringDic.Add(text.Key, text.Value);
             }
             return _stringDic;
         }
@@ -22,7 +22,7 @@ namespace Supercent.MoleIO.Management
     [System.Serializable]
     public class LocalizedText
     {
-        public string key;
-        public string value;
+        public int Key;
+        public string Value;
     }
 }
