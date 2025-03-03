@@ -114,10 +114,12 @@ namespace Supercent.MoleIO.Management
         public static void SetActiveAudio(bool isOn)
         {
             IsVolumeOn = isOn ? 1 : 0;
+            PlayerPrefs.SetInt(IS_VOLUME_ON, IsVolumeOn);
         }
         public static void SetActiveHaptic(bool isOn)
         {
             IsHaptic = isOn ? 1 : 0;
+            PlayerPrefs.SetInt(IS_HAPTIC, IsHaptic);
         }
     }
 }
