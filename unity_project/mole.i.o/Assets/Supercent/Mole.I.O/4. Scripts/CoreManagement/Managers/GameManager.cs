@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using Supercent.MoleIO.Management;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,12 +10,15 @@ public static class GameManager
     static bool _isLoaded = false;
     public static string PlayerName => PlayerData.Name;
 
+    static GooglePlayManager _googlePlayManager = new GooglePlayManager();
     public static bool IsLoaded()
     {
         if (_isLoaded)
             return true;
 
         _isLoaded = true;
+
+        _googlePlayManager.StartSetup();
         PlayerData.LoadData();
         return false;
     }
