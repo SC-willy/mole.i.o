@@ -496,6 +496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CountCard
       objectReference: {fileID: 0}
+    - target: {fileID: 5680833274009208283, guid: 240c20c8eb9bf433ebff11bf23643703, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6594752084146532210, guid: 240c20c8eb9bf433ebff11bf23643703, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
