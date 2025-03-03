@@ -15,7 +15,7 @@ namespace Supercent.MoleIO.InGame
 
         [SerializeField] UnitRaycastMover _mover = new UnitRaycastMover();
         [SerializeField] float _moveSpeed = 6;
-        Vector3 _forwardDir = Vector3.zero;
+        Vector3 _forwardDir = Vector3.forward;
         float _mainCamY = 0;
         public void Init()
         {

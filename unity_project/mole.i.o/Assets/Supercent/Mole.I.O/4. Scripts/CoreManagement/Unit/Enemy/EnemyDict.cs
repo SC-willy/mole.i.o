@@ -27,6 +27,8 @@ public class ColDict : InstancedClass<ColDict>
 
     public void _RegistData(Collider collider, IDamageable controller)
     {
+        if (_dict.ContainsKey(collider))
+            return;
         _dict.Add(collider, controller);
     }
 }

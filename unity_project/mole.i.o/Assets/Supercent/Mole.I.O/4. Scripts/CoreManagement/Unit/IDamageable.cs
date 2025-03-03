@@ -8,5 +8,6 @@ namespace Supercent.MoleIO.InGame
         public void GetDamage(int attackerLevel);
         public void GetWeakAttack();
         public void GetDeadlyAttack();
+        public bool CheckIsDead();
     }
 }

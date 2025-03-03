@@ -92,6 +92,7 @@ namespace Supercent.MoleIO.InGame
         private void OpenFailUI()
         {
             _mainCanvas.OpenFailUI(_player.GetPlayerXp());
+            _timer.OnEnd -= ShowTimerEnd;
         }
 
 #if UNITY_EDITOR

@@ -20,6 +20,7 @@ namespace Supercent.MoleIO.InGame
         public event Action<float> OnCombo;
         public event Action<float> OnSetSize;
         public event Action OnChangeXp;
+        public event Action<int> OnKill;
 
         public int Level => _level;
         public int Xp => _xp;
@@ -40,6 +41,7 @@ namespace Supercent.MoleIO.InGame
         LevelData.HammerLevel _nextLevelInfo;
         int _combo = 0;
         int _curHammerType = 0;
+        int _killCount = 0;
 
         [Space]
         [Header("UI")]
@@ -61,7 +63,7 @@ namespace Supercent.MoleIO.InGame
             {
                 reduceRate *= REDUCED_ATTACKRATE_VALUE;
             }
-            _hitter.ReduceHitDuration(reduceRate);
+            _hitter.ReduceHitDuration(1 - reduceRate);
         }
 
         public void SetName(string name)
@@ -101,6 +103,13 @@ namespace Supercent.MoleIO.InGame
                     continue;
 
                 enemy.GetDamage(_level);
+
+                if (enemy.CheckIsDead())
+                {
+                    _killCount++;
+                    OnKill?.Invoke(_killCount);
+                }
+
                 ReleaseCharge();
             }
         }

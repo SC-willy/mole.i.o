@@ -8,6 +8,8 @@ namespace Supercent.MoleIO.InGame
         public Action<EnemyController> OnHit;
         public Action<EnemyController> OnDie;
 
+        public bool IsDie => _isDie;
+
 
         [CustomColor(0, 0, 0.2f)]
         [SerializeField] UnitBattleController _attacker;
@@ -54,7 +56,7 @@ namespace Supercent.MoleIO.InGame
             if (_isDie)
                 return;
 
-            transform.position += transform.forward * Time.deltaTime * _speed;
+            transform.position += _model.forward * Time.deltaTime * _speed;
 
             if (_lastRotateTime + _rotateDuration > Time.deltaTime)
                 StartRotate();
@@ -63,7 +65,7 @@ namespace Supercent.MoleIO.InGame
                 return;
 
             _rotateLerpValue = Mathf.Min(_rotateLerpValue + Time.deltaTime * _rotateSpeed, 1f);
-            _model.forward = Vector3.Lerp(transform.forward, (_followTarget.position + _offset - transform.position).normalized, _rotateLerpValue);
+            _model.forward = Vector3.Lerp(_model.forward, (_followTarget.position + _offset - transform.position).normalized, _rotateLerpValue);
 
             if (_rotateLerpValue == 1f)
             {
@@ -73,6 +75,7 @@ namespace Supercent.MoleIO.InGame
 
         private void StartRotate()
         {
+            _lastRotateTime = Time.time;
             _rotateLerpValue = 0;
             _isRotate = true;
         }
@@ -109,5 +112,7 @@ namespace Supercent.MoleIO.InGame
             _isDie = false;
             return this;
         }
+
+        public bool CheckIsDead() => _isDie;
     }
 }

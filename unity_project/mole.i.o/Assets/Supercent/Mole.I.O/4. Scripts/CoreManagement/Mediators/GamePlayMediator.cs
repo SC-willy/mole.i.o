@@ -47,7 +47,7 @@ namespace Supercent.MoleIO.InGame
 
         public void SetKillEvent(Action<int> action)
         {
-            _enemyManager.OnKill += action;
+            _player.Attacker.OnKill += action;
         }
 
         protected override void _Release()

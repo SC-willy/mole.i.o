@@ -41,6 +41,7 @@ namespace Supercent.MoleIO.InGame
             {
                 _enemies[i].OnHit += StartHitAction;
                 _enemies[i].OnDie += SetRespawnMod;
+                _enemies[i].Init();
             }
 
             _width = _spawnMaxTr.position.x - _spawnMinTr.position.x;
