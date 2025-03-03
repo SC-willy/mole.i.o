@@ -11,16 +11,21 @@ namespace Supercent.MoleIO.InGame
         [Header("Managers")]
         [CustomColor(0f, 0f, 0.2f)]
         [SerializeField] InitManager _initManager = new InitManager();
+
         [CustomColor(0.23f, 0.34f, 0f)]
         [SerializeField] TransitionManager _transitionManager = new TransitionManager();
         [CustomColor(0.2f, 0f, 0.1f)]
         [SerializeField] CameraManager _cameraManager = new CameraManager();
+        [CustomColor(0f, 0.34f, 0.23f)]
+        [SerializeField] AudioMuteManager _muteManager = new AudioMuteManager();
 
         private void Start()
         {
             InvokeStartMethod(_initManager);
             InvokeStartMethod(_transitionManager);
             InvokeStartMethod(_cameraManager);
+
+            _muteManager.CheckSound();
         }
 
         private void Update()
@@ -31,6 +36,7 @@ namespace Supercent.MoleIO.InGame
         private void InvokeStartMethod(IStartable managed) => managed.StartSetup();
 
         public void CheckStartUp(Action<bool> subscriber) => subscriber?.Invoke(_initManager != null);
+        public void SetActiveAudio(bool isOn) => _muteManager.ActiveSound(isOn);
 
 #if UNITY_EDITOR
 

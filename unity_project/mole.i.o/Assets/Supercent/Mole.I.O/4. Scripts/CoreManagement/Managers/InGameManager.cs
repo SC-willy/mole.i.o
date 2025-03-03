@@ -16,6 +16,8 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] InitManager _initManager = new InitManager();
         [CustomColor(0.23f, 0.34f, 0f)]
         [SerializeField] TransitionManager _transitionManager = new TransitionManager();
+        [CustomColor(0f, 0.34f, 0.23f)]
+        [SerializeField] AudioMuteManager _muteManager = new AudioMuteManager();
         [SerializeField] LevelData _levelData;
 
         [Header("Mediators")]
@@ -32,6 +34,7 @@ namespace Supercent.MoleIO.InGame
             InvokeStartMethod(_transitionManager);
 
             StartCoroutine(CoWaitForMove());
+            _muteManager.CheckSound();
         }
 
         private IEnumerator CoWaitForMove()

@@ -264,6 +264,9 @@ MonoBehaviour:
     _customCamMoveTime: 1
     _customCamWaitTime: 1
     _isSmoothCamera: 1
+  _muteManager:
+    _audioSources: []
+    _volumes: []
 --- !u!1001 &199883178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1365,6 +1368,34 @@ PrefabInstance:
     - target: {fileID: 3581133515241594930, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 119670049}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActiveAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Supercent.MoleIO.InGame.LobbyManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890360744730218598, guid: 936d507e16fc73f4093e771d7583101b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
