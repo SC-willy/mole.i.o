@@ -1,4 +1,5 @@
 using System;
+using Supercent.MoleIO.Management;
 using UnityEngine;
 
 namespace Supercent.MoleIO.InGame
@@ -23,7 +24,7 @@ namespace Supercent.MoleIO.InGame
             ScreenInputController.OnPointerDownEvent += StopPlayer;
             _mainCamY = Camera.main.transform.rotation.eulerAngles.y;
 
-            _mover.SetMoveSpeed(_moveSpeed);
+            _mover.SetMoveSpeed(_moveSpeed + ((PlayerData.SkillLevel3 - 1) * 0.1f));
             ResetCamY();
         }
 

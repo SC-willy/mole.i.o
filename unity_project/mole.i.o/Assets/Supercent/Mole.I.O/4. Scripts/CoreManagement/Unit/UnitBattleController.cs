@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Supercent.MoleIO.Management;
 using TMPro;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
@@ -7,7 +8,10 @@ namespace Supercent.MoleIO.InGame
     [Serializable]
     public class UnitBattleController : IInitable, ITileXpGetter
     {
+        const int XP_PER_LEVEL = 100;
         const int ATTACKABLE_COMBO = 5;
+        const int MAX_REDUCED_ATTACKRATE = 1;
+        const float REDUCED_ATTACKRATE_VALUE = 0.99f;
         readonly private static int _animTrigHit = Animator.StringToHash("Hit");
         readonly private static int _animTrigDie = Animator.StringToHash("Die");
         readonly private static int _animTrigHitted = Animator.StringToHash("Ouch");
@@ -47,6 +51,17 @@ namespace Supercent.MoleIO.InGame
             _hitter.OnHit += PlayAttackAnim;
             _animEvent.OnAnimEvent += CheckEnemy;
             SetLevel(_level);
+        }
+
+        public void SetPlayerUpgrade()
+        {
+            _xp += (PlayerData.SkillLevel1 - 1) * XP_PER_LEVEL;
+            float reduceRate = MAX_REDUCED_ATTACKRATE;
+            for (int i = 0; i < PlayerData.SkillLevel2 - 1; i++)
+            {
+                reduceRate *= REDUCED_ATTACKRATE_VALUE;
+            }
+            _hitter.ReduceHitDuration(reduceRate);
         }
 
         public void SetName(string name)

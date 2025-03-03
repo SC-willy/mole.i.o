@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Supercent.MoleIO.Management;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,9 +8,10 @@ using UnityEngine.SceneManagement;
 public static class GameManager
 {
     const string FIRST_CHECK = "IsFirst";
+    const string LOBBY_SCENE = "Lobby";
+    const int STAGE_LENGTH = 1;
     static bool _isLoaded = false;
-    static string _playerName = "Player";
-    public static string PlayerName => _playerName;
+    public static string PlayerName => PlayerData.Name;
 
     public static bool IsLoaded()
     {
@@ -33,11 +35,14 @@ public static class GameManager
 
     public static void LoadGameScene()
     {
-        SceneManager.LoadScene("Stage000");
+        if (STAGE_LENGTH <= PlayerData.Stage)
+            SceneManager.LoadScene($"Stage00{STAGE_LENGTH - 1}");
+        else
+            SceneManager.LoadScene($"Stage00{PlayerData.Stage}");
     }
 
     public static void LoadLobbyScene()
     {
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene(LOBBY_SCENE);
     }
 }

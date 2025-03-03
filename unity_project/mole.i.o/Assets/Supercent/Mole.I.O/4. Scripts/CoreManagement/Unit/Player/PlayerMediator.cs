@@ -37,6 +37,8 @@ namespace Supercent.MoleIO.InGame
             _attacker.Init();
             _attacker.OnCombo += UpdateComboUI;
             _attacker.OnSetSize += SetSize;
+
+            _attacker.SetPlayerUpgrade();
         }
 
         protected override void _Release()

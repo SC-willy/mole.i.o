@@ -4,21 +4,8 @@ using Supercent.MoleIO.InGame;
 using UnityEngine;
 
 
-public class ColDict
+public class ColDict : InstancedClass<ColDict>
 {
-    public static ColDict Instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = new ColDict();
-
-            return _instance;
-        }
-
-    }
-
-    private static ColDict _instance;
     private Dictionary<Collider, IDamageable> _dict = new Dictionary<Collider, IDamageable>();
 
     public static IDamageable GetData(Collider collider)

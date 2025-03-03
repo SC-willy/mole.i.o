@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 namespace Supercent.MoleIO.Management
 {
     public static class PlayerData
     {
+        public static event Action<int> OnChangeMoney;
         const string STAGE = "CurrentStage";
         const string SKILL_LV_1 = "SKLV1";
         const string SKILL_LV_2 = "SKLV2";
         const string SKILL_LV_3 = "SKLV3";
         const string MOENY = "PlayerBaseMoney";
-        const string NAME = "PlayerName";
+        const string NAME = "Player";
         public static int Stage { get; private set; }
         public static int SkillLevel1 { get; private set; }
         public static int SkillLevel2 { get; private set; }
@@ -18,14 +18,87 @@ namespace Supercent.MoleIO.Management
         public static int Money { get; private set; }
         public static string Name { get; private set; }
 
+        public static int CostRiseValue { get; private set; } = 1000;
+
         public static void LoadData()
         {
-            Stage = PlayerPrefs.GetInt(STAGE, 1);
+            Stage = PlayerPrefs.GetInt(STAGE, 0);
             SkillLevel1 = PlayerPrefs.GetInt(SKILL_LV_1, 1);
             SkillLevel2 = PlayerPrefs.GetInt(SKILL_LV_2, 1);
             SkillLevel3 = PlayerPrefs.GetInt(SKILL_LV_3, 1);
-            Money = PlayerPrefs.GetInt(MOENY, 1);
+            Money = PlayerPrefs.GetInt(MOENY, 0);
             Name = PlayerPrefs.GetString(NAME, "Player");
+        }
+
+        public static void SaveData()
+        {
+            PlayerPrefs.SetInt(STAGE, Stage);
+            PlayerPrefs.SetInt(SKILL_LV_1, SkillLevel1);
+            PlayerPrefs.SetInt(SKILL_LV_2, SkillLevel2);
+            PlayerPrefs.SetInt(SKILL_LV_3, SkillLevel3);
+            PlayerPrefs.SetInt(MOENY, Money);
+
+        }
+
+        public static void ClearData()
+        {
+            PlayerPrefs.DeleteKey(SKILL_LV_1);
+            PlayerPrefs.DeleteKey(SKILL_LV_2);
+            PlayerPrefs.DeleteKey(SKILL_LV_3);
+            PlayerPrefs.DeleteKey(STAGE);
+            PlayerPrefs.DeleteKey(MOENY);
+            PlayerPrefs.DeleteKey(NAME);
+        }
+
+        public static void SetName(string name)
+        {
+            Name = name;
+            PlayerPrefs.SetString(NAME, Name);
+        }
+        public static bool TryUpgrade1()
+        {
+            if (!CheckMoneyByLevel(SkillLevel1))
+                return false;
+
+            SkillLevel1++;
+            PlayerPrefs.SetInt(SKILL_LV_1, SkillLevel1);
+            return true;
+        }
+        public static bool TryUpgrade2()
+        {
+            if (!CheckMoneyByLevel(SkillLevel2))
+                return false;
+
+            SkillLevel2++;
+            PlayerPrefs.SetInt(SKILL_LV_2, SkillLevel2);
+            return true;
+        }
+        public static bool TryUpgrade3()
+        {
+            if (!CheckMoneyByLevel(SkillLevel3))
+                return false;
+
+            SkillLevel3++;
+            PlayerPrefs.SetInt(SKILL_LV_3, SkillLevel3);
+            return true;
+        }
+
+        private static bool CheckMoneyByLevel(int level)
+        {
+            if (Money < level * CostRiseValue)
+                return false;
+
+            Money -= level * CostRiseValue;
+            OnChangeMoney?.Invoke(Money);
+            PlayerPrefs.SetInt(MOENY, Money);
+            return true;
+        }
+
+        public static void EarnMoney(int money)
+        {
+            Money += money;
+            OnChangeMoney?.Invoke(Money);
+            PlayerPrefs.SetInt(MOENY, Money);
         }
     }
 }

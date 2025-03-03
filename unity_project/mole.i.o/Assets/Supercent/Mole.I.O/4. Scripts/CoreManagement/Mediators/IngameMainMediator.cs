@@ -86,12 +86,12 @@ namespace Supercent.MoleIO.InGame
 
         private void OpenWinUI()
         {
-            _mainCanvas.OpenWinUI();
+            _mainCanvas.OpenWinUI(_player.GetPlayerXp());
         }
 
         private void OpenFailUI()
         {
-            _mainCanvas.OpenFailUI();
+            _mainCanvas.OpenFailUI(_player.GetPlayerXp());
         }
 
 #if UNITY_EDITOR

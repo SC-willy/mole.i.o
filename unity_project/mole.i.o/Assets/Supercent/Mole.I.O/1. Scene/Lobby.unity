@@ -1449,10 +1449,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePlayObjects
       objectReference: {fileID: 0}
-    - target: {fileID: 5989544568308547144, guid: b5ed44ab2f779544eb74c4a2ee7a7639, type: 3}
-      propertyPath: _col
-      value: 
-      objectReference: {fileID: 8626830740873687806}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1461,11 +1457,6 @@ PrefabInstance:
 --- !u!4 &8626830740873687805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3270451438258636261, guid: b5ed44ab2f779544eb74c4a2ee7a7639, type: 3}
-  m_PrefabInstance: {fileID: 8626830740873687803}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &8626830740873687806 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 1842657796431182553, guid: b5ed44ab2f779544eb74c4a2ee7a7639, type: 3}
   m_PrefabInstance: {fileID: 8626830740873687803}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8626830740873687808 stripped

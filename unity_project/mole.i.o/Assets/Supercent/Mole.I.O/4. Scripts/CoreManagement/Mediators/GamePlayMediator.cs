@@ -20,6 +20,7 @@ namespace Supercent.MoleIO.InGame
 
             _enemyManager.OnGetPlayerXp += _player.GetPlayerXp;
             _enemyManager.SetTarget(_player.transform);
+            _enemyManager.Init();
         }
 
         public void RegistLeaderboard(LeaderBoard leaderBoard)

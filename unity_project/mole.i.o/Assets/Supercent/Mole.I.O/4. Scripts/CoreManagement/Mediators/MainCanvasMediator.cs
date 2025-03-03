@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Text;
+using Supercent.MoleIO.Management;
 using Supercent.MoleIO.Playable001;
 using Supercent.Util;
 using TMPro;
@@ -10,12 +11,16 @@ namespace Supercent.MoleIO.InGame
 {
     public class MainCanvasMediator : InitManagedBehaviorBase
     {
+        const float WIN_COIN_VALUE = 1.2f;
+        const float FAIL_COIN_VALUE = 0.8f;
         [SerializeField] Canvas _canvas;
         [SerializeField] ScreenInputController _screenInputHandler;
         [SerializeField] GameObject _timerEndCard;
         [SerializeField] GameObject _winUI;
         [SerializeField] GameObject _failUI;
         [SerializeField] TMP_Text _killCount;
+        [SerializeField] TMP_Text _winMoneyText;
+        [SerializeField] TMP_Text _failMoneyText;
         [SerializeField] float _winUiDelay = 5f;
         [SerializeField] float _failUiDelay = 1f;
         StringBuilder _stringBuilder = new StringBuilder();
@@ -37,20 +42,27 @@ namespace Supercent.MoleIO.InGame
             _timerEndCard.SetActive(isOn);
         }
 
-        public void OpenWinUI()
+        public void OpenWinUI(int xp)
         {
             StartCoroutine(CoOpenWinUi());
+            _stringBuilder.Clear();
+            _winMoneyText.text = _stringBuilder.Append(xp * WIN_COIN_VALUE).ToString();
+            PlayerData.EarnMoney((int)(xp * WIN_COIN_VALUE));
         }
 
         private IEnumerator CoOpenWinUi()
         {
             yield return CoroutineUtil.WaitForSeconds(_winUiDelay);
             _winUI.SetActive(true);
+
         }
 
-        public void OpenFailUI()
+        public void OpenFailUI(int xp)
         {
             StartCoroutine(CoOpenFailUi());
+            _stringBuilder.Clear();
+            _failMoneyText.text = _stringBuilder.Append(xp * FAIL_COIN_VALUE).ToString();
+            PlayerData.EarnMoney((int)(xp * FAIL_COIN_VALUE));
         }
         private IEnumerator CoOpenFailUi()
         {
