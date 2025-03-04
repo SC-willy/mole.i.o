@@ -14,8 +14,8 @@ namespace Supercent.MoleIO.Management
         static bool _isLoaded = false;
 
         [SerializeField] float _loadDelay;
-        GameObject _loadingScreen; // 로딩 UI
-        Slider _progressBar; // 진행도 바 (UI)
+        [SerializeField] GameObject _loadingScreen; // 로딩 UI
+        [SerializeField] Slider _progressBar; // 진행도 바 (UI)
 
         void Awake()
         {

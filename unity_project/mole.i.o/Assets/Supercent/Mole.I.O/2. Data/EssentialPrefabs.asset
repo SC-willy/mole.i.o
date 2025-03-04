@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: EssentialPrefabs
   m_EditorClassIdentifier: 
   _nameUI: {fileID: 7857853601724699251, guid: b80e15af36d670e4c957d58be0504f46, type: 3}
+  _sceneLoadingUI: {fileID: 3062467313586341090, guid: c57de8f01388b4c6bb0d42b6daadb5e9, type: 3}

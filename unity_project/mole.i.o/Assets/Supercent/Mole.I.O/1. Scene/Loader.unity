@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cee95a3d664410ea70d937f6e24948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _essentialPrefabs: {fileID: 11400000, guid: 1443057a67a04e148b7d29e1052ad23b, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
