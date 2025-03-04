@@ -5,22 +5,33 @@ using UnityEngine.SceneManagement;
 public static class GameManager
 {
     const string FIRST_CHECK = "IsFirst";
-    const string LOBBY_SCENE = "Lobby";
-    const int STAGE_LENGTH = 1;
-    static bool _isLoaded = false;
+    static bool _isDynamicLoaded = false;
+    static bool _isEssentialLoaded = false;
     public static string PlayerName => PlayerData.Name;
 
     static GooglePlayManager _googlePlayManager = new GooglePlayManager();
-    public static bool IsLoaded()
+    static SceneLoadingUI _sceneLoadingUI;
+
+    static public void GetLoadUI(SceneLoadingUI sceneLoadingUI) => _sceneLoadingUI = sceneLoadingUI;
+    public static bool IsDynamicLoaded()
     {
-        if (_isLoaded)
+        if (_isDynamicLoaded)
             return true;
 
-        _isLoaded = true;
+        _isDynamicLoaded = true;
+        return false;
+    }
+
+    public static void LoadEssentials()
+    {
+        if (_isEssentialLoaded)
+            return;
+
+        _isEssentialLoaded = true;
 
         _googlePlayManager.StartSetup();
         PlayerData.LoadData();
-        return false;
+        return;
     }
 
     public static bool IsFirst()
@@ -33,17 +44,11 @@ public static class GameManager
         return false;
     }
 
-    public static void LoadGameScene()
+    public static void LoadLoadScene()
     {
-        if (STAGE_LENGTH <= PlayerData.Stage)
-            SceneManager.LoadScene($"Stage00{STAGE_LENGTH - 1}");
-        else
-            SceneManager.LoadScene($"Stage00{PlayerData.Stage}");
-    }
+        if (_sceneLoadingUI == null)
+            return;
 
-    public static void LoadLobbyScene()
-    {
-        SceneManager.LoadScene(LOBBY_SCENE);
-        
+        _sceneLoadingUI.LoadScene();
     }
 }

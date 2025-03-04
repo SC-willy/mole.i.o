@@ -9,5 +9,7 @@ namespace Supercent.MoleIO.Management
     {
         [SerializeField] GameObject _nameUI;
         public GameObject NameUI => _nameUI;
+        [SerializeField] GameObject _sceneLoadingUI;
+        public GameObject SceneLoadingUI => _sceneLoadingUI;
     }
 }

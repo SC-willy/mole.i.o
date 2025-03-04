@@ -7,7 +7,7 @@ namespace Supercent.MoleIO.InGame
     {
         void OnTriggerEnter(Collider other)
         {
-            GameManager.LoadGameScene();
+            //GameManager.LoadGameScene();
         }
     }
 }
