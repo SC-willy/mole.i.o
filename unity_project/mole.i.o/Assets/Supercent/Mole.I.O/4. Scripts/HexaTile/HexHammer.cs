@@ -15,7 +15,9 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _playerCode = 1;
 
         float _lastHitTime = 1;
+        bool _isUpdate = false;
 
+        public void ActiveAttack(bool on) => _isUpdate = on;
         public void ReduceHitDuration(float timeValue) => _hitDuration -= timeValue;
         public void SetPlayerCode(int code) => _playerCode = code;
         public void SetMapInfo(HexGrid map) => _mapInfo = map;
@@ -28,6 +30,9 @@ namespace Supercent.MoleIO.InGame
         }
         void Update()
         {
+            if (!_isUpdate)
+                return;
+
             if (_lastHitTime + _hitDuration > Time.time)
                 return;
 

@@ -214,42 +214,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeUI Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1958719021012094828, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2635758537739943182, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4311699845758827795}
     - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4311699845758827795}
-    - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitUi
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Supercent.MoleIO.Management.UpgradeController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175654842549333215, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 9019135372518313078, guid: 9f90fbec0ad8d27499238af29ba7d6cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -20,6 +20,11 @@ namespace Supercent.MoleIO.Management
                 Instantiate(_essentialPrefabs.NameUI);
             }
 
+            if (!SceneLoadingUI.IsLoaded)
+            {
+                Instantiate(_essentialPrefabs.SceneLoadingUI);
+            }
+
             Destroy(this);
         }
     }

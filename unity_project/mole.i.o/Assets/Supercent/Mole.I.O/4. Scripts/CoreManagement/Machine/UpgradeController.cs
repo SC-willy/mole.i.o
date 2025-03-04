@@ -12,7 +12,6 @@ namespace Supercent.MoleIO.Management
         const int MONEY_MIN_AMIOUNT = 1000;
         const string MONEY_TAIL = ".0K";
         const string LEVEL_HEADER = "Lv.";
-        [SerializeField] GameObject _upgradeCanvas;
         [SerializeField] TMP_Text[] _levelText;
         [SerializeField] TMP_Text[] _costText;
         StringBuilder _stringBuilder = new StringBuilder();
@@ -46,16 +45,6 @@ namespace Supercent.MoleIO.Management
 
             _stringBuilder.Clear();
             _costText[2].text = _stringBuilder.Append(PlayerData.SkillLevel3 * costRise / MONEY_MIN_AMIOUNT).Append(MONEY_TAIL).ToString();
-        }
-        private void OnTriggerEnter(Collider other)
-        {
-            _upgradeCanvas.SetActive(true);
-            ScreenInputController.CutJoystickMove();
-        }
-
-        public void ExitUi()
-        {
-            _upgradeCanvas.SetActive(false);
         }
 
         public void Upgrade(int code)

@@ -9,13 +9,10 @@ namespace Supercent.MoleIO.InGame
 {
     public class LobbyCanvasMediator : InitManagedBehaviorBase
     {
-        [SerializeField] Canvas _canvas;
-        [SerializeField] ScreenInputController _screenInputHandler;
         [SerializeField] TMP_Text _moneyText;
         StringBuilder _stringBuilder = new StringBuilder();
         protected override void _Init()
         {
-            _screenInputHandler.SetCanvas(_canvas);
             UpdateMoneyUI(PlayerData.Money);
             PlayerData.OnChangeMoney += UpdateMoneyUI;
         }
@@ -33,8 +30,6 @@ namespace Supercent.MoleIO.InGame
 #if UNITY_EDITOR
         protected override void OnBindSerializedField()
         {
-            _canvas = GetComponentInChildren<Canvas>(true);
-            _screenInputHandler = GetComponentInChildren<ScreenInputController>(true);
         }
 #endif // UNITY_EDITOR
     }

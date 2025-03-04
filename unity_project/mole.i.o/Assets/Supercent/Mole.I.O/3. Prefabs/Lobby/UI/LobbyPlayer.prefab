@@ -53,14 +53,15 @@ MonoBehaviour:
     _mover:
       _playerTr: {fileID: 7458152155176721912}
       _rotateModelTr: {fileID: 7150318272788474741}
-      _moveSpeed: 6
+      _moveSpeed: 10
       IsCanMove: 0
       _rayRadius: 0.5
       _layerMask:
         serializedVersion: 2
         m_Bits: 64
-    _moveSpeed: 6
+    _moveSpeed: 10
   _animator: {fileID: 2347926330334698593}
+  _col: {fileID: 6012367210153992900}
 --- !u!54 &5794833839227030001
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -105,7 +106,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 1.58
   m_Center: {x: 0, y: 0, z: 0}

@@ -16,6 +16,7 @@ namespace Supercent.MoleIO.InGame
         readonly private static int _animTrigDie = Animator.StringToHash("Die");
         readonly private static int _animTrigHitted = Animator.StringToHash("Ouch");
         readonly private static int _animIdle = Animator.StringToHash("Idle");
+        readonly private static int _animMoveBool = Animator.StringToHash("Move");
 
         public event Action<float> OnCombo;
         public event Action<float> OnSetSize;
@@ -55,6 +56,11 @@ namespace Supercent.MoleIO.InGame
             SetLevel(_level);
         }
 
+        public void ActiveAttack(bool on)
+        {
+            _animator.SetBool(_animMoveBool, on);
+            _hitter.ActiveAttack(on);
+        }
         public void SetPlayerUpgrade()
         {
             _xp += (PlayerData.SkillLevel1 - 1) * XP_PER_LEVEL;

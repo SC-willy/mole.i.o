@@ -24,6 +24,7 @@ namespace Supercent.MoleIO.InGame
         [CustomColor(0.2f, 0.1f, 0.3f)]
         [SerializeField] IngameMainMediator _mainMed = new IngameMainMediator();
 
+
         private void Start()
         {
             if (CurLevelData == null)
@@ -33,16 +34,8 @@ namespace Supercent.MoleIO.InGame
             InvokeStartMethod(_mainMed);
             InvokeStartMethod(_transitionManager);
 
-            StartCoroutine(CoWaitForMove());
             _muteManager.CheckSound();
         }
-
-        private IEnumerator CoWaitForMove()
-        {
-            yield return CoroutineUtil.WaitForSeconds(0.5f);
-            _mainMed.StartGame();
-        }
-
         private void Update()
         {
             _transitionManager.UpdateManualy(Time.deltaTime);

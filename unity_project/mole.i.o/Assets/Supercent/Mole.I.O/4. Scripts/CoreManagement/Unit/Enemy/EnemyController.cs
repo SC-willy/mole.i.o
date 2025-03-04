@@ -23,7 +23,7 @@ namespace Supercent.MoleIO.InGame
         float _rotateLerpValue = 0;
         float _lastRotateTime = 0;
 
-        bool _isDie = false;
+        bool _isDie = true;
         bool _isRotate = false;
 
         public UnitBattleController BattleController => _attacker;
@@ -39,6 +39,12 @@ namespace Supercent.MoleIO.InGame
             _attacker.OnSetSize += SetSize;
             _attacker.Init();
             _attacker.SetRandomXp();
+        }
+
+        public void ActiveBattle(bool on)
+        {
+            _attacker.ActiveAttack(on);
+            _isDie = !on;
         }
 
         protected override void _Release()

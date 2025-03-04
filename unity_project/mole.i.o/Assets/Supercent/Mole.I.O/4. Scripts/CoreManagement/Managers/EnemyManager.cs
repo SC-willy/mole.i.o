@@ -58,6 +58,14 @@ namespace Supercent.MoleIO.InGame
             }
         }
 
+        public void ActiveBattle(bool on)
+        {
+            for (int i = 0; i < _enemies.Length; i++)
+            {
+                _enemies[i].ActiveBattle(on);
+            }
+        }
+
         private void StartHitAction(EnemyController target)
         {
             target.gameObject.SetActive(false);

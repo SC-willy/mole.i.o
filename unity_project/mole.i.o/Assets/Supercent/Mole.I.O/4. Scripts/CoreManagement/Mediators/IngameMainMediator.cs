@@ -16,13 +16,17 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] CameraManager _cameraManager = new CameraManager();
         [CustomColor(0f, 0.1f, 0.2f)]
         [SerializeField] BossFlowManager _bossFlowManager = new BossFlowManager();
+        [SerializeField] EnemyManager _enemyManager;
+
         [SerializeField] float _bossFlowDelay = 1f;
 
         [Space]
         [Header("Mediators")]
         [SerializeField] MainCanvasMediator _mainCanvas;
+        [SerializeField] LobbyCanvasMediator _lobbyCanvas;
         [SerializeField] GamePlayMediator _playMediator;
         [SerializeField] PlayerMediator _player;
+
 
         [Space]
         [Header("Others")]
@@ -45,6 +49,13 @@ namespace Supercent.MoleIO.InGame
             _bossFlowManager.OnFail += OpenFailUI;
 
             _timer.OnEnd += ShowTimerEnd;
+
+            ScreenInputController.OnPointerDownEvent += StartGameOnTouch;
+        }
+        private void StartGameOnTouch()
+        {
+            ScreenInputController.OnPointerDownEvent -= StartGameOnTouch;
+            StartGame();
         }
 
         public void UpdateManualy(float dt)
@@ -68,6 +79,8 @@ namespace Supercent.MoleIO.InGame
             _timer.gameObject.SetActive(true);
             _timer.StartTimer();
             _player.StartUpdate();
+            _enemyManager.ActiveBattle(true);
+            _lobbyCanvas.gameObject.SetActive(false);
         }
 
         private void ShowTimerEnd()
@@ -75,13 +88,13 @@ namespace Supercent.MoleIO.InGame
             _player.Release();
             _mainCanvas.SetActiveTimerEndUI();
             _timer.StartCoroutine(CoStartBossFlow());
+            _enemyManager.ActiveBattle(false);
         }
 
         private IEnumerator CoStartBossFlow()
         {
             yield return CoroutineUtil.WaitForSeconds(_bossFlowDelay);
             _bossFlowManager.StartFlow(_player.GetPlayerXp());
-            _mainCanvas.SetActiveTimerEndUI(false);
         }
 
         private void OpenWinUI()
@@ -102,10 +115,12 @@ namespace Supercent.MoleIO.InGame
             _cameraManager.Bind(mono);
             _isoCam = mono.GetComponentInChildren<IsoCamSizeFitter>(true);
             _mainCanvas = mono.GetComponentInChildren<MainCanvasMediator>(true);
+            _lobbyCanvas = mono.GetComponentInChildren<LobbyCanvasMediator>(true);
             _playMediator = mono.GetComponentInChildren<GamePlayMediator>(true);
             _leaderBoard = mono.GetComponentInChildren<LeaderBoard>(true);
             _player = mono.GetComponentInChildren<PlayerMediator>(true);
             _timer = mono.GetComponentInChildren<TimerUI>(true);
+            _enemyManager = mono.GetComponentInChildren<EnemyManager>(true);
         }
 
 

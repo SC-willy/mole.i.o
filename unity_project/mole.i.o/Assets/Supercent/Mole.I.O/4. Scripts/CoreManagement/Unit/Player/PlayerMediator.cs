@@ -28,7 +28,11 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _combo = 0;
 
         public int GetPlayerXp() => _attacker.Xp;
-        public void StartUpdate() => _isCanUpdate = true;
+        public void StartUpdate()
+        {
+            _isCanUpdate = true;
+            _attacker.ActiveAttack(true);
+        }
         public UnitBattleController Attacker => _attacker;
 
         protected override void _Init()
