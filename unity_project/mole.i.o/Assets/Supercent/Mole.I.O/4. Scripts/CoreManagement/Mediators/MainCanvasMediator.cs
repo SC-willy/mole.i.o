@@ -15,6 +15,7 @@ namespace Supercent.MoleIO.InGame
         const float FAIL_COIN_VALUE = 0.8f;
         [SerializeField] Canvas _canvas;
         [SerializeField] ScreenInputController _screenInputHandler;
+        [SerializeField] GameObject[] _ingameUI;
         [SerializeField] GameObject _timerEndCard;
         [SerializeField] GameObject _winUI;
         [SerializeField] GameObject _failUI;
@@ -75,6 +76,14 @@ namespace Supercent.MoleIO.InGame
             _stringBuilder.Clear();
             _stringBuilder.Append(count);
             _killCount.text = _stringBuilder.ToString();
+        }
+
+        public void ActiveIngameUI(bool on)
+        {
+            for (int i = 0; i < _ingameUI.Length; i++)
+            {
+                _ingameUI[i].SetActive(on);
+            }
         }
 
 

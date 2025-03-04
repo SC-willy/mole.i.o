@@ -17,7 +17,7 @@ namespace Supercent.MoleIO.InGame
         [CustomColor(0f, 0.1f, 0.2f)]
         [SerializeField] BossFlowManager _bossFlowManager = new BossFlowManager();
         [SerializeField] EnemyManager _enemyManager;
-
+        [SerializeField] float _playDelay = 1f;
         [SerializeField] float _bossFlowDelay = 1f;
 
         [Space]
@@ -33,6 +33,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] IsoCamSizeFitter _isoCam;
         [SerializeField] LeaderBoard _leaderBoard;
         [SerializeField] TimerUI _timer;
+        [SerializeField] GameObject _startUI;
 
         public void StartSetup()
         {
@@ -75,19 +76,25 @@ namespace Supercent.MoleIO.InGame
 
         public void StartGame()
         {
-            _leaderBoard.gameObject.SetActive(true);
-            _timer.gameObject.SetActive(true);
+            _lobbyCanvas.gameObject.SetActive(false);
+            _startUI.SetActive(true);
+            _playMediator.StartCoroutine(WaitForStartCount());
+        }
+
+        IEnumerator WaitForStartCount()
+        {
+            yield return CoroutineUtil.WaitForSeconds(_playDelay);
             _timer.StartTimer();
             _player.StartUpdate();
             _enemyManager.ActiveBattle(true);
-            _lobbyCanvas.gameObject.SetActive(false);
+            _mainCanvas.ActiveIngameUI(true);
         }
 
         private void ShowTimerEnd()
         {
             _player.Release();
             _mainCanvas.SetActiveTimerEndUI();
-            _timer.StartCoroutine(CoStartBossFlow());
+            _playMediator.StartCoroutine(CoStartBossFlow());
             _enemyManager.ActiveBattle(false);
         }
 
@@ -95,6 +102,7 @@ namespace Supercent.MoleIO.InGame
         {
             yield return CoroutineUtil.WaitForSeconds(_bossFlowDelay);
             _bossFlowManager.StartFlow(_player.GetPlayerXp());
+            _mainCanvas.ActiveIngameUI(false);
         }
 
         private void OpenWinUI()

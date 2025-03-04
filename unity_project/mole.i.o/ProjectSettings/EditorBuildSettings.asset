@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Supercent/Mole.I.O/1. Scene/Lobby.unity
-    guid: e4f74e7cf9e513349b7e6a3ce1171772
+    path: Assets/Supercent/Mole.I.O/1. Scene/Loader.unity
+    guid: 1b3ed0fa1086f4f2c849c0d52e8d8a83
   - enabled: 1
     path: Assets/Supercent/Mole.I.O/1. Scene/Stage000.unity
     guid: bd9a21abc835d184b85135c08b0dfd66
