@@ -48,8 +48,8 @@ MonoBehaviour:
   - RequireXp: 12800
     AttackRange: 12
     PlayerSize: 1.8
-    HammerModelType: 3
-  - RequireXp: 3200
-    AttackRange: 10
-    PlayerSize: 1.6
     HammerModelType: 2
+  - RequireXp: 25600
+    AttackRange: 13
+    PlayerSize: 1.6
+    HammerModelType: 3

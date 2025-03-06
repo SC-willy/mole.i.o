@@ -11,8 +11,7 @@ namespace Supercent.MoleIO.Management
     public class CSVLoader
     {
         private readonly string _url = "https://script.google.com/macros/s/AKfycbwCZDqK107c4pF0jNj1JtRWI4d34k12OhU_3uiG5mg6eT7qELG6yJcpBpeEcWBimZc/exec";
-        [SerializeField] LocalizationData localizationData;
-        // [SerializeField] bool _forceUpdate;
+        [SerializeField] DynamicGameData localizationData;
         public async void StartLoadText()
         {
             string csvData = await LoadDataGoogleSheet(_url);
@@ -42,10 +41,9 @@ namespace Supercent.MoleIO.Management
         private void ParseCSV(string csvData)
         {
             localizationData.Texts = new List<LocalizedText>();
-            csvData = csvData.Trim('[', ']'); // 양 끝의 대괄호 제거
+            csvData = csvData.Trim('[', ']');
             var items = csvData.Split(new[] { "},{" }, StringSplitOptions.None);
 
-            // 처음과 끝의 아이템 처리: 첫번째 아이템과 마지막 아이템에 대한 처리가 제대로 이루어지도록 수정
             for (int i = 0; i < items.Length; i++)
             {
                 var cleanItem = items[i].Trim('{', '}');
@@ -57,22 +55,18 @@ namespace Supercent.MoleIO.Management
                     var keyValuePair = keyValue.Split(':');
                     var key = keyValuePair[0].Trim('"');
                     var value = keyValuePair[1].Trim('"');
-
                     if (key == "Key")
                     {
                         entry.Key = int.Parse(value);
                     }
                     else if (key == "Value")
                     {
-                        entry.Value = value;
+                        entry.Value = float.Parse(value);
                     }
                 }
 
                 localizationData.Texts.Add(entry);
             }
-
-            Debug.Log("CSV 파싱 완료! 총 " + localizationData.Texts.Count + "개의 번역 데이터 로드됨.");
-
         }
     }
 }

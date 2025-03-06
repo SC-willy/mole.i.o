@@ -19,9 +19,6 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] CameraTransitionData _cameraPosData;
         [SerializeField] Transform[] _watchTransforms;
         [SerializeField] MonoBehaviour[] _disableComponents;
-        [SerializeField] SmoothCameraByJoyStick _smoothCam;
-        [SerializeField] TrSlowTracker _tracker;
-        Transform _originParent;
         Vector3 _gap = Vector3.zero;
 
         [SerializeField] float _customCamMoveTime = 1f;
@@ -44,13 +41,9 @@ namespace Supercent.MoleIO.InGame
             _gap = _camera.transform.position - _target.position;
             _originTr.SetParent(_target);
 
-            _originParent = _camera.transform.parent;
-
             //if Need Auto Follow
             _camera.transform.SetParent(_originTr);
             OnCamTrChanged?.Invoke();
-
-            _smoothCam.enabled = _isSmoothCamera;
         }
         private void EnableComponents(bool isEnabled)
         {
@@ -150,9 +143,6 @@ namespace Supercent.MoleIO.InGame
             if (camData == null || camData.Length <= 0)
                 return;
             _cameraPosData = camData[0];
-
-            _smoothCam = mono.GetComponentInChildren<SmoothCameraByJoyStick>(true);
-            _tracker = mono.GetComponentInChildren<TrSlowTracker>(true);
         }
 #endif // UNITY_EDITOR
 

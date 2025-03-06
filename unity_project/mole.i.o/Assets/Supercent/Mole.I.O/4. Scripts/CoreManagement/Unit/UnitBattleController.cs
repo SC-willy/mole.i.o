@@ -8,7 +8,6 @@ namespace Supercent.MoleIO.InGame
     [Serializable]
     public class UnitBattleController : IInitable, ITileXpGetter
     {
-        const int XP_PER_LEVEL = 100;
         const int ATTACKABLE_COMBO = 5;
         const int MAX_REDUCED_ATTACKRATE = 1;
         const float REDUCED_ATTACKRATE_VALUE = 0.99f;
@@ -63,7 +62,7 @@ namespace Supercent.MoleIO.InGame
         }
         public void SetPlayerUpgrade()
         {
-            _xp += (PlayerData.SkillLevel1 - 1) * XP_PER_LEVEL;
+            _xp += (PlayerData.SkillLevel1 - 1) * (int)GameManager.GetDynamicData(DynamicGameData.EDynamicType.LevelPerUpgrade);
             float reduceRate = MAX_REDUCED_ATTACKRATE;
             for (int i = 0; i < PlayerData.SkillLevel2 - 1; i++)
             {

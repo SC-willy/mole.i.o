@@ -21,7 +21,7 @@ namespace Supercent.MoleIO.Management
         {
             _isLoaded = true;
             DontDestroyOnLoad(this);
-            GameManager.GetLoadUI(this);
+            GameManager.SetLoadUI(this);
         }
         public void LoadScene()
         {
