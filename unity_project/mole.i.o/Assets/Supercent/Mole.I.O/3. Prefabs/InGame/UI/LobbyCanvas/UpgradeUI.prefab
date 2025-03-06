@@ -564,7 +564,7 @@ PrefabInstance:
     - target: {fileID: 3865804478294920021, guid: 203a088b5fd86a9459442222007f3c8d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 78485dfaa31654f8c981ec8534473689, type: 3}
+      objectReference: {fileID: 21300000, guid: f39a1c26ef31b40d58e6932357d1c20d, type: 3}
     - target: {fileID: 7759750060944236174, guid: 203a088b5fd86a9459442222007f3c8d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
