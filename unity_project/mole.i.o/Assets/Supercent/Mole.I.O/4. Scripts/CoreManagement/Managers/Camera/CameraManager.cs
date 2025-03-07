@@ -23,7 +23,6 @@ namespace Supercent.MoleIO.InGame
 
         [SerializeField] float _customCamMoveTime = 1f;
         [SerializeField] float _customCamWaitTime = 1f;
-        [SerializeField] bool _isSmoothCamera = true;
         bool _isCustomMod = false;
 
         public void SetCustomTimeMode(bool isCustom) => _isCustomMod = isCustom;

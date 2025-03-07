@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Text;
 using Supercent.MoleIO.Management;
-using Supercent.MoleIO.Playable001;
 using Supercent.Util;
 using TMPro;
 using UnityEngine;

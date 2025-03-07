@@ -7,7 +7,6 @@ namespace Supercent.MoleIO.InGame
 {
     public class PlayerMediator : InitManagedBehaviorBase, IDamageable
     {
-        public event Action OnKill;
         public event Action OnDie;
         private bool _isCanUpdate = false;
 
