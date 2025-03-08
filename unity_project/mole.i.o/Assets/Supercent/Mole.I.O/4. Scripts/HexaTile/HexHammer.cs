@@ -15,6 +15,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _maxWaveRange = 3; // 최대 웨이브 퍼지는 거리 설정
         [SerializeField] int _playerCode = 1;
 
+        int _chargingPoint = 0;
         float _lastHitTime = 1;
         bool _isUpdate = false;
 
@@ -67,13 +68,19 @@ namespace Supercent.MoleIO.InGame
             _lastHitTime = Time.time;
         }
 
+        public void SetChargeDouble()
+        {
+            _chargingPoint = (int)(_maxWaveRange * 1.3f);
+        }
+
         public void HitTile(ITileXpGetter hitter)
         {
             TileData tile = _mapInfo.GetTileDataByPos(_hitTr.position);
 
             if (tile == null)
                 return;
-            _mapInfo.SpreadWave(hitter, tile.HexCoords, _playerColor, _maxWaveRange, _playerCode);
+            _mapInfo.SpreadWave(hitter, tile.HexCoords, _playerColor, _maxWaveRange + _chargingPoint, _playerCode);
+            _chargingPoint = 0;
         }
     }
 }

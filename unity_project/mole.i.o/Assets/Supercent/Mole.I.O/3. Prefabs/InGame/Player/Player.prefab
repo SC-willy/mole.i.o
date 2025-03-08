@@ -150,6 +150,7 @@ MonoBehaviour:
     _moveSpeed: 6
   _animEvent: {fileID: 1925687718496948091}
   _animator: {fileID: 3664012417166261792}
+  _levelUpParticle: {fileID: 0}
   _attacker:
     _name: {fileID: 9181622676602880401}
     _hitter: {fileID: 4402852869471919772}
@@ -14910,6 +14911,18 @@ PrefabInstance:
     - target: {fileID: 7782961899951991122, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
       propertyPath: m_Name
       value: PlayerModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910827478020985035, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910827478020985035, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910827478020985035, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7.9999995
       objectReference: {fileID: 0}
     - target: {fileID: 8185345249240701993, guid: 9f56d8459e3bc534c8bed7810bcec85e, type: 3}
       propertyPath: m_LocalPosition.x

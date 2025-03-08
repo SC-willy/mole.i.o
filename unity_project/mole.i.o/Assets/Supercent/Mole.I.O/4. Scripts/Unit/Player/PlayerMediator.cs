@@ -25,6 +25,7 @@ namespace Supercent.MoleIO.InGame
         [Header("Animation")]
         [SerializeField] AnimEventContainer _animEvent;
         [SerializeField] Animator _animator = null;
+        [SerializeField] ParticleSystem _levelUpParticle;
 
         [Space]
         [Header("Attack")]
@@ -107,6 +108,7 @@ namespace Supercent.MoleIO.InGame
                 StopCoroutine(_coroutine);
 
             _animator.SetTrigger(_animTrigLevelUp);
+            _col.enabled = false;
             _coroutine = StartCoroutine(CoStartGrow(size));
             OnLevelUp?.Invoke();
         }
@@ -123,8 +125,10 @@ namespace Supercent.MoleIO.InGame
                 transform.localScale = Vector3.Lerp(start, end, lerpValue);
                 yield return null;
             }
+            yield return CoroutineUtil.WaitForSeconds(LEVEL_UP_WAIT_TIME * 2);
+            _levelUpParticle?.Play();
+            StartCoroutine(CoStopInvincible());
             _coroutine = null;
-
         }
     }
 }

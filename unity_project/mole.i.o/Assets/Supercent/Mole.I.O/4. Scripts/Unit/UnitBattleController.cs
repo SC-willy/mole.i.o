@@ -128,6 +128,8 @@ namespace Supercent.MoleIO.InGame
 
             _level++;
             _nextLevelInfo = InGameManager.CurLevelData.GetNextHammerLvData(_level);
+            if (_hitter.PlayerCode == -1)
+                _hitter.SetChargeDouble();
         }
 
         private void SetLevel(int level)
