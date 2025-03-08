@@ -9,8 +9,9 @@ namespace Supercent.MoleIO.Management
         [SerializeField] CSVLoader _csvLoader;
         private void Awake()
         {
+            GameManager.SetBakedDynamicData(_csvLoader.GetDynamicGameData().GetDataDic());
             GameManager.LoadEssentials();
-            if (!GameManager.IsDynamicLoaded())
+            if (!GameManager.IsDynamicLoaded)
             {
                 _csvLoader.StartLoadText();
             }

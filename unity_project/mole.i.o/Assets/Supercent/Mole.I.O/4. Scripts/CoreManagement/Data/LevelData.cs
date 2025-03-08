@@ -5,9 +5,26 @@ namespace Supercent.MoleIO.InGame
     [CreateAssetMenu(fileName = "LevelData", menuName = "Data/Level")]
     public class LevelData : ScriptableObject
     {
+        const int HammerLevelCount = 10;
         const float MAX_RAND_LEVEL_VALUE = 1.1f;
         public int MaxHammerLevel => _hammerLevels.Length;
         [SerializeField] HammerLevel[] _hammerLevels;
+
+        public void SetHammerInfo()
+        {
+            if (_hammerLevels.Length < HammerLevelCount)
+                _hammerLevels = new HammerLevel[HammerLevelCount];
+
+            for (int i = 0; i < HammerLevelCount; i++)
+            {
+                HammerLevel curHammer = new HammerLevel();
+                curHammer.RequireXp = (int)GameManager.GetLevelData(GameManager.EDynamicType.XpPerLevel, i);
+                curHammer.AttackRange = (int)GameManager.GetLevelData(GameManager.EDynamicType.RangePerLevel, i);
+                curHammer.PlayerSize = (int)GameManager.GetLevelData(GameManager.EDynamicType.SizePerLevel, i);
+                curHammer.HammerModelType = (int)GameManager.GetLevelData(GameManager.EDynamicType.HammerModelPerLevel, i);
+                _hammerLevels[i] = curHammer;
+            }
+        }
 
         public HammerLevel GetNextHammerLvData(int curlevel)
         {

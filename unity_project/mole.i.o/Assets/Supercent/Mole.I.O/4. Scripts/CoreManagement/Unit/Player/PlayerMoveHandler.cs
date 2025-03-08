@@ -24,7 +24,7 @@ namespace Supercent.MoleIO.InGame
             ScreenInputController.OnPointerDownEvent += StopPlayer;
             _mainCamY = Camera.main.transform.rotation.eulerAngles.y;
 
-            _mover.SetMoveSpeed(_moveSpeed + ((PlayerData.SkillLevel3 - 1) * 0.1f));
+            _mover.SetMoveSpeed(GameManager.GetDynamicData(GameManager.EDynamicType.PlayerSpeeed) + ((PlayerData.SkillLevel3 - 1) * GameManager.GetDynamicData(GameManager.EDynamicType.SpeedPerUpgrade)));
             ResetCamY();
         }
 

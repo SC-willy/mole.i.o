@@ -34,6 +34,7 @@ namespace Supercent.MoleIO.InGame
 
         public void StartTimer()
         {
+            _totalSeconds = (int)GameManager.GetDynamicData(GameManager.EDynamicType.PlayTime);
             _isUpdate = true;
             _lastUpdateTime = Time.time;
         }

@@ -13,7 +13,7 @@ namespace Supercent.MoleIO.Management
             if (!SceneLoadingUI.IsLoaded)
                 Instantiate(_essentialPrefabs.SceneLoadingUI);
 
-            GameManager.LoadLoadScene();
+            GameManager.LoadScene();
         }
     }
 }

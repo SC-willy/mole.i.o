@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Supercent.MoleIO.Management;
 using Supercent.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +52,7 @@ namespace Supercent.MoleIO.InGame
 
         public void StartFlow(int energy)
         {
+            _requiredPower = (int)GameManager.GetLevelData(GameManager.EDynamicType.BossHpPerStage, PlayerData.Stage);
             _energy = energy;
             _gauge.fillAmount = 0;
             _usedEnergy = 0;

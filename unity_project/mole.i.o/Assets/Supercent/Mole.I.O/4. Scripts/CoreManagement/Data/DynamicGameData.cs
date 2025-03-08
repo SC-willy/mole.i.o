@@ -2,19 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Supercent.MoleIO.Management
 {
-    [CreateAssetMenu(fileName = "LocalizationData", menuName = "Data/Localization")]
+    [CreateAssetMenu(fileName = "DynamicGameData", menuName = "Data/DynamicGameData")]
     public class DynamicGameData : ScriptableObject
     {
-        public enum EDynamicType
-        {
-            LevelPerUpgrade = 1001,
-        }
-        public List<LocalizedText> Texts;
+        public List<LoadedData> LoadedDatas;
 
         public Dictionary<int, float> GetDataDic()
         {
             Dictionary<int, float> dataDic = new Dictionary<int, float>();
-            foreach (var text in Texts)
+            foreach (var text in LoadedDatas)
             {
                 if (!dataDic.ContainsKey(text.Key))
                     dataDic.Add(text.Key, text.Value);
@@ -24,7 +20,7 @@ namespace Supercent.MoleIO.Management
     }
 
     [System.Serializable]
-    public class LocalizedText
+    public class LoadedData
     {
         public int Key;
         public float Value;

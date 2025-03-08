@@ -32,7 +32,7 @@ namespace Supercent.MoleIO.InGame
         protected override void _Init()
         {
             _zoomValue = 2 - _zoomValue;
-            _originOrthoSize = _cameras[0].orthographicSize * _zoomValue;
+            _originOrthoSize = GameManager.GetDynamicData(GameManager.EDynamicType.CamZoom) * _zoomValue;
             _zoomOrthoSize = _originOrthoSize - Mathf.Max(Screen.width, Screen.height) / Mathf.Min(Screen.width, Screen.height) * _onWideScreenCameraScale;
 
             if (_zoomOrthoSize < MIN_ORTHO_SIZE)

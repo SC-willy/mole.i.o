@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Supercent.MoleIO.Management;
 using UnityEngine;
 namespace Supercent.MoleIO.InGame
 {
@@ -37,8 +38,15 @@ namespace Supercent.MoleIO.InGame
         }
         protected override void _Init()
         {
+            int enemyCount = (int)GameManager.GetLevelData(GameManager.EDynamicType.EnemyCountPerStage, PlayerData.Stage);
             for (int i = 0; i < _enemies.Length; i++)
             {
+                if (i >= enemyCount)
+                {
+                    _enemies[i].gameObject.SetActive(false);
+                    continue;
+                }
+
                 _enemies[i].OnHit += StartHitAction;
                 _enemies[i].OnDie += SetRespawnMod;
                 _enemies[i].Init();

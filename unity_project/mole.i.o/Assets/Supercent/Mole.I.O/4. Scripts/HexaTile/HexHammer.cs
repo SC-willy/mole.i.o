@@ -18,7 +18,7 @@ namespace Supercent.MoleIO.InGame
         bool _isUpdate = false;
 
         public void ActiveAttack(bool on) => _isUpdate = on;
-        public void ReduceHitDuration(float timeValue) => _hitDuration -= timeValue;
+        public void SetHitDuration(float timeValue) => _hitDuration = timeValue;
         public void SetPlayerCode(int code) => _playerCode = code;
         public void SetMapInfo(HexGrid map) => _mapInfo = map;
         public void SetRange(int range)

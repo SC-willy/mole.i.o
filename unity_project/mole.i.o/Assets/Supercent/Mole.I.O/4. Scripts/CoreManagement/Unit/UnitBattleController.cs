@@ -9,8 +9,6 @@ namespace Supercent.MoleIO.InGame
     public class UnitBattleController : IInitable, ITileXpGetter
     {
         const int ATTACKABLE_COMBO = 5;
-        const int MAX_REDUCED_ATTACKRATE = 1;
-        const float REDUCED_ATTACKRATE_VALUE = 0.99f;
         readonly private static int _animTrigHit = Animator.StringToHash("Hit");
         readonly private static int _animTrigDie = Animator.StringToHash("Die");
         readonly private static int _animTrigHitted = Animator.StringToHash("Ouch");
@@ -62,13 +60,21 @@ namespace Supercent.MoleIO.InGame
         }
         public void SetPlayerUpgrade()
         {
-            _xp += (PlayerData.SkillLevel1 - 1) * (int)GameManager.GetDynamicData(DynamicGameData.EDynamicType.LevelPerUpgrade);
-            float reduceRate = MAX_REDUCED_ATTACKRATE;
+            _xp = (PlayerData.SkillLevel1 - 1) * (int)GameManager.GetDynamicData(GameManager.EDynamicType.LevelPerUpgrade);
+            float reduceRate = GameManager.GetDynamicData(GameManager.EDynamicType.AtkRateReduceMax);
             for (int i = 0; i < PlayerData.SkillLevel2 - 1; i++)
             {
-                reduceRate *= REDUCED_ATTACKRATE_VALUE;
+                reduceRate *= GameManager.GetDynamicData(GameManager.EDynamicType.AtkRateReducePerUpgrade);
             }
-            _hitter.ReduceHitDuration(1 - reduceRate);
+            _hitter.SetHitDuration(
+                GameManager.GetDynamicData(GameManager.EDynamicType.PlayerAtkRate)
+            - (GameManager.GetDynamicData(GameManager.EDynamicType.AtkRateReduceMax) - reduceRate)
+            );
+        }
+
+        public void SetAiInfo()
+        {
+            _hitter.SetHitDuration(GameManager.GetDynamicData(GameManager.EDynamicType.AiAtkRate));
         }
 
         public void SetName(string name)

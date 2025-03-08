@@ -28,7 +28,7 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] int _combo = 0;
 
         public int GetPlayerXp() => _attacker.Xp;
-        public int GetPlayerGettedXp() => _attacker.Xp - PlayerData.SkillLevel1 * (int)GameManager.GetDynamicData(DynamicGameData.EDynamicType.LevelPerUpgrade);
+        public int GetPlayerGettedXp() => _attacker.Xp - PlayerData.SkillLevel1 * (int)GameManager.GetDynamicData(GameManager.EDynamicType.LevelPerUpgrade);
         public void StartUpdate()
         {
             _isCanUpdate = true;

@@ -1032,6 +1032,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1171696743}
     m_Modifications:
+    - target: {fileID: 3687014547407811119, guid: ab12f09a0262396419b9156708601c7a, type: 3}
+      propertyPath: _csvLoader._gameData
+      value: 
+      objectReference: {fileID: 11400000, guid: 61f9e6d50be72294ab1a7a95037dc810, type: 2}
     - target: {fileID: 4877006963879259750, guid: ab12f09a0262396419b9156708601c7a, type: 3}
       propertyPath: m_Name
       value: SceneLoadChecker

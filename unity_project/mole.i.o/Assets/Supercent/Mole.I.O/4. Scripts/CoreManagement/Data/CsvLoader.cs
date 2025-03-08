@@ -10,11 +10,13 @@ namespace Supercent.MoleIO.Management
     [Serializable]
     public class CSVLoader
     {
-        private readonly string _url = "https://script.google.com/macros/s/AKfycbwCZDqK107c4pF0jNj1JtRWI4d34k12OhU_3uiG5mg6eT7qELG6yJcpBpeEcWBimZc/exec";
-        [SerializeField] DynamicGameData localizationData;
+        private readonly string _defaultUrl = "https://script.google.com/macros/s/AKfycbwCZDqK107c4pF0jNj1JtRWI4d34k12OhU_3uiG5mg6eT7qELG6yJcpBpeEcWBimZc/exec";
+        [SerializeField] DynamicGameData _gameData;
+
+        public DynamicGameData GetDynamicGameData() => _gameData;
         public async void StartLoadText()
         {
-            string csvData = await LoadDataGoogleSheet(_url);
+            string csvData = await LoadDataGoogleSheet(_defaultUrl);
             if (csvData != null)
             {
                 ParseCSV(csvData);
@@ -37,36 +39,36 @@ namespace Supercent.MoleIO.Management
                 }
             }
         }
-
         private void ParseCSV(string csvData)
         {
-            localizationData.Texts = new List<LocalizedText>();
-            csvData = csvData.Trim('[', ']');
-            var items = csvData.Split(new[] { "},{" }, StringSplitOptions.None);
+            var lines = csvData.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries); // 줄단위로 분리
+            List<LoadedData> LoadedDatas = new List<LoadedData>();
 
-            for (int i = 0; i < items.Length; i++)
+            if (lines.Length > 0)
             {
-                var cleanItem = items[i].Trim('{', '}');
-                var keyValuePairs = cleanItem.Split(',');
-
-                LocalizedText entry = new LocalizedText();
-                foreach (var keyValue in keyValuePairs)
+                for (int i = 1; i < lines.Length; i++)
                 {
-                    var keyValuePair = keyValue.Split(':');
-                    var key = keyValuePair[0].Trim('"');
-                    var value = keyValuePair[1].Trim('"');
-                    if (key == "Key")
+                    var columns = lines[i].Split(',');
+                    LoadedData entry = new LoadedData();
+
+                    for (int j = 0; j < 3; j++)
                     {
-                        entry.Key = int.Parse(value);
+                        if (j == 1)
+                        {
+                            entry.Key = int.Parse(columns[j].Trim('"'));
+                        }
+                        else if (j == 2)
+                        {
+                            entry.Value = float.Parse(columns[j].Trim('"'));
+                        }
                     }
-                    else if (key == "Value")
-                    {
-                        entry.Value = float.Parse(value);
-                    }
+
+                    LoadedDatas.Add(entry);
                 }
 
-                localizationData.Texts.Add(entry);
+                _gameData.LoadedDatas = LoadedDatas;
             }
         }
+
     }
 }

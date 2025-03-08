@@ -45,6 +45,12 @@ namespace Supercent.MoleIO.InGame
         {
             _attacker.ActiveAttack(on);
             _isDie = !on;
+
+            if (on)
+            {
+                _attacker.SetAiInfo();
+                _speed = GameManager.GetDynamicData(GameManager.EDynamicType.AiSpeed);
+            }
         }
 
         protected override void _Release()

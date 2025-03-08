@@ -22,7 +22,7 @@ namespace Supercent.MoleIO.Management
         public static int IsVolumeOn { get; private set; }
         public static int IsHaptic { get; private set; }
 
-        public static int CostRiseValue { get; private set; } = 1000;
+        public static int CostRiseValue => (int)GameManager.GetDynamicData(GameManager.EDynamicType.CostPerUpgrade);
 
         public static void LoadData()
         {

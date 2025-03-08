@@ -6,6 +6,6 @@ public class LobbyLoadBtn : MonoBehaviour
 {
     public void OpenLobbyScene()
     {
-        GameManager.LoadLoadScene();
+        GameManager.LoadScene();
     }
 }
