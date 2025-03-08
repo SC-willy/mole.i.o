@@ -44,12 +44,6 @@ namespace Supercent.MoleIO.InGame
         {
             _map.UpdateManualy(Time.deltaTime);
         }
-
-        public void SetKillEvent(Action<int> action)
-        {
-            _player.Attacker.OnKill += action;
-        }
-
         protected override void _Release()
         {
         }

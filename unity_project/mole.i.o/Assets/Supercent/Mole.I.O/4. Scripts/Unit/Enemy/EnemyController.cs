@@ -5,11 +5,6 @@ namespace Supercent.MoleIO.InGame
 {
     public class EnemyController : InitManagedBehaviorBase, IDamageable
     {
-        public Action<EnemyController> OnHit;
-        public Action<EnemyController> OnDie;
-
-        public bool IsDie => _isDie;
-
 
         [CustomColor(0, 0, 0.2f)]
         [SerializeField] UnitBattleController _attacker;
@@ -23,7 +18,7 @@ namespace Supercent.MoleIO.InGame
         float _rotateLerpValue = 0;
         float _lastRotateTime = 0;
 
-        bool _isDie = true;
+        bool _isUpdateable = false;
         bool _isRotate = false;
 
         public UnitBattleController BattleController => _attacker;
@@ -37,14 +32,20 @@ namespace Supercent.MoleIO.InGame
             _offset.z = rand.y;
 
             _attacker.OnSetSize += SetSize;
+            _attacker.OnEndStun += SetColOn;
             _attacker.Init();
             _attacker.SetRandomXp();
+        }
+        protected override void _Release()
+        {
+            _attacker.OnSetSize -= SetSize;
+            _attacker.OnEndStun -= SetColOn;
         }
 
         public void ActiveBattle(bool on)
         {
             _attacker.ActiveAttack(on);
-            _isDie = !on;
+            _isUpdateable = on;
 
             if (on)
             {
@@ -53,10 +54,7 @@ namespace Supercent.MoleIO.InGame
             }
         }
 
-        protected override void _Release()
-        {
-            _attacker.OnSetSize -= SetSize;
-        }
+
 
         public void SetTarget(Transform tr)
         {
@@ -65,7 +63,7 @@ namespace Supercent.MoleIO.InGame
 
         private void Update()
         {
-            if (_isDie)
+            if (!_isUpdateable)
                 return;
 
             transform.position += _model.forward * Time.deltaTime * _speed;
@@ -101,15 +99,20 @@ namespace Supercent.MoleIO.InGame
         }
         public void GetWeakAttack()
         {
-            _attacker.GradeDown();
-            OnHit.Invoke(this);
+            _attacker.GetBumped();
         }
 
         public void GetDeadlyAttack()
         {
-            _attacker.Die();
-            _isDie = true;
-            OnDie?.Invoke(this);
+            _isUpdateable = false;
+            _col.enabled = false;
+            _attacker.GetStun();
+        }
+
+        private void SetColOn()
+        {
+            _col.enabled = true;
+            _isUpdateable = true;
         }
 
         private void SetSize(float size)
@@ -121,10 +124,9 @@ namespace Supercent.MoleIO.InGame
         {
             gameObject.SetActive(true);
             _attacker.ResetData(xp);
-            _isDie = false;
+            _isUpdateable = true;
             return this;
         }
 
-        public bool CheckIsDead() => _isDie;
     }
 }

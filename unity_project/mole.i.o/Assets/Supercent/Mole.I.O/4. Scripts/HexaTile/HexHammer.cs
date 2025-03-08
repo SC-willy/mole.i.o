@@ -9,7 +9,8 @@ namespace Supercent.MoleIO.InGame
         public int PlayerCode => _playerCode;
         HexGrid _mapInfo;
         [SerializeField] Transform _hitTr;
-        [SerializeField] Color playerColor = Color.red;
+        [SerializeField] SpriteRenderer _colorIndicator;
+        [SerializeField] Color _playerColor = Color.red;
         [SerializeField] float _hitDuration = 1f;
         [SerializeField] int _maxWaveRange = 3; // 최대 웨이브 퍼지는 거리 설정
         [SerializeField] int _playerCode = 1;
@@ -17,7 +18,21 @@ namespace Supercent.MoleIO.InGame
         float _lastHitTime = 1;
         bool _isUpdate = false;
 
-        public void ActiveAttack(bool on) => _isUpdate = on;
+        private void Start()
+        {
+            _colorIndicator.color = _playerColor;
+        }
+
+        public void SetColor(Color color)
+        {
+            _playerColor = color;
+            _colorIndicator.color = _playerColor;
+        }
+        public void ActiveAttack(bool on)
+        {
+            _isUpdate = on;
+            _colorIndicator.gameObject.SetActive(on);
+        }
         public void SetHitDuration(float timeValue) => _hitDuration = timeValue;
         public void SetPlayerCode(int code) => _playerCode = code;
         public void SetMapInfo(HexGrid map) => _mapInfo = map;
@@ -58,7 +73,7 @@ namespace Supercent.MoleIO.InGame
 
             if (tile == null)
                 return;
-            _mapInfo.SpreadWave(hitter, tile.HexCoords, playerColor, _maxWaveRange, _playerCode);
+            _mapInfo.SpreadWave(hitter, tile.HexCoords, _playerColor, _maxWaveRange, _playerCode);
         }
     }
 }

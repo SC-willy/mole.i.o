@@ -70,13 +70,6 @@ namespace Supercent.MoleIO.InGame
             _failUI.SetActive(true);
         }
 
-        public void CountKill(int count)
-        {
-            _stringBuilder.Clear();
-            _stringBuilder.Append(count);
-            _killCount.text = _stringBuilder.ToString();
-        }
-
         public void ActiveIngameUI(bool on)
         {
             for (int i = 0; i < _ingameUI.Length; i++)

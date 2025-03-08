@@ -21,6 +21,7 @@ public static class GameManager
         StunTime,
         AiLevelMin,
         AiLevelMax,
+        InvincibleTime,
 
         RangePerLevel = 1100,
         XpPerLevel = 1200,
@@ -82,7 +83,6 @@ public static class GameManager
     static public void SetBakedDynamicData(Dictionary<int, float> dynamicDataDic)
     {
         _dynamicDataDic = dynamicDataDic;
-        _isDynamicLoaded = true;
     }
     static public float GetDynamicData(EDynamicType type) => GetDynamicData((int)type);
     static public float GetDynamicData(int code)

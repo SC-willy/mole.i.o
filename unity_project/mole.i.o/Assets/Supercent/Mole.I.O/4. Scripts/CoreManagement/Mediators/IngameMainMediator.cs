@@ -41,9 +41,7 @@ namespace Supercent.MoleIO.InGame
             _cameraManager.StartSetup();
 
             _playMediator.RegistLeaderboard(_leaderBoard);
-            _playMediator.SetKillEvent(_mainCanvas.CountKill);
             _player.Attacker.OnSetSize += LevelUpZoom;
-            _player.OnDie += OpenFailUI;
 
             _bossFlowManager.Init();
             _bossFlowManager.OnWin += OpenWinUI;

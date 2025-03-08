@@ -47,8 +47,6 @@ namespace Supercent.MoleIO.InGame
                     continue;
                 }
 
-                _enemies[i].OnHit += StartHitAction;
-                _enemies[i].OnDie += SetRespawnMod;
                 _enemies[i].Init();
             }
 
@@ -72,24 +70,6 @@ namespace Supercent.MoleIO.InGame
             {
                 _enemies[i].ActiveBattle(on);
             }
-        }
-
-        private void StartHitAction(EnemyController target)
-        {
-            target.gameObject.SetActive(false);
-        }
-
-        private void SetRespawnMod(EnemyController target)
-        {
-            _killCount++;
-            OnKill?.Invoke(_killCount);
-            _respawnLine.Enqueue(target);
-
-            if (_isResawning)
-                return;
-
-            _isResawning = true;
-            _lastRespawnTime = Time.time;
         }
 
         private void Update()
@@ -146,11 +126,6 @@ namespace Supercent.MoleIO.InGame
 
         protected override void _Release()
         {
-            for (int i = 0; i < _enemies.Length; i++)
-            {
-                _enemies[i].OnHit -= StartHitAction;
-                _enemies[i].OnDie -= SetRespawnMod;
-            }
         }
 #if UNITY_EDITOR
 

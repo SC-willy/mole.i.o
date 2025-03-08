@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4877006963879259750}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 360, y: 640, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,5 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _essentialPrefabs: {fileID: 11400000, guid: 1443057a67a04e148b7d29e1052ad23b, type: 2}
   _csvLoader:
-    localizationData: {fileID: 11400000, guid: 61f9e6d50be72294ab1a7a95037dc810, type: 2}
-    _forceUpdate: 0
+    _gameData: {fileID: 11400000, guid: 61f9e6d50be72294ab1a7a95037dc810, type: 2}

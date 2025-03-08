@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using Supercent.MoleIO.Management;
+using Supercent.Util;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +9,6 @@ namespace Supercent.MoleIO.InGame
 {
     public class PlayerMediator : InitManagedBehaviorBase, IDamageable
     {
-        public event Action OnDie;
         private bool _isCanUpdate = false;
 
         [Header("Functions")]
@@ -41,8 +42,8 @@ namespace Supercent.MoleIO.InGame
             ColDict.RegistData(_col, this);
             _moveHandler.Init();
             _attacker.Init();
-            _attacker.OnCombo += UpdateComboUI;
             _attacker.OnSetSize += SetSize;
+            _attacker.OnEndStun += SetColOn;
 
             _attacker.SetPlayerUpgrade();
         }
@@ -73,27 +74,31 @@ namespace Supercent.MoleIO.InGame
 
         public void GetWeakAttack()
         {
-            _attacker.GradeDown();
+            _attacker.GetBumped();
         }
 
         public void GetDeadlyAttack()
         {
-            OnDie?.Invoke();
-            _attacker.Die();
             _isCanUpdate = false;
+            _col.enabled = false;
+            _attacker.GetStun();
         }
 
-        public void UpdateComboUI(float comboValue)
+        private void SetColOn()
         {
-            if (_gauge != null)
-                _gauge.fillAmount = comboValue;
+            _isCanUpdate = true;
+            StartCoroutine(CoStopInvincible());
+        }
+
+        private IEnumerator CoStopInvincible()
+        {
+            yield return CoroutineUtil.WaitForSeconds(GameManager.GetDynamicData(GameManager.EDynamicType.InvincibleTime));
+            _col.enabled = true;
         }
 
         private void SetSize(float size)
         {
             transform.localScale = Vector3.one * size;
         }
-
-        public bool CheckIsDead() => _isCanUpdate;
     }
 }
