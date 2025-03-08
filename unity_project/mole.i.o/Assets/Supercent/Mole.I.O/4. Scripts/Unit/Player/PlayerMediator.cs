@@ -9,7 +9,13 @@ namespace Supercent.MoleIO.InGame
 {
     public class PlayerMediator : InitManagedBehaviorBase, IDamageable
     {
+        const float LEVEL_UP_WAIT_TIME = 0.2f;
+        const float LEVEL_UP_SPEED = 4f;
         private bool _isCanUpdate = false;
+
+        readonly private static int _animTrigLevelUp = Animator.StringToHash("Up");
+
+        public event Action OnLevelUp;
 
         [Header("Functions")]
         [CustomColor(0.2f, 0, 0)]
@@ -28,6 +34,8 @@ namespace Supercent.MoleIO.InGame
         [SerializeField] Image _gauge;
         [SerializeField] int _combo = 0;
 
+        Coroutine _coroutine;
+
         public int GetPlayerXp() => _attacker.Xp;
         public int GetPlayerGettedXp() => _attacker.Xp - PlayerData.SkillLevel1 * (int)GameManager.GetDynamicData(GameManager.EDynamicType.LevelPerUpgrade);
         public void StartUpdate()
@@ -42,7 +50,7 @@ namespace Supercent.MoleIO.InGame
             ColDict.RegistData(_col, this);
             _moveHandler.Init();
             _attacker.Init();
-            _attacker.OnSetSize += SetSize;
+            _attacker.OnSetSize += LevelUp;
             _attacker.OnEndStun += SetColOn;
 
             _attacker.SetPlayerUpgrade();
@@ -60,9 +68,6 @@ namespace Supercent.MoleIO.InGame
             if (!_isCanUpdate)
                 return;
             _moveHandler.UpdateMove();
-
-            if (_animator == null)
-                return;
         }
         public void GetDamage(int attackerLevel)
         {
@@ -96,9 +101,30 @@ namespace Supercent.MoleIO.InGame
             _col.enabled = true;
         }
 
-        private void SetSize(float size)
+        private void LevelUp(float size)
         {
-            transform.localScale = Vector3.one * size;
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
+
+            _animator.SetTrigger(_animTrigLevelUp);
+            _coroutine = StartCoroutine(CoStartGrow(size));
+            OnLevelUp?.Invoke();
+        }
+
+        private IEnumerator CoStartGrow(float size)
+        {
+            yield return CoroutineUtil.WaitForSeconds(LEVEL_UP_WAIT_TIME);
+            Vector3 start = transform.localScale;
+            Vector3 end = Vector3.one * size;
+            float lerpValue = 0;
+            while (lerpValue < 1f)
+            {
+                lerpValue = Mathf.Min(lerpValue + Time.deltaTime * LEVEL_UP_SPEED, 1f);
+                transform.localScale = Vector3.Lerp(start, end, lerpValue);
+                yield return null;
+            }
+            _coroutine = null;
+
         }
     }
 }

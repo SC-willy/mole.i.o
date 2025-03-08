@@ -8,6 +8,7 @@ namespace Supercent.MoleIO.Management
         [SerializeField] EssentialPrefabs _essentialPrefabs;
         private void Awake()
         {
+
             GameManager.LoadEssentials();
 
             if (!SceneLoadingUI.IsLoaded)

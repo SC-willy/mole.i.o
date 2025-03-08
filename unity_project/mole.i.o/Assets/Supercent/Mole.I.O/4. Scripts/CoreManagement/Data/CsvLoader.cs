@@ -67,6 +67,7 @@ namespace Supercent.MoleIO.Management
                 }
 
                 _gameData.LoadedDatas = LoadedDatas;
+                GameManager.SetDynamicData(_gameData.GetDataDic());
             }
         }
 

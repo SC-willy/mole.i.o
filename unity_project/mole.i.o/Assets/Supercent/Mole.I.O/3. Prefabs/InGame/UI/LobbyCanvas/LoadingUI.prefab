@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 5781478445932770192}
   - component: {fileID: 6396966835286942899}
   - component: {fileID: 4472040894254608349}
+  - component: {fileID: 4190515097835016667}
   m_Layer: 0
   m_Name: LoadingUI
   m_TagString: Untagged
@@ -261,7 +262,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5781478445932770192
 MonoBehaviour:
@@ -318,6 +319,25 @@ MonoBehaviour:
   _loadDelay: 0.6
   _loadingScreen: {fileID: 3963614975136867006}
   _progressBar: {fileID: 5198947150652433310}
+  _offAnim: {fileID: 4190515097835016667}
+  _csvLoader:
+    _gameData: {fileID: 11400000, guid: 61f9e6d50be72294ab1a7a95037dc810, type: 2}
+--- !u!111 &4190515097835016667
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062467313586341090}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 80ec337fc4775d64f8408da3fa44ac96, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 80ec337fc4775d64f8408da3fa44ac96, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3452025567168009778
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,9 +397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -455,9 +475,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

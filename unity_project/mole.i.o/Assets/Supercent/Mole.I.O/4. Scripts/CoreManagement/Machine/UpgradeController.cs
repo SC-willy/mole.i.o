@@ -54,21 +54,21 @@ namespace Supercent.MoleIO.Management
             else if (code > UPGRADE_COUNT)
                 code = 3;
 
-            bool _isCanUpgrade = false;
+            bool isCanUpgrade = false;
             switch (code)
             {
                 case 1:
-                    _isCanUpgrade = PlayerData.TryUpgrade1();
+                    isCanUpgrade = PlayerData.TryUpgrade1();
                     break;
                 case 2:
-                    _isCanUpgrade = PlayerData.TryUpgrade2();
+                    isCanUpgrade = PlayerData.TryUpgrade2();
                     break;
                 case 3:
-                    _isCanUpgrade = PlayerData.TryUpgrade3();
+                    isCanUpgrade = PlayerData.TryUpgrade3();
                     break;
             }
 
-            if (_isCanUpgrade)
+            if (isCanUpgrade)
                 UpdateCanvas();
             else if (_moneyLessAnim != null)
                 _moneyLessAnim.Play();
